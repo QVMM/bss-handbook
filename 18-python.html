@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>附录：Python 数据分析（选修） · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a class="active" href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>附录：Python 数据分析（选修）</span></div>
+<main class="content">
+<p class="kicker">附录 · 选修</p>
+<h1>附录：Python 数据分析（选修）</h1>
+<p class="lead">省赛模块 A、B 以 C# 桌面和 Android 为主，只备省赛的同学可以跳过本附录（训练建议）。WSC2026 技术描述把 Python 列入可用的开发语言，专家能力要求中也列有 Python；准备冲击国赛、世赛的同学，可以在模拟训练阶段的空余时间学习本附录。它假设你已经学完第 04 章 C#，所以只讲“C# 的这个在 Python 里怎么写”，以及两个最实用的场景：数据分析和接口测试。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">环境</a></li><li><a href="#s2">从 C# 到 Python：对照表</a></li><li><a href="#s3">数据分析：pandas 入门</a></li><li><a href="#s4">接口测试：只用标准库</a></li><li><a href="#s5">本附录过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>环境</h2>
+<ol>
+<li>从 Python 官网下载 Windows 安装包，安装时勾选 “Add python.exe to PATH”。</li>
+<li>命令提示符执行 <code>python --version</code> 确认安装成功。</li>
+<li>安装 pandas（需要联网）：<code>python -m pip install pandas</code>。</li>
+<li>编辑器：VS Code、Notepad++ 或 Python 自带的 IDLE 都可以。</li>
+</ol>
+
+<h2 id="s2"><span class="sec">02</span>从 C# 到 Python：对照表</h2>
+<div class="tw"><table>
+<tr><th>概念</th><th>C#</th><th>Python</th></tr>
+<tr><td>变量</td><td><code>int age = 18;</code></td><td><code>age = 18</code>（不写类型）</td></tr>
+<tr><td>输出</td><td><code>Console.WriteLine($"年龄 {age}");</code></td><td><code>print(f"年龄 {age}")</code></td></tr>
+<tr><td>输入转换</td><td><code>int.TryParse(s, out n)</code></td><td><code>try: n = int(s)</code> / <code>except ValueError:</code></td></tr>
+<tr><td>代码块</td><td>花括号 <code>{ }</code></td><td>冒号 + 缩进（4 个空格），缩进错了就是语法错误</td></tr>
+<tr><td>条件</td><td><code>if (a &gt; 0 &amp;&amp; b &gt; 0)</code></td><td><code>if a &gt; 0 and b &gt; 0:</code></td></tr>
+<tr><td>循环</td><td><code>for (int i = 0; i &lt; 10; i++)</code></td><td><code>for i in range(10):</code></td></tr>
+<tr><td>列表</td><td><code>List&lt;int&gt; xs = new List&lt;int&gt;();</code></td><td><code>xs = []</code>，<code>xs.append(1)</code></td></tr>
+<tr><td>字典</td><td><code>Dictionary&lt;string,int&gt;</code></td><td><code>d = {"a": 1}</code></td></tr>
+<tr><td>方法</td><td><code>static int Add(int a, int b) { return a + b; }</code></td><td><code>def add(a, b):</code> / <code>    return a + b</code></td></tr>
+<tr><td>空值</td><td><code>null</code></td><td><code>None</code></td></tr>
+<tr><td>整数除法</td><td><code>5 / 2</code> 得 2</td><td><code>5 / 2</code> 得 2.5；<code>5 // 2</code> 得 2</td></tr>
+<tr><td>正则</td><td><code>Regex.IsMatch(s, @"^\d{11}$")</code></td><td><code>re.fullmatch(r"\d{11}", s)</code></td></tr>
+</table></div>
+<div class="ex"><span class="h">练习 附-1　把 C# 练习改写成 Python</span>
+<p>把第 04 章练习 4-5（登录三次锁定）和 4-6（分页计算）用 Python 重写。对比两种语言的代码行数和写法差异。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>数据分析：pandas 入门</h2>
+<p>本手册附带了一份练习数据 <a href="assets/健康数据-练习.csv">assets/健康数据-练习.csv</a>（由 SmartCare 练习库的健康记录表导出，共 20 条）。把它和下面的脚本放在同一个文件夹中运行：</p>
+<span class="fname">health.py</span><pre><code>import pandas as pd
+
+df = pd.read_csv("健康数据-练习.csv", encoding="utf-8")      # 读取 CSV
+print(df.head())                                               # 前 5 行
+print(df["RecordType"].value_counts())                         # 各类型记录数
+
+bp = df[df["RecordType"] == "血压"]                            # 筛选血压
+summary = bp.groupby("CustomerId")["Value1"].agg(["count", "max", "min", "mean"]).round(1)
+print(summary)                                                 # 每位客户的收缩压统计
+
+high = bp[bp["Value1"] &gt;= 140]                                 # 收缩压 ≥ 140 的记录
+print("偏高记录：", len(high))
+high.to_csv("血压偏高.csv", index=False, encoding="utf-8-sig") # 导出，Excel 打开不乱码</code></pre>
+<p>运行结果中应能看到：血压 10 条、心率 5 条、血糖 5 条；客户 1 的收缩压共 7 次，最高 145.0、最低 128.0、平均 135.9；收缩压 ≥ 140 的记录 4 条，并生成文件“血压偏高.csv”。这和你在第 05 章用 SQL、第 08 章用 Java 算出的结果是同一批数据——三种工具做同一件事，正好可以互相核对。</p>
+<div class="tw"><table>
+<tr><th>pandas 操作</th><th>对应 SQL</th></tr>
+<tr><td><code>df[df["RecordType"] == "血压"]</code></td><td><code>WHERE RecordType = N'血压'</code></td></tr>
+<tr><td><code>df.groupby("CustomerId")["Value1"].mean()</code></td><td><code>SELECT CustomerId, AVG(Value1) … GROUP BY CustomerId</code></td></tr>
+<tr><td><code>df.sort_values("Value1", ascending=False)</code></td><td><code>ORDER BY Value1 DESC</code></td></tr>
+<tr><td><code>df.head(10)</code></td><td><code>SELECT TOP 10</code></td></tr>
+<tr><td><code>df.merge(other, on="CustomerId")</code></td><td><code>JOIN … ON</code></td></tr>
+</table></div>
+<div class="ex"><span class="h">练习 附-2　分析与可视化</span>
+<p>① 计算每位客户的心率平均值；② 找出每位客户最近一次的血糖记录；③ 用 SSMS 把练习库的订单表导出为 CSV（查询结果右键“将结果另存为”），用 pandas 统计每月营业额（不含已取消），与第 06 章统计窗体的结果核对；④ 安装 matplotlib，把营业额画成折线图并保存为图片。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>接口测试：只用标准库</h2>
+<p>Python 自带的 <code>urllib</code> 和 <code>json</code> 就能调用第 07 章的接口，适合快速写接口测试脚本：</p>
+<span class="fname">api_test.py</span><pre><code>import json
+import urllib.request
+import urllib.error
+
+BASE = "http://localhost:5000"
+
+def call(method, path, body=None):
+    data = json.dumps(body).encode("utf-8") if body is not None else None
+    req = urllib.request.Request(BASE + path, data=data, method=method,
+                                 headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req) as resp:
+            return resp.status, json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:          # 404、500 等状态码
+        return e.code, json.loads(e.read().decode("utf-8"))
+
+cases = [
+    ("登录成功", "POST", "/api/customer/login", {"phone": "13800000001", "password": "abc12345"}, True),
+    ("密码错误", "POST", "/api/customer/login", {"phone": "13800000001", "password": "wrong"}, False),
+    ("账号禁用", "POST", "/api/customer/login", {"phone": "13800000005", "password": "abc12345"}, False),
+    ("分类列表", "GET", "/api/categories", None, True),
+]
+passed = 0
+for name, method, path, body, expect in cases:
+    status, result = call(method, path, body)
+    ok = result.get("success") == expect
+    passed += ok
+    print(f"{'通过' if ok else '失败'}  {name}  {status}  {result.get('message')}")
+print(f"共 {len(cases)} 条，通过 {passed} 条")</code></pre>
+
+<h2 id="s5"><span class="sec">05</span>本附录过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>能用 Python 写出带输入校验的控制台程序</li>
+<li>能用 pandas 完成筛选、分组统计、排序和导出</li>
+<li>能用标准库写出接口测试脚本，并对第 07 章的接口跑通</li>
+</ul></div>
+
+<div class="pager"><a href="17-glossary.html"><small>上一章</small>术语表</a><span></span></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>C# 从零开始 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a class="active" href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>C# 从零开始</span></div>
+<main class="content">
+<p class="kicker">第 04 章 · 学习路径第二站</p>
+<h1>C# 从零开始</h1>
+<p class="lead">C# 是模块 A（桌面端和接口）使用的编程语言。这一章从“Hello”讲到类、异常、集合、文件和 LINQ，每一节都有可以照着敲的代码和带预期结果的练习。标准版计划用 5 周、强化版用 3 周完成本章。全部练习都用控制台程序做，界面的事情留到第 06 章。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">准备：建一个控制台项目</a></li><li><a href="#s2">变量与数据类型</a></li><li><a href="#s3">运算符与表达式</a></li><li><a href="#s4">条件判断：if 与 switch</a></li><li><a href="#s5">循环：for、while、foreach</a></li><li><a href="#s6">字符串处理与输入校验</a></li><li><a href="#s7">数组与集合：List 和 Dictionary</a></li><li><a href="#s8">方法：把重复的事情写一次</a></li><li><a href="#s9">类与对象</a></li><li><a href="#s10">异常处理</a></li><li><a href="#s11">日期与时间</a></li><li><a href="#s12">LINQ：像写 SQL 一样处理集合</a></li><li><a href="#s13">文件读写</a></li><li><a href="#s14">命名与注释规范</a></li><li><a href="#s15">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>准备：建一个控制台项目</h2>
+<ol>
+<li>VS → 创建新项目 → 搜索“控制台” → 选择<strong>“控制台应用(.NET Framework)”</strong>（C#）。</li>
+<li>项目名 <code>Ch04</code>，位置 <code>D:\备赛\练习\04-CSharp</code>，框架 .NET Framework 4.8。</li>
+<li>打开 <code>Program.cs</code>，你会看到下面的结构：</li>
+</ol>
+<span class="fname">Program.cs</span><pre><code>using System;
+
+namespace Ch04
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("你好，商务软件！");
+            Console.ReadKey();   // 等待按键，防止窗口一闪而过
+        }
+    }
+}</code></pre>
+<p>按 <kbd>F5</kbd> 运行，黑色窗口里出现“你好，商务软件！”。这就是你的第一个程序。</p>
+<ul>
+<li><code>using System;</code>：引入系统命名空间，这样才能直接写 <code>Console</code>。</li>
+<li><code>namespace</code>、<code>class</code>：先把它们当成“装代码的盒子”，第 9 节再细讲。</li>
+<li><code>static void Main</code>：程序从这里开始执行。</li>
+<li>每条语句以分号 <code>;</code> 结尾；大括号 <code>{ }</code> 成对出现；<strong>大小写敏感</strong>（<code>console</code> 是错的）。</li>
+</ul>
+<div class="box note"><span class="h">说明：C# 语言版本</span>
+<p>.NET Framework 4.8 的项目默认使用 C# 7.3。网上很多新教程用的是 C# 10 以后的写法（例如没有 <code>Main</code> 方法的“顶级语句”、<code>record</code>、<code>new()</code> 省略类型名、<code>switch</code> 表达式），这些在 C# 7.3 中<strong>会编译报错</strong>。本章所有代码都按 C# 7.3 编写，你可以放心照抄。</p></div>
+<div class="box tip"><span class="h">训练建议：本章练习的组织方式</span>
+<p>每做一个练习，就在 <code>Program</code> 类里新写一个静态方法（如 <code>static void Ex4_1()</code>），在 <code>Main</code> 里调用它。做下一题时把上一题的调用注释掉。这样一个项目就能保存全部练习，方便复习。</p></div>
+
+<h2 id="s2"><span class="sec">02</span>变量与数据类型</h2>
+<p>变量就是“有名字的盒子”，用来存放数据。声明时要写清盒子里装什么类型的数据。</p>
+<span class="fname">常用类型</span><pre><code>int age = 72;                  // 整数
+long orderNo = 202611100001;   // 大整数
+double weight = 61.5;          // 小数（科学计算，有精度误差）
+decimal price = 199.00m;       // 小数（金额一律用 decimal，末尾加 m）
+bool isVip = true;             // 真/假
+char gender = '女';            // 单个字符，用单引号
+string name = "张阿姨";        // 字符串，用双引号
+DateTime now = DateTime.Now;   // 日期时间
+
+Console.WriteLine(name + "，" + age + " 岁");
+Console.WriteLine($"{name} 的体重是 {weight} kg");   // 字符串插值，推荐
+Console.WriteLine(now.ToString("yyyy-MM-dd"));        // 比赛要求的 ISO 日期格式</code></pre>
+<h3>类型转换</h3>
+<p>从输入框、控制台读到的永远是字符串，要做计算就必须转换。</p>
+<span class="fname">字符串与数字互转</span><pre><code>string s = "68";
+int a = int.Parse(s);              // 字符串 → 整数；s 不是数字时会抛出异常
+int b;
+bool ok = int.TryParse("abc", out b);   // 安全转换：ok 为 false，b 为 0
+decimal d = decimal.Parse("12.5");
+string t = a.ToString();           // 数字 → 字符串
+string money = 1234.5m.ToString("0.00");   // "1234.50"
+int c = (int)3.99;                 // 强制转换：截断小数，c = 3</code></pre>
+<div class="box warn"><span class="h">易错提醒</span>
+<p>处理用户输入时，<strong>优先用 <code>TryParse</code></strong>。用户在“年龄”框里输入“七十”，<code>int.Parse</code> 会让程序直接崩溃，而裁判非常喜欢故意输错来测试你的校验。</p></div>
+<div class="ex"><span class="h">练习 4-1　自我介绍</span>
+<p>声明变量保存：姓名、年龄、身高（米）、月服务费（元）、是否已签约。用字符串插值输出一行：“姓名：李大爷，年龄：80，身高：1.68 米，月服务费：1280.00 元，已签约：True”。</p>
+<details><summary>参考答案</summary>
+<pre><code>string name = "李大爷"; int age = 80; double height = 1.68;
+decimal fee = 1280m; bool signed = true;
+Console.WriteLine($"姓名：{name}，年龄：{age}，身高：{height} 米，月服务费：{fee.ToString("0.00")} 元，已签约：{signed}");</code></pre>
+</details></div>
+<div class="ex"><span class="h">练习 4-2　读取输入</span>
+<p>用 <code>Console.ReadLine()</code> 读入一个年龄。如果是合法整数，输出“明年 X 岁”；否则输出“请输入数字”。分别输入 <code>65</code> 和 <code>abc</code> 测试。</p>
+<details><summary>参考答案与预期结果</summary>
+<pre><code>Console.Write("请输入年龄：");
+string input = Console.ReadLine();
+int age;
+if (int.TryParse(input, out age))
+    Console.WriteLine($"明年 {age + 1} 岁");
+else
+    Console.WriteLine("请输入数字");</code></pre>
+<p>输入 65 → “明年 66 岁”；输入 abc → “请输入数字”。</p></details></div>
+
+<h2 id="s3"><span class="sec">03</span>运算符与表达式</h2>
+<div class="tw"><table>
+<tr><th>运算符</th><th>含义</th><th>例子</th><th>结果</th></tr>
+<tr><td><code>+ - * /</code></td><td>加减乘除</td><td><code>7 / 2</code></td><td><code>3</code>（整数相除取整！）</td></tr>
+<tr><td><code>%</code></td><td>取余</td><td><code>7 % 2</code></td><td><code>1</code></td></tr>
+<tr><td><code>== != &gt; &lt; &gt;= &lt;=</code></td><td>比较</td><td><code>5 &gt;= 5</code></td><td><code>true</code></td></tr>
+<tr><td><code>&amp;&amp; || !</code></td><td>并且、或者、取反</td><td><code>age &gt;= 60 &amp;&amp; isVip</code></td><td>两个都真才为真</td></tr>
+<tr><td><code>+= -= ++ --</code></td><td>复合赋值、自增自减</td><td><code>count++</code></td><td>count 加 1</td></tr>
+<tr><td><code>? :</code></td><td>条件运算</td><td><code>stock &lt;= 3 ? "紧张" : "充足"</code></td><td>二选一</td></tr>
+</table></div>
+<div class="box warn"><span class="h">易错提醒：整数除法</span>
+<p>计算“完成率 = 已完成 / 总数”时，<code>3 / 4</code> 的结果是 <code>0</code> 而不是 0.75。要写成 <code>(double)done / total</code> 或 <code>done * 1.0 / total</code>，并且先判断 <code>total</code> 是否为 0。</p></div>
+<div class="ex"><span class="h">练习 4-3　准点率</span>
+<p>某航班 30 天内实际执行 28 次，延误 3 次。准点率 = 100% − 延误率，结果四舍五入为整数。输出“准点率：89%”。</p>
+<details><summary>参考答案</summary>
+<pre><code>int flown = 28, delayed = 3;
+double delayRate = (double)delayed / flown;          // 0.10714...
+int onTime = (int)Math.Round((1 - delayRate) * 100, MidpointRounding.AwayFromZero);
+Console.WriteLine($"准点率：{onTime}%");             // 准点率：89%</code></pre>
+</details></div>
+
+<h2 id="s4"><span class="sec">04</span>条件判断：if 与 switch</h2>
+<pre><code>int age = 75;
+if (age &gt;= 80)
+{
+    Console.WriteLine("高龄");
+}
+else if (age &gt;= 60)
+{
+    Console.WriteLine("老年");
+}
+else
+{
+    Console.WriteLine("非老年");
+}
+
+string status = "Paid";
+switch (status)
+{
+    case "Pending": Console.WriteLine("待支付"); break;
+    case "Paid":    Console.WriteLine("已支付"); break;
+    case "Done":    Console.WriteLine("已完成"); break;
+    default:        Console.WriteLine("未知状态"); break;
+}</code></pre>
+<div class="ex"><span class="h">练习 4-4　血压分级</span>
+<p>输入收缩压和舒张压（整数）。规则（练习用的简化规则）：收缩压 ≥140 或舒张压 ≥90 为“偏高”；收缩压 &lt;90 或舒张压 &lt;60 为“偏低”；其余为“正常”。输入非数字时提示重新输入。测试：<code>150 85</code> → 偏高；<code>85 55</code> → 偏低；<code>120 80</code> → 正常。</p>
+<details><summary>参考答案</summary>
+<pre><code>static string BloodLevel(int sys, int dia)
+{
+    if (sys &gt;= 140 || dia &gt;= 90) return "偏高";
+    if (sys &lt; 90 || dia &lt; 60) return "偏低";
+    return "正常";
+}</code></pre>
+<p>先判断“偏高”再判断“偏低”，顺序不同可能导致结果不同。思考：收缩压 150、舒张压 55 应该算什么？按上面的规则是“偏高”。真实比赛中如果题目规则有重叠，要按题目原文的先后顺序实现。</p></details></div>
+
+<h2 id="s5"><span class="sec">05</span>循环：for、while、foreach</h2>
+<pre><code>// for：知道次数
+for (int i = 1; i &lt;= 5; i++)
+{
+    Console.WriteLine($"第 {i} 次");
+}
+
+// while：满足条件就一直做
+int tries = 0;
+while (tries &lt; 3)
+{
+    tries++;
+    Console.WriteLine($"尝试 {tries}");
+}
+
+// foreach：逐个取出集合中的元素
+string[] services = { "助浴", "助餐", "陪诊" };
+foreach (string s in services)
+{
+    Console.WriteLine(s);
+}</code></pre>
+<p><code>break</code> 跳出整个循环，<code>continue</code> 跳过本次、进入下一次。</p>
+<div class="ex"><span class="h">练习 4-5　登录三次锁定</span>
+<p>正确密码是 <code>abc12345</code>。循环读入密码，最多 3 次：正确输出“登录成功”并结束；错误输出“密码错误，还剩 N 次”；3 次都错输出“已锁定”。</p>
+<details><summary>参考答案</summary>
+<pre><code>const string Correct = "abc12345";
+bool success = false;
+for (int i = 1; i &lt;= 3; i++)
+{
+    Console.Write("密码：");
+    if (Console.ReadLine() == Correct) { success = true; break; }
+    if (i &lt; 3) Console.WriteLine($"密码错误，还剩 {3 - i} 次");
+}
+Console.WriteLine(success ? "登录成功" : "已锁定");</code></pre>
+<p>湖北样题的“登录失败 3 次后出现验证码”就是这个逻辑的变形：用一个计数变量记录失败次数。</p></details></div>
+<div class="ex"><span class="h">练习 4-6　分页计算</span>
+<p>共有 47 条记录，每页 10 条。用循环输出每一页的记录序号范围：“第 1 页：1–10” …… “第 5 页：41–47”。再输出总页数。</p>
+<details><summary>参考答案</summary>
+<pre><code>int total = 47, pageSize = 10;
+int pages = (total + pageSize - 1) / pageSize;     // 向上取整：5
+for (int p = 1; p &lt;= pages; p++)
+{
+    int from = (p - 1) * pageSize + 1;
+    int to = Math.Min(p * pageSize, total);
+    Console.WriteLine($"第 {p} 页：{from}–{to}");
+}
+Console.WriteLine($"共 {pages} 页");</code></pre>
+<p>这两个公式（总页数向上取整、每页起止）在比赛的分页功能里会反复用到，抄进错题本。</p></details></div>
+
+<h2 id="s6"><span class="sec">06</span>字符串处理与输入校验</h2>
+<span class="fname">常用字符串操作</span><pre><code>string s = "  13800138000 ";
+string t = s.Trim();                    // 去掉首尾空格
+int len = t.Length;                     // 11
+bool empty = string.IsNullOrWhiteSpace(s);   // 是否为空或只有空格
+bool starts = t.StartsWith("138");
+string part = t.Substring(0, 3);        // "138"（从下标 0 开始取 3 个）
+int pos = "zhang@care.com".IndexOf('@');     // 5
+string[] arr = "助浴,助餐,陪诊".Split(',');
+string joined = string.Join(" / ", arr);     // "助浴 / 助餐 / 陪诊"
+string masked = t.Substring(0, 3) + "****" + t.Substring(7);   // "138****8000"</code></pre>
+<h3>逐个字符判断</h3>
+<pre><code>static bool HasLetterAndDigit(string pwd)
+{
+    bool hasLetter = false, hasDigit = false;
+    foreach (char c in pwd)
+    {
+        if (char.IsDigit(c)) hasDigit = true;
+        else if ((c &gt;= 'a' &amp;&amp; c &lt;= 'z') || (c &gt;= 'A' &amp;&amp; c &lt;= 'Z')) hasLetter = true;
+    }
+    return hasLetter &amp;&amp; hasDigit;
+}</code></pre>
+<div class="box warn"><span class="h">易错提醒</span>
+<p><code>char.IsLetter('张')</code> 也返回 <code>true</code>——汉字也算“字母”。题目要求“含字母”通常指英文字母，所以上面用范围判断。</p></div>
+<h3>正则表达式（Regex）</h3>
+<p>正则表达式是描述“字符串格式”的小语言。比赛中最常见的校验都可以一行搞定。需要 <code>using System.Text.RegularExpressions;</code></p>
+<div class="tw"><table>
+<tr><th>校验</th><th>写法</th><th>说明</th></tr>
+<tr><td>11 位数字</td><td><code>^\d{11}$</code></td><td><code>^</code> 开头、<code>$</code> 结尾，中间恰好 11 个数字</td></tr>
+<tr><td>手机号（1 开头）</td><td><code>^1\d{10}$</code></td><td>题目只说“11 位”时，用上一行即可，不要自己加严</td></tr>
+<tr><td>密码 ≥8 位且含字母和数字</td><td><code>^(?=.*[A-Za-z])(?=.*\d).{8,}$</code></td><td><code>(?=…)</code> 表示“后面某处必须出现”</td></tr>
+<tr><td>6 位数字验证码</td><td><code>^\d{6}$</code></td><td></td></tr>
+<tr><td>简单邮箱</td><td><code>^[^@\s]+@[^@\s]+\.[^@\s]+$</code></td><td>够用即可，不追求完美</td></tr>
+<tr><td>日期 YYYY-MM-DD</td><td>用 <code>DateTime.TryParseExact</code></td><td>比正则可靠，能排除 2 月 30 日</td></tr>
+</table></div>
+<pre><code>using System.Text.RegularExpressions;
+
+bool okPhone = Regex.IsMatch("13800138000", @"^\d{11}$");                     // true
+bool okPwd = Regex.IsMatch("abc12345", @"^(?=.*[A-Za-z])(?=.*\d).{8,}$");      // true
+bool badPwd = Regex.IsMatch("12345678", @"^(?=.*[A-Za-z])(?=.*\d).{8,}$");     // false</code></pre>
+<p>字符串前面的 <code>@</code> 表示“原样字符串”，里面的反斜杠不需要再转义。</p>
+<div class="ex"><span class="h">练习 4-7　注册校验器</span>
+<p>写一个方法 <code>static string ValidateRegister(string user, string pwd, string pwd2, string phone)</code>，返回第一条错误信息，全部通过返回空字符串 <code>""</code>。规则：用户名不能为空；密码 ≥8 位含字母和数字；两次密码一致；电话 11 位数字。用以下数据测试并写出预期输出：</p>
+<ol><li><code>("", "abc12345", "abc12345", "13800138000")</code></li><li><code>("wang", "abc123", "abc123", "13800138000")</code></li><li><code>("wang", "abc12345", "abc12346", "13800138000")</code></li><li><code>("wang", "abc12345", "abc12345", "1380013800")</code></li><li><code>("wang", "abc12345", "abc12345", "13800138000")</code></li></ol>
+<details><summary>参考答案与预期结果</summary>
+<pre><code>static string ValidateRegister(string user, string pwd, string pwd2, string phone)
+{
+    if (string.IsNullOrWhiteSpace(user)) return "用户名不能为空";
+    if (!Regex.IsMatch(pwd ?? "", @"^(?=.*[A-Za-z])(?=.*\d).{8,}$")) return "密码至少 8 位，且必须同时包含字母和数字";
+    if (pwd != pwd2) return "两次输入的密码不一致";
+    if (!Regex.IsMatch(phone ?? "", @"^\d{11}$")) return "联系电话必须是 11 位数字";
+    return "";
+}</code></pre>
+<p>预期：① 用户名不能为空；② 密码至少 8 位……；③ 两次输入的密码不一致；④ 联系电话必须是 11 位数字；⑤ 空字符串（通过）。这个方法第 06 章会直接搬进注册窗体。<code>pwd ?? ""</code> 的意思是“如果 pwd 是 null 就用空字符串”，防止空引用异常。</p></details></div>
+
+<h2 id="s7"><span class="sec">07</span>数组与集合：List 和 Dictionary</h2>
+<pre><code>// 数组：长度固定
+int[] scores = { 88, 92, 75 };
+Console.WriteLine(scores.Length);    // 3
+Console.WriteLine(scores[0]);        // 88（下标从 0 开始）
+
+// List&lt;T&gt;：长度可变，最常用
+using System.Collections.Generic;   // 放在文件顶部
+List&lt;string&gt; names = new List&lt;string&gt;();
+names.Add("张阿姨");
+names.Add("李大爷");
+names.Insert(0, "王奶奶");
+names.Remove("李大爷");
+Console.WriteLine(names.Count);      // 2
+bool has = names.Contains("张阿姨"); // true
+
+// Dictionary&lt;键, 值&gt;：按键快速查找
+Dictionary&lt;string, decimal&gt; priceOf = new Dictionary&lt;string, decimal&gt;();
+priceOf["助浴"] = 120m;
+priceOf["陪诊"] = 200m;
+decimal p;
+if (priceOf.TryGetValue("陪诊", out p)) Console.WriteLine(p);   // 200</code></pre>
+<div class="ex"><span class="h">练习 4-8　服务价格表</span>
+<p>用 Dictionary 存 5 项服务及价格。循环读入服务名，输出价格；不存在时提示“没有该服务”；输入空行结束，最后输出“共查询 N 次，命中 M 次”。</p></div>
+
+<h2 id="s8"><span class="sec">08</span>方法：把重复的事情写一次</h2>
+<pre><code>// 返回值类型 方法名(参数列表)
+static decimal CalcAmount(decimal unitPrice, int quantity, bool isVip)
+{
+    decimal amount = unitPrice * quantity;
+    if (isVip) amount = amount * 0.9m;
+    return Math.Round(amount, 2, MidpointRounding.AwayFromZero);
+}
+
+// 调用
+decimal a = CalcAmount(128.5m, 3, true);   // 346.95</code></pre>
+<ul>
+<li>方法名用大驼峰（PascalCase）：<code>CalcAmount</code>、<code>LoadUsers</code>。</li>
+<li>一个方法只做一件事，长度最好不超过一屏。</li>
+<li>没有返回值写 <code>void</code>。</li>
+<li><code>out</code> 参数可以“多返回一个值”，<code>TryParse</code> 就是这样设计的。</li>
+</ul>
+<div class="box warn"><span class="h">易错提醒：金额舍入</span>
+<p><code>Math.Round(2.345m, 2)</code> 默认用“银行家舍入”（遇 5 取偶），结果是 2.34 而不是 2.35。题目说“四舍五入”时，一定写 <code>Math.Round(x, 2, MidpointRounding.AwayFromZero)</code>。同时金额要用 <code>decimal</code>，不要用 <code>double</code>。</p></div>
+<div class="ex"><span class="h">练习 4-9　舍入对比</span>
+<p>分别输出 <code>Math.Round(2.345m, 2)</code>、<code>Math.Round(2.345m, 2, MidpointRounding.AwayFromZero)</code>、<code>Math.Round(2.5m)</code>、<code>Math.Round(3.5m)</code>，记下结果。</p>
+<details><summary>预期结果</summary><p>2.34、2.35、2、4。后两个说明默认舍入“遇 5 取偶”。</p></details></div>
+<div class="ex"><span class="h">练习 4-10　订餐补差价</span>
+<p>写方法 <code>static decimal Diff(decimal oldTotal, decimal newTotal)</code> 返回差额（新 − 旧）。再写一个方法把差额格式化：正数显示“需补交 X 元”，负数显示“退款 X 元”（X 为绝对值，保留 2 位），0 显示“无需补退”。（湖北样题订餐服务中有类似要求：退款时金额为负数并标识为退款。）</p>
+<details><summary>参考答案</summary>
+<pre><code>static string DiffText(decimal oldTotal, decimal newTotal)
+{
+    decimal d = newTotal - oldTotal;
+    if (d &gt; 0) return $"需补交 {d:0.00} 元";
+    if (d &lt; 0) return $"退款 {Math.Abs(d):0.00} 元";
+    return "无需补退";
+}</code></pre>
+<p>插值中的 <code>{d:0.00}</code> 等同于 <code>d.ToString("0.00")</code>。</p></details></div>
+
+<h2 id="s9"><span class="sec">09</span>类与对象</h2>
+<p>类是“模板”，对象是按模板造出来的“东西”。在比赛中，<strong>数据库的每张表通常对应一个类</strong>，叫“实体类”或“模型类”。</p>
+<span class="fname">Models.cs</span><pre><code>public class Service
+{
+    // 属性：大驼峰命名，{ get; set; } 是自动属性
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int DurationMinutes { get; set; }
+    public bool IsOnSale { get; set; }
+
+    // 构造函数：创建对象时自动执行
+    public Service() { IsOnSale = true; }
+
+    public Service(int id, string name, decimal price)
+    {
+        Id = id; Name = name; Price = price; IsOnSale = true;
+    }
+
+    // 方法
+    public string PriceText()
+    {
+        return Price.ToString("0.00") + " 元";
+    }
+
+    // 重写 ToString：在下拉框中显示对象时会用到
+    public override string ToString()
+    {
+        return Name;
+    }
+}</code></pre>
+<span class="fname">使用</span><pre><code>Service s1 = new Service(1, "助浴", 120m);
+Service s2 = new Service { Id = 2, Name = "陪诊", Price = 200m };   // 对象初始化器
+s2.Price = 180m;
+Console.WriteLine(s1.PriceText());    // 120.00 元
+Console.WriteLine(s2);                // 陪诊（自动调用 ToString）
+
+List&lt;Service&gt; list = new List&lt;Service&gt; { s1, s2 };</code></pre>
+<h3>静态成员与枚举</h3>
+<pre><code>// 静态：不需要 new，直接 类名.成员 使用。适合存放“当前登录用户”这样的全局信息
+public static class Session
+{
+    public static int UserId { get; set; }
+    public static string UserName { get; set; }
+}
+
+// 枚举：一组有名字的常量
+public enum OrderStatus { Pending = 0, Paid = 1, Done = 2, Cancelled = 3 }
+
+OrderStatus st = OrderStatus.Paid;
+int code = (int)st;                    // 1，存进数据库
+OrderStatus back = (OrderStatus)2;     // Done</code></pre>
+<div class="ex"><span class="h">练习 4-11　订单类</span>
+<p>定义 <code>Order</code> 类：Id、CustomerName、ServiceName、UnitPrice、Quantity、AppointmentTime（DateTime）、Status（OrderStatus 枚举）。添加只读属性 <code>Amount</code>（单价×数量）和方法 <code>CanCancel()</code>：只有 Pending 或 Paid 状态、且预约时间在 2 小时以后，才能取消。创建 3 个订单测试 <code>CanCancel</code>。</p>
+<details><summary>参考答案</summary>
+<pre><code>public class Order
+{
+    public int Id { get; set; }
+    public string CustomerName { get; set; }
+    public string ServiceName { get; set; }
+    public decimal UnitPrice { get; set; }
+    public int Quantity { get; set; }
+    public DateTime AppointmentTime { get; set; }
+    public OrderStatus Status { get; set; }
+
+    public decimal Amount { get { return UnitPrice * Quantity; } }
+
+    public bool CanCancel()
+    {
+        bool statusOk = Status == OrderStatus.Pending || Status == OrderStatus.Paid;
+        bool timeOk = AppointmentTime &gt; DateTime.Now.AddHours(2);
+        return statusOk &amp;&amp; timeOk;
+    }
+}</code></pre>
+</details></div>
+
+<h2 id="s10"><span class="sec">10</span>异常处理</h2>
+<p>程序运行中出现无法继续的问题（数据库连不上、文件不存在、除以零），就会“抛出异常”。不处理，程序就崩溃——在比赛中，一次崩溃可能让裁判后面的测试全部无法进行。</p>
+<pre><code>try
+{
+    int x = int.Parse("abc");          // 这里会抛出 FormatException
+    Console.WriteLine("不会执行到这里");
+}
+catch (FormatException)
+{
+    Console.WriteLine("格式不正确");
+}
+catch (Exception ex)                   // 兜底：捕获其他所有异常
+{
+    Console.WriteLine("发生错误：" + ex.Message);
+}
+finally
+{
+    Console.WriteLine("无论是否出错都会执行");   // 常用于关闭连接
+}</code></pre>
+<p>主动抛出异常：<code>throw new ArgumentException("数量必须大于 0");</code></p>
+<div class="box tip"><span class="h">训练建议：异常处理的分寸</span>
+<ul><li><strong>能预判的错误，用 if 判断，不要靠异常</strong>：用户输入格式用 <code>TryParse</code> 和正则；除数先判断是否为 0。</li><li><strong>无法预判的错误，用 try-catch 兜住</strong>：数据库操作、文件读写、网络请求。</li><li>catch 里要给用户一个能看懂的提示，不要什么都不做（“吞掉异常”会让你调试时找不到问题）。</li></ul></div>
+<div class="ex"><span class="h">练习 4-12　安全除法</span>
+<p>读入两个整数，输出商（保留 2 位小数）。分别处理：输入不是数字、除数为 0。要求程序在任何输入下都不崩溃。</p></div>
+
+<h2 id="s11"><span class="sec">11</span>日期与时间</h2>
+<p>比赛中日期出现频率极高：注册时间、预约时间、验证码有效期、“仅显示今天及以后的日期”、按月统计……</p>
+<pre><code>DateTime now = DateTime.Now;
+DateTime today = DateTime.Today;                 // 今天 00:00:00
+DateTime d = new DateTime(2026, 3, 15, 9, 30, 0);
+string s1 = d.ToString("yyyy-MM-dd");            // 2026-03-15
+string s2 = d.ToString("yyyy-MM-dd HH:mm");      // 2026-03-15 09:30（HH 是 24 小时制）
+string s3 = d.ToString("yyyy-MM");               // 2026-03（按月统计用）
+DateTime later = d.AddDays(7).AddHours(-1);
+TimeSpan span = later - d;
+double hours = span.TotalHours;                  // 167
+bool expired = (DateTime.Now - d).TotalSeconds &gt; 60;   // 是否超过 60 秒
+
+DateTime parsed;
+bool ok = DateTime.TryParseExact("2026-02-30", "yyyy-MM-dd",
+    System.Globalization.CultureInfo.InvariantCulture,
+    System.Globalization.DateTimeStyles.None, out parsed);   // false：2 月没有 30 日</code></pre>
+<div class="box warn"><span class="h">易错提醒</span>
+<p>格式串大小写含义不同：<code>MM</code> 是月、<code>mm</code> 是分钟；<code>HH</code> 是 24 小时制、<code>hh</code> 是 12 小时制。写成 <code>yyyy-mm-dd</code> 是最常见的错误之一，显示出来的“月份”其实是分钟数。</p></div>
+<div class="ex"><span class="h">练习 4-13　年龄计算</span>
+<p>输入出生日期（yyyy-MM-dd），计算周岁（今年生日没过要减 1）。输入格式不对时提示。用 <code>1950-12-31</code> 和今天的日期分别测试。</p>
+<details><summary>参考答案</summary>
+<pre><code>static int Age(DateTime birth, DateTime today)
+{
+    int age = today.Year - birth.Year;
+    if (birth.Date &gt; today.AddYears(-age)) age--;
+    return age;
+}</code></pre>
+</details></div>
+<div class="ex"><span class="h">练习 4-14　7 天自动登录</span>
+<p>假设上次登录时间保存为字符串 <code>"2026-11-05 08:00:00"</code>。写方法判断当前时间是否仍在 7 天内（湖北样题的“Auto login in 7 days”）。</p>
+<details><summary>参考答案</summary>
+<pre><code>static bool WithinDays(string lastLogin, int days)
+{
+    DateTime t;
+    if (!DateTime.TryParseExact(lastLogin, "yyyy-MM-dd HH:mm:ss",
+        System.Globalization.CultureInfo.InvariantCulture,
+        System.Globalization.DateTimeStyles.None, out t)) return false;
+    return DateTime.Now &lt; t.AddDays(days);
+}</code></pre>
+</details></div>
+
+<h2 id="s12"><span class="sec">12</span>LINQ：像写 SQL 一样处理集合</h2>
+<p>LINQ 让你对 List 做筛选、排序、统计，写法简洁。需要 <code>using System.Linq;</code>（新建项目默认已有）。</p>
+<pre><code>List&lt;Service&gt; list = new List&lt;Service&gt;
+{
+    new Service(1, "助浴", 120m), new Service(2, "陪诊", 200m),
+    new Service(3, "助餐", 25m),  new Service(4, "康复理疗", 260m)
+};
+
+var cheap = list.Where(s =&gt; s.Price &lt; 150m).ToList();               // 筛选
+var sorted = list.OrderByDescending(s =&gt; s.Price).ToList();         // 排序（降序）
+var names = list.Select(s =&gt; s.Name).ToList();                       // 只取名字
+decimal total = list.Sum(s =&gt; s.Price);                              // 求和 605
+int count = list.Count(s =&gt; s.Price &gt; 100m);                         // 计数 3
+Service first = list.FirstOrDefault(s =&gt; s.Name.Contains("陪"));     // 找不到返回 null
+bool any = list.Any(s =&gt; s.Price &gt; 250m);                            // true
+
+// 分页：第 2 页，每页 2 条
+var page2 = list.OrderBy(s =&gt; s.Id).Skip(2).Take(2).ToList();
+
+// 分组统计
+var groups = list.GroupBy(s =&gt; s.Price &gt;= 150m ? "高价" : "普通")
+                 .Select(g =&gt; new { Kind = g.Key, Num = g.Count(), Sum = g.Sum(x =&gt; x.Price) })
+                 .ToList();
+foreach (var g in groups) Console.WriteLine($"{g.Kind}: {g.Num} 项，合计 {g.Sum}");</code></pre>
+<p><code>s =&gt; s.Price &lt; 150m</code> 叫 Lambda 表达式，读作“对每个 s，判断它的价格是否小于 150”。</p>
+<div class="ex"><span class="h">练习 4-15　订单统计</span>
+<p>造 10 个 <code>Order</code> 对象（不同日期、不同服务、不同状态）。用 LINQ 输出：① 已完成订单总金额；② 每种服务的订单数，按订单数降序；③ 按月份（yyyy-MM）统计订单数和金额；④ 金额最高的 3 个订单。</p></div>
+
+<h2 id="s13"><span class="sec">13</span>文件读写</h2>
+<p>比赛中文件操作主要用于：读图片（显示头像，不存在时显示 <code>default.jpg</code>）、保存简单配置、导出数据。需要 <code>using System.IO;</code></p>
+<pre><code>string dir = AppDomain.CurrentDomain.BaseDirectory;   // 程序运行目录（bin\Debug\）
+string file = Path.Combine(dir, "note.txt");           // 拼路径，不要手写反斜杠
+
+File.WriteAllText(file, "第一行\r\n第二行", System.Text.Encoding.UTF8);
+string all = File.ReadAllText(file, System.Text.Encoding.UTF8);
+string[] lines = File.ReadAllLines(file, System.Text.Encoding.UTF8);
+File.AppendAllText(file, "\r\n追加一行", System.Text.Encoding.UTF8);
+
+bool exists = File.Exists(Path.Combine(dir, "Images", "u1001.jpg"));
+string img = exists ? Path.Combine(dir, "Images", "u1001.jpg")
+                    : Path.Combine(dir, "Images", "default.jpg");
+
+if (!Directory.Exists(Path.Combine(dir, "Export")))
+    Directory.CreateDirectory(Path.Combine(dir, "Export"));</code></pre>
+<div class="box warn"><span class="h">易错提醒：中文乱码</span>
+<p>读写含中文的文本文件，一律显式指定 <code>Encoding.UTF8</code>。导出 CSV 给 Excel 打开时，Excel 可能需要带 BOM 的 UTF-8（<code>new UTF8Encoding(true)</code>）才能正确识别中文。</p></div>
+<div class="ex"><span class="h">练习 4-16　简易通讯录（小项目）</span>
+<p>控制台菜单：1 新增联系人（姓名、电话，电话需 11 位校验）、2 列出全部（按姓名排序）、3 按姓名模糊查找、4 删除、0 退出。数据用 <code>List&lt;Contact&gt;</code> 存，退出时保存到 <code>contacts.txt</code>（每行“姓名,电话”），启动时读取。要求任何输入都不崩溃。这是本章的综合项目，建议用一个周末完成。</p>
+<details><summary>完成标准</summary><ul><li>重启程序后数据还在；</li><li>输入非法菜单编号、空姓名、10 位电话都有提示；</li><li>删除不存在的人提示“未找到”；</li><li>代码中至少有 <code>Contact</code> 类、<code>LoadContacts</code>、<code>SaveContacts</code> 三个独立部分。</li></ul></details></div>
+
+<h2 id="s14"><span class="sec">14</span>命名与注释规范</h2>
+<p>辽宁文件要求“符合命名规范和注释规范”，评价分也会看代码质量。下面是本手册统一采用的规范：</p>
+<div class="tw"><table>
+<tr><th>对象</th><th>规范</th><th>例子</th></tr>
+<tr><td>类、方法、属性、枚举</td><td>大驼峰 PascalCase</td><td><code>UserService</code>、<code>LoadUsers()</code>、<code>CreatedAt</code></td></tr>
+<tr><td>局部变量、参数</td><td>小驼峰 camelCase</td><td><code>userName</code>、<code>pageIndex</code></td></tr>
+<tr><td>私有字段</td><td>下划线 + 小驼峰</td><td><code>_currentPage</code></td></tr>
+<tr><td>常量</td><td>大驼峰</td><td><code>PageSize</code></td></tr>
+<tr><td>窗体</td><td>Frm + 功能</td><td><code>FrmLogin</code>、<code>FrmUserManage</code></td></tr>
+<tr><td>控件</td><td>类型前缀 + 含义</td><td><code>txtUserName</code>、<code>btnLogin</code>、<code>dgvUsers</code>、<code>cboRole</code>、<code>chkRemember</code>、<code>lblTip</code>、<code>dtpBirth</code>、<code>picAvatar</code></td></tr>
+<tr><td>数据库表</td><td>大驼峰单数或统一复数（全库一致）</td><td><code>Manager</code>、<code>ServiceOrder</code></td></tr>
+</table></div>
+<p>注释：类和公共方法上方用 <code>///</code> 写一句说明（输入 <code>///</code> VS 会自动生成模板）；复杂逻辑前用 <code>//</code> 说明“为什么这样做”，而不是重复“做了什么”。</p>
+<pre><code>/// &lt;summary&gt;
+/// 校验注册信息，返回第一条错误提示；全部通过时返回空字符串。
+/// &lt;/summary&gt;
+public static string ValidateRegister(string user, string pwd, string pwd2, string phone) { /* ... */ return ""; }</code></pre>
+<div class="box warn"><span class="h">易错提醒：不要留 button1、Form2</span>
+<p>拖控件后 VS 默认命名 <code>button1</code>、<code>textBox2</code>。赛场上时间紧，很多人懒得改，结果评价分里“命名规范”一项被扣，自己调试时也分不清哪个是哪个。拖完控件立刻在“属性”窗口改 <code>(Name)</code>，养成肌肉记忆。</p></div>
+
+<h2 id="s15"><span class="sec">15</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准（全部做到再进入第 05 章）</span>
+<ul class="cl">
+<li>不看资料，10 分钟内写出练习 4-7 的注册校验器并全部测试通过</li>
+<li>能解释整数除法、银行家舍入、<code>MM</code> 与 <code>mm</code> 的区别</li>
+<li>能写一个包含 5 个属性和 1 个方法的实体类，并用 List 存放、LINQ 筛选排序</li>
+<li>能写分页的两个公式（总页数、当前页起止）</li>
+<li>完成了练习 4-16 通讯录小项目，任何输入都不崩溃</li>
+<li>错题本 C# 区已记录至少 15 条</li>
+</ul></div>
+
+<div class="pager"><a href="03-thinking.html"><small>上一章</small>计算思维与商务应用的结构</a><a href="05-sql.html" style="text-align:right"><small>下一章</small>SQL Server 与数据库设计</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

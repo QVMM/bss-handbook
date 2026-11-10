@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SQL Server 与数据库设计 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a class="active" href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>SQL Server 与数据库设计</span></div>
+<main class="content">
+<p class="kicker">第 05 章 · 学习路径第三站</p>
+<h1>SQL Server 与数据库设计</h1>
+<p class="lead">数据库是整个解决方案的“地基”：桌面端读它、接口读它、手机端间接读它。这一章教你用 SSMS 管理数据库，用 T-SQL 建表、查询、统计、增删改，并学会画 ER 图。配套的练习库脚本可以直接导入，所有练习题都给出了可核对的预期结果。标准版用 4 周，强化版用 2 周。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">数据库的基本概念</a></li><li><a href="#s2">SSMS 基本操作</a></li><li><a href="#s3">数据类型怎么选</a></li><li><a href="#s4">建表与约束</a></li><li><a href="#s5">ER 图与数据库设计</a></li><li><a href="#s6">导入练习库</a></li><li><a href="#s7">查询基础：SELECT</a></li><li><a href="#s8">常用函数</a></li><li><a href="#s9">聚合与分组统计</a></li><li><a href="#s10">多表连接：JOIN</a></li><li><a href="#s11">分页查询</a></li><li><a href="#s12">增、删、改</a></li><li><a href="#s13">视图与存储过程（了解）</a></li><li><a href="#s14">健康数据统计（为手机端图表做准备）</a></li><li><a href="#s15">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>数据库的基本概念</h2>
+<div class="tw"><table>
+<tr><th>概念</th><th>通俗解释</th><th>例子</th></tr>
+<tr><td>数据库（Database）</td><td>一个项目的全部数据放在一起</td><td><code>SmartCare</code></td></tr>
+<tr><td>表（Table）</td><td>一类“东西”的清单，像一张 Excel 工作表</td><td><code>Customer</code> 客户表</td></tr>
+<tr><td>行（记录）</td><td>一个具体的东西</td><td>王秀英这位客户</td></tr>
+<tr><td>列（字段）</td><td>东西的一个属性，有固定的数据类型</td><td><code>Phone</code>、<code>BirthDate</code></td></tr>
+<tr><td>主键（PK）</td><td>每行唯一的编号，不能重复、不能为空</td><td><code>CustomerId</code></td></tr>
+<tr><td>外键（FK）</td><td>引用另一张表主键的列，表示“属于谁”</td><td>订单表的 <code>CustomerId</code></td></tr>
+<tr><td>约束</td><td>数据库替你把关的规则</td><td>手机号唯一、价格不能为负</td></tr>
+</table></div>
+<p>SQL（Structured Query Language）是和数据库对话的语言，SQL Server 使用的版本叫 T-SQL。SQL 关键字不区分大小写，本手册统一把关键字写成大写，便于阅读。</p>
+
+<h2 id="s2"><span class="sec">02</span>SSMS 基本操作</h2>
+<h3>新建数据库与执行脚本</h3>
+<ol>
+<li>连接后，在左侧“对象资源管理器”右键“数据库” → “新建数据库”，输入名称，确定。</li>
+<li>或者点工具栏“新建查询”，输入 <code>CREATE DATABASE Practice;</code>，按 <kbd>F5</kbd> 执行（只执行选中部分：先选中再按 <kbd>F5</kbd>）。</li>
+<li>执行脚本文件：文件 → 打开 → 文件，选择 <code>.sql</code>，按 <kbd>F5</kbd>。</li>
+<li>工具栏上的下拉框显示“当前数据库”。执行查询前确认它不是 <code>master</code>，或者在脚本开头写 <code>USE 数据库名;</code>。</li>
+</ol>
+<h3>常用操作速查</h3>
+<div class="tw"><table>
+<tr><th>想做什么</th><th>怎么做</th></tr>
+<tr><td>看表结构</td><td>展开 数据库 → 表 → 某表 → 列；或右键表 → 设计</td></tr>
+<tr><td>快速看/改数据</td><td>右键表 → 选择前 1000 行 / 编辑前 200 行</td></tr>
+<tr><td>新建的表在列表里看不到</td><td>右键“表” → 刷新（<kbd>F5</kbd>）</td></tr>
+<tr><td>把表结构和数据导出成脚本</td><td>右键数据库 → 任务 → 生成脚本 → 高级 → “要编写脚本的数据的类型”选“架构和数据”</td></tr>
+<tr><td>备份 / 还原</td><td>右键数据库 → 任务 → 备份；右键“数据库” → 还原数据库（题目给 .bak 文件时用）</td></tr>
+<tr><td>附加数据库</td><td>右键“数据库” → 附加 → 添加 .mdf 文件（题目给 .mdf/.ldf 时用）</td></tr>
+<tr><td>画数据库关系图</td><td>展开数据库 → 数据库关系图 → 新建（首次会提示安装支持对象）</td></tr>
+</table></div>
+<div class="box warn"><span class="h">易错提醒：题目给的脚本先看再执行</span>
+<p>湖北样题要求先创建名为“Session1”的数据库，再把脚本导入其中，并且“除试题中有明确要求外，不可修改数据库结构、不可删除数据表、不可添加或删除字段、不可修改数据类型”。执行前先用记事本或 SSMS 打开脚本看开头：有没有 <code>CREATE DATABASE</code>、有没有 <code>USE</code>。如果脚本里没有 <code>USE</code>，而你当前选的是 <code>master</code>，所有表就会建到 <code>master</code> 里——这是赛场上真实发生过很多次的事故。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>数据类型怎么选</h2>
+<div class="tw"><table>
+<tr><th>数据</th><th>推荐类型</th><th>说明</th></tr>
+<tr><td>编号</td><td><code>INT IDENTITY(1,1)</code></td><td>自动递增，插入时不用给值</td></tr>
+<tr><td>中文文字</td><td><code>NVARCHAR(n)</code></td><td>带 N 的类型才能正确存中文；字面量写 <code>N'张三'</code></td></tr>
+<tr><td>固定长度编码</td><td><code>CHAR(11)</code>、<code>VARCHAR(20)</code></td><td>手机号、订单号这类纯数字/英文</td></tr>
+<tr><td>金额</td><td><code>DECIMAL(10,2)</code></td><td>精确小数，共 10 位，其中 2 位小数</td></tr>
+<tr><td>日期</td><td><code>DATE</code></td><td>只有年月日，如出生日期</td></tr>
+<tr><td>日期时间</td><td><code>DATETIME</code></td><td>精确到约 3 毫秒，比赛够用；也可用 <code>DATETIME2</code></td></tr>
+<tr><td>是/否</td><td><code>BIT</code></td><td>0 或 1；C# 中读出来是 <code>bool</code></td></tr>
+<tr><td>状态码</td><td><code>TINYINT</code></td><td>0–255，配合注释说明含义</td></tr>
+<tr><td>长文本</td><td><code>NVARCHAR(500)</code> 或 <code>NVARCHAR(MAX)</code></td><td>投诉内容、描述</td></tr>
+<tr><td>图片</td><td><code>NVARCHAR(100)</code> 存文件名，或 <code>VARBINARY(MAX)</code> 存图片本身</td><td>比赛中两种都见过：湖北样题要求“照片存储到系统中、≤100KB”</td></tr>
+</table></div>
+
+<h2 id="s4"><span class="sec">04</span>建表与约束</h2>
+<span class="fname">建一张客户表</span><pre><code>CREATE TABLE Customer (
+    CustomerId  INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Customer PRIMARY KEY,
+    Phone       CHAR(11)      NOT NULL CONSTRAINT UQ_Customer_Phone UNIQUE,
+    Password    NVARCHAR(64)  NOT NULL,
+    RealName    NVARCHAR(20)  NULL,
+    Gender      NCHAR(1)      NULL CONSTRAINT CK_Customer_Gender CHECK (Gender IN (N'男', N'女')),
+    BirthDate   DATE          NULL,
+    Status      TINYINT       NOT NULL CONSTRAINT DF_Customer_Status DEFAULT (1),
+    CreatedAt   DATETIME      NOT NULL CONSTRAINT DF_Customer_CreatedAt DEFAULT (GETDATE())
+);</code></pre>
+<div class="tw"><table>
+<tr><th>约束</th><th>作用</th><th>违反时</th></tr>
+<tr><td><code>PRIMARY KEY</code></td><td>唯一且非空</td><td>插入重复编号报错</td></tr>
+<tr><td><code>UNIQUE</code></td><td>该列不能重复</td><td>注册重复手机号时报错（C# 中捕获后提示“已注册”）</td></tr>
+<tr><td><code>NOT NULL</code></td><td>必须有值</td><td>不给值报错</td></tr>
+<tr><td><code>CHECK</code></td><td>值必须满足条件</td><td>性别写“未知”报错</td></tr>
+<tr><td><code>DEFAULT</code></td><td>不给值时的默认值</td><td>—</td></tr>
+<tr><td><code>FOREIGN KEY ... REFERENCES</code></td><td>值必须在另一张表的主键里存在</td><td>给不存在的客户下单报错；删除有订单的客户报错</td></tr>
+</table></div>
+<p>约束名（如 <code>PK_Customer</code>、<code>UQ_Customer_Phone</code>）建议按“类型_表_列”的规则手动起名，出错时一眼就能看出是哪条规则。</p>
+<span class="fname">修改表结构</span><pre><code>ALTER TABLE Customer ADD Email NVARCHAR(100) NULL;          -- 加列
+ALTER TABLE Customer ALTER COLUMN RealName NVARCHAR(30) NULL; -- 改类型
+ALTER TABLE Customer DROP COLUMN Email;                      -- 删列</code></pre>
+
+<h2 id="s5"><span class="sec">05</span>ER 图与数据库设计</h2>
+<p>ER 图（实体—关系图）用图形描述“有哪些表、表之间什么关系”。拿到需求时先画 ER 图，再写建表语句，能避免返工。题目如果提供了 ERD（湖北样题模块 A 就附有 <code>ERD.pdf</code>），你要能读懂它。</p>
+<h3>三种关系</h3>
+<div class="tw"><table>
+<tr><th>关系</th><th>含义</th><th>怎么建表</th><th>例子</th></tr>
+<tr><td>一对多（1:N）</td><td>一个 A 对应多个 B，一个 B 只属于一个 A</td><td>在“多”的一方加外键</td><td>一个客户有多个订单 → <code>ServiceOrder.CustomerId</code></td></tr>
+<tr><td>多对多（M:N）</td><td>一个 A 对应多个 B，一个 B 也对应多个 A</td><td>建一张“中间表”，含两个外键</td><td>服务人员与技能 → <code>StaffSkill(StaffId, SkillId)</code></td></tr>
+<tr><td>一对一（1:1）</td><td>一一对应</td><td>外键加 UNIQUE，或合并成一张表</td><td>客户与其健康档案</td></tr>
+</table></div>
+<h3>练习库的 ER 图</h3>
+<span class="fname">SmartCare 实体关系（文字版）</span><pre><code> Manager（管理者，独立）
+
+ ServiceCategory 1 ──── N CareService 1 ──── N ServiceOrder N ──── 1 Customer
+                                                     │                     │
+                                                     1                     ├── 1:N ── HealthRecord
+                                                     │                     │
+                                                     N                     └── 1:N ── EmergencyContact
+                                                 Complaint</code></pre>
+<p>请用 SSMS 的“数据库关系图”或 Draw.io 把它画成标准图形：每个实体一个方框，列出主键（PK）、外键（FK）和主要属性，连线标注 1 和 N。</p>
+<h3>规范化：三条朴素的规则</h3>
+<ol>
+<li><strong>一个格子只放一个值</strong>（第一范式）：不要在一个字段里存“助浴,助餐,陪诊”。需要多个值就拆成多行或另建表。</li>
+<li><strong>每个字段都完整依赖主键</strong>（第二范式）：中间表 <code>StaffSkill(StaffId, SkillId)</code> 里不要放 <code>StaffName</code>，因为姓名只依赖 StaffId。</li>
+<li><strong>不存“能算出来”或“能查出来”的冗余信息</strong>（第三范式）：订单表存 <code>ServiceId</code> 就够了，不要再存服务名称和分类名称。</li>
+</ol>
+<p>例外：订单金额 <code>Amount</code> 虽然能用“单价×数量”算出来，但服务价格以后可能调整，订单要记录“下单当时的金额”，所以保留。这类有业务理由的冗余是合理的——能说清理由即可。</p>
+<h3>数据字典</h3>
+<p>数据字典是对每张表每个字段的文字说明，世赛能力标准中明确列出了它。格式很简单：</p>
+<div class="tw"><table>
+<tr><th>字段</th><th>类型</th><th>允许空</th><th>约束</th><th>说明</th></tr>
+<tr><td>OrderId</td><td>INT</td><td>否</td><td>PK，自增</td><td>订单编号</td></tr>
+<tr><td>OrderNo</td><td>VARCHAR(20)</td><td>否</td><td>UNIQUE</td><td>订单号，SO + 下单日期 + 4 位序号</td></tr>
+<tr><td>Status</td><td>TINYINT</td><td>否</td><td>默认 0</td><td>0 待支付、1 已支付、2 已完成、3 已取消</td></tr>
+</table></div>
+<div class="ex"><span class="h">练习 5-1　设计一个小库</span>
+<p>为“社区活动报名”设计数据库：活动（名称、时间、地点、人数上限）、居民（姓名、手机号、出生日期）、报名记录（谁报了哪个活动、报名时间、是否签到）。要求：画 ER 图，写数据字典，写出全部 <code>CREATE TABLE</code> 语句（含主键、外键、唯一、检查、默认约束）。思考：同一居民不能重复报名同一活动，用什么约束实现？</p>
+<details><summary>提示</summary><p>报名记录表是活动与居民之间的中间表（多对多）。防止重复报名：在 <code>(ActivityId, ResidentId)</code> 两列上建联合唯一约束：<code>CONSTRAINT UQ_Signup UNIQUE (ActivityId, ResidentId)</code>。人数上限不能用简单约束实现，要在程序里插入前先查询已报名人数。</p></details></div>
+
+<h2 id="s6"><span class="sec">06</span>导入练习库</h2>
+<p>本手册附带一个自拟的练习库脚本：<a href="assets/SmartCare-练习库.sql"><code>assets/SmartCare-练习库.sql</code></a>（在手册文件夹的 <code>assets</code> 目录中）。它模拟“智慧康养平台”的数据，包含 8 张表：管理者、客户、服务分类、康养服务、服务订单、投诉、健康数据、紧急联系人。第 05–08 章的练习都基于它。</p>
+<ol>
+<li>在 SSMS 中 文件 → 打开 → 文件，选择该脚本。</li>
+<li>按 <kbd>F5</kbd> 执行。脚本会删除并重建 <code>SmartCare</code> 库，最后输出每张表的行数。</li>
+<li>核对：Manager 3、Customer 12、ServiceCategory 4、CareService 10、ServiceOrder 30、Complaint 6、HealthRecord 20、EmergencyContact 5。</li>
+</ol>
+<div class="box note"><span class="h">说明</span><p>这是为练习编写的数据，不是任何比赛的官方素材。为了方便你核对登录功能，练习库中的密码使用明文（客户密码都是 <code>abc12345</code>，管理员 <code>admin</code> 的密码是 <code>admin123</code>）。真实项目中密码应存储哈希值；比赛中以题目给定的数据库为准。</p></div>
+<p>建议你先通读一遍脚本：看看每张表的约束是怎么写的，再看 <code>INSERT</code> 语句如何一次插入多行。日期时间字面量写成 <code>'2026-07-03T09:00:00'</code>（中间带 T）的格式，这种 ISO 8601 写法不受服务器语言设置影响，最稳妥。</p>
+
+<h2 id="s7"><span class="sec">07</span>查询基础：SELECT</h2>
+<pre><code>USE SmartCare;
+
+SELECT * FROM Customer;                                -- 全部列（练习可以，正式代码中写明列名）
+SELECT RealName, Phone, BirthDate FROM Customer;       -- 指定列
+SELECT RealName AS 姓名, Phone AS 手机号 FROM Customer; -- 列别名
+
+-- 条件
+SELECT * FROM CareService WHERE Price &lt; 100;
+SELECT * FROM CareService WHERE Price BETWEEN 50 AND 200;
+SELECT * FROM CareService WHERE CategoryId IN (1, 2);
+SELECT * FROM Customer WHERE RealName LIKE N'王%';      -- 王开头；%任意多个字符，_一个字符
+SELECT * FROM Customer WHERE RealName LIKE N'%华%';     -- 包含“华”（模糊查询）
+SELECT * FROM Customer WHERE RealName IS NULL;          -- 判断空值必须用 IS NULL，不能用 = NULL
+SELECT * FROM CareService WHERE IsOnSale = 1 AND Price &lt; 100;
+
+-- 排序
+SELECT * FROM CareService ORDER BY Price DESC;                 -- 降序
+SELECT * FROM CareService ORDER BY CategoryId ASC, Price DESC;  -- 多列排序
+
+-- 取前几条、去重
+SELECT TOP 3 * FROM CareService ORDER BY Price DESC;
+SELECT DISTINCT CategoryId FROM CareService;</code></pre>
+<div class="ex"><span class="h">练习 5-2</span>
+<p>查询所有<strong>在售</strong>且价格低于 100 元的服务，显示服务名称和价格，按价格从低到高排序。</p>
+<details><summary>参考答案与预期结果</summary>
+<pre><code>SELECT ServiceName, Price FROM CareService
+WHERE IsOnSale = 1 AND Price &lt; 100
+ORDER BY Price ASC;</code></pre>
+<p>5 行：助餐配送 25.00、上门测血压血糖 30.00、代读书报 40.00、聊天陪伴 60.00、居家保洁 80.00。</p></details></div>
+<div class="ex"><span class="h">练习 5-3</span>
+<p>查询姓名中包含“华”的客户；查询没有填写姓名的客户；查询 1950 年以前出生的客户，按出生日期升序。</p>
+<details><summary>预期结果</summary><p>含“华”：黄国华、郑丽华（2 行）。未填姓名：手机号 13800000012 的 1 位客户。1950 年以前出生（<code>BirthDate &lt; '1950-01-01'</code>）：张桂兰 1945-11-02、杨德胜 1943-09-09、吴长海 1947-02-11、王秀英 1948-03-12、黄国华 1949-04-04，按升序为杨德胜、张桂兰、吴长海、王秀英、黄国华。</p></details></div>
+
+<h2 id="s8"><span class="sec">08</span>常用函数</h2>
+<pre><code>SELECT GETDATE();                                         -- 当前日期时间
+SELECT CONVERT(CHAR(10), GETDATE(), 120);                 -- 'yyyy-mm-dd'（120 是 ODBC 规范格式）
+SELECT CONVERT(CHAR(7), CreatedAt, 120) FROM ServiceOrder; -- 'yyyy-mm' 按月统计常用
+SELECT CONVERT(CHAR(16), CreatedAt, 120) FROM ServiceOrder;-- 'yyyy-mm-dd hh:mi'
+SELECT DATEADD(DAY, 7, GETDATE());                        -- 7 天后
+SELECT DATEDIFF(YEAR, BirthDate, GETDATE()) FROM Customer; -- 粗略年龄（只看年份差）
+SELECT ISNULL(RealName, N'未填写') FROM Customer;          -- 空值替换
+SELECT LEN(N'智慧康养');                                    -- 4
+SELECT CAST(Price AS INT) FROM CareService;                -- 类型转换
+SELECT ServiceName,
+       CASE WHEN Price &gt;= 150 THEN N'高价' WHEN Price &gt;= 50 THEN N'中价' ELSE N'低价' END AS 档次
+FROM CareService;                                          -- 条件表达式
+SELECT OrderNo,
+       CASE Status WHEN 0 THEN N'待支付' WHEN 1 THEN N'已支付'
+                   WHEN 2 THEN N'已完成' WHEN 3 THEN N'已取消' END AS 状态
+FROM ServiceOrder;</code></pre>
+<div class="box tip"><span class="h">训练建议：日期格式在哪里转</span>
+<p>题目要求界面显示 YYYY-MM-DD。你可以在 SQL 里用 <code>CONVERT(CHAR(10), 列, 120)</code> 转成字符串，也可以把 <code>DateTime</code> 取到 C# 后用 <code>ToString("yyyy-MM-dd")</code>。推荐后者：数据库只负责给出正确的数据，格式交给界面。但按月统计分组时，在 SQL 里转换更方便。</p></div>
+
+<h2 id="s9"><span class="sec">09</span>聚合与分组统计</h2>
+<pre><code>SELECT COUNT(*) FROM Customer;                     -- 行数
+SELECT COUNT(RealName) FROM Customer;              -- 非空的 RealName 个数（11）
+SELECT SUM(Amount), AVG(Amount), MAX(Amount), MIN(Amount) FROM ServiceOrder;
+
+-- 按状态分组
+SELECT Status, COUNT(*) AS Cnt, SUM(Amount) AS Total
+FROM ServiceOrder
+GROUP BY Status;
+
+-- 按月统计（不含已取消）
+SELECT CONVERT(CHAR(7), CreatedAt, 120) AS [Month], COUNT(*) AS OrderCount, SUM(Amount) AS Revenue
+FROM ServiceOrder
+WHERE Status &lt;&gt; 3
+GROUP BY CONVERT(CHAR(7), CreatedAt, 120)
+ORDER BY [Month];
+
+-- HAVING：对分组结果再筛选
+SELECT CustomerId, COUNT(*) AS Cnt
+FROM ServiceOrder
+GROUP BY CustomerId
+HAVING COUNT(*) &gt;= 3;          -- 练习库中结果为客户 1、2、3、4、6、7</code></pre>
+<p><code>WHERE</code> 在分组前筛选行，<code>HAVING</code> 在分组后筛选组。<code>SELECT</code> 中出现的非聚合列，必须出现在 <code>GROUP BY</code> 中。</p>
+<div class="ex"><span class="h">练习 5-4</span>
+<p>统计：① 女性客户人数；② 已完成（Status = 2）订单的数量和总金额；③ 按月统计订单数和金额（不含已取消，按下单时间 CreatedAt 分月）。</p>
+<details><summary>预期结果</summary><p>① 6。② 22 单，4060.00。③ 2026-07：8 单 980.00；2026-08：6 单 1550.00；2026-09：7 单 1500.00；2026-10：6 单 935.00。</p></details></div>
+
+<h2 id="s10"><span class="sec">10</span>多表连接：JOIN</h2>
+<p>订单表里只存了客户编号和服务编号。要显示“客户姓名、服务名称”，就需要把表连接起来。</p>
+<pre><code>-- 内连接：两边都匹配上的行才出现
+SELECT o.OrderNo, c.RealName, s.ServiceName, o.Quantity, o.Amount,
+       o.AppointmentTime, o.Status
+FROM ServiceOrder o
+INNER JOIN Customer c    ON o.CustomerId = c.CustomerId
+INNER JOIN CareService s ON o.ServiceId = s.ServiceId
+ORDER BY o.CreatedAt DESC;
+
+-- 三表以上：服务 + 分类
+SELECT s.ServiceName, cat.CategoryName, s.Price
+FROM CareService s
+JOIN ServiceCategory cat ON s.CategoryId = cat.CategoryId;
+
+-- 左连接：左表全部保留，右表匹配不上的列为 NULL
+SELECT s.ServiceName, COUNT(o.OrderId) AS OrderCount
+FROM CareService s
+LEFT JOIN ServiceOrder o ON s.ServiceId = o.ServiceId
+GROUP BY s.ServiceName
+ORDER BY OrderCount DESC;</code></pre>
+<p>表别名（<code>o</code>、<code>c</code>、<code>s</code>）让语句更短。左连接中计数要写 <code>COUNT(o.OrderId)</code> 而不是 <code>COUNT(*)</code>，否则没有订单的服务也会计成 1。</p>
+<div class="ex"><span class="h">练习 5-5　连接综合</span>
+<ol>
+<li>找出从未被下过单的服务。</li>
+<li>找出从未下过单的客户。</li>
+<li>统计每种服务的订单数和金额（不含已取消），按订单数降序、金额降序。</li>
+<li>列出所有“待处理”的投诉：投诉内容、客户姓名、服务名称、投诉时间（yyyy-MM-dd HH:mm）。</li>
+<li>按客户统计消费金额（只算已支付和已完成），取前 3 名。</li>
+<li>统计每个服务分类下有几项服务。</li>
+</ol>
+<details><summary>参考答案</summary>
+<pre><code>-- 1
+SELECT s.ServiceName FROM CareService s
+LEFT JOIN ServiceOrder o ON s.ServiceId = o.ServiceId
+WHERE o.OrderId IS NULL;
+-- 2
+SELECT c.RealName, c.Phone FROM Customer c
+WHERE NOT EXISTS (SELECT 1 FROM ServiceOrder o WHERE o.CustomerId = c.CustomerId);
+-- 3
+SELECT s.ServiceName, COUNT(*) AS Cnt, SUM(o.Amount) AS Total
+FROM ServiceOrder o JOIN CareService s ON o.ServiceId = s.ServiceId
+WHERE o.Status &lt;&gt; 3
+GROUP BY s.ServiceName
+ORDER BY Cnt DESC, Total DESC;
+-- 4
+SELECT cp.Content, c.RealName, s.ServiceName, CONVERT(CHAR(16), cp.CreatedAt, 120) AS CreatedAt
+FROM Complaint cp
+JOIN ServiceOrder o ON cp.OrderId = o.OrderId
+JOIN Customer c     ON o.CustomerId = c.CustomerId
+JOIN CareService s  ON o.ServiceId = s.ServiceId
+WHERE cp.Status = 0
+ORDER BY cp.CreatedAt;
+-- 5
+SELECT TOP 3 c.RealName, SUM(o.Amount) AS Spend
+FROM ServiceOrder o JOIN Customer c ON o.CustomerId = c.CustomerId
+WHERE o.Status IN (1, 2)
+GROUP BY c.RealName
+ORDER BY Spend DESC;
+-- 6
+SELECT cat.CategoryName, COUNT(s.ServiceId) AS Cnt
+FROM ServiceCategory cat LEFT JOIN CareService s ON cat.CategoryId = s.CategoryId
+GROUP BY cat.CategoryName;</code></pre>
+<p>预期：① 中医推拿。② 陈淑珍。③ 第一行 上门助浴 5 单 600.00，其后依次为 助餐配送 4 单 1375.00、聊天陪伴 4 单 480.00、上门测血压血糖 4 单 150.00、康复理疗 3 单 1300.00、陪同就医 3 单 600.00、伤口护理 2 单 300.00，最后居家保洁与代读书报各 1 单 80.00（这两行金额相同，先后顺序不确定）。④ 3 行：“有两天送餐时间晚于 12 点。”周凤琴、助餐配送、2026-08-12 13:00；“就医时排队较久……”黄国华、陪同就医、2026-09-12 17:00；“理疗后有些酸痛……”杨德胜、康复理疗、2026-10-03 19:00。注意投诉表只记录了订单编号，客户和服务要经过订单表再连接。⑤ 王秀英 1140.00、李建国 865.00、杨德胜 760.00。⑥ 生活照料 3、医疗护理 3、康复理疗 2、精神慰藉 2。</p>
+</details></div>
+
+<h2 id="s11"><span class="sec">11</span>分页查询</h2>
+<p>比赛中“每页 10 条、首页/上一页/下一页/尾页/跳转”出现频率很高（湖北样题有 4 个界面要求分页）。SQL Server 2012 起支持 <code>OFFSET ... FETCH</code>：</p>
+<pre><code>DECLARE @PageIndex INT = 2, @PageSize INT = 5;   -- 第 2 页，每页 5 条
+
+SELECT CustomerId, RealName, Phone
+FROM Customer
+ORDER BY CustomerId                                -- 分页必须有 ORDER BY
+OFFSET (@PageIndex - 1) * @PageSize ROWS
+FETCH NEXT @PageSize ROWS ONLY;
+
+SELECT COUNT(*) FROM Customer;                     -- 总条数，用来算总页数</code></pre>
+<div class="ex"><span class="h">练习 5-6</span>
+<p>按 <code>CustomerId</code> 排序、每页 5 条，第 2 页是哪些客户？共几页？再把条件改成“只查状态正常（Status = 1）的客户”，第 3 页有几条？</p>
+<details><summary>预期结果</summary><p>第 2 页：杨德胜、赵玉梅、黄国华、周凤琴、吴长海。共 12 条，3 页。状态正常的有 11 人，第 3 页 1 条（手机号 13800000012）。</p></details></div>
+
+<h2 id="s12"><span class="sec">12</span>增、删、改</h2>
+<pre><code>-- 插入
+INSERT INTO Manager (UserName, Password, Phone) VALUES (N'test01', N'test1234', '13900000009');
+SELECT SCOPE_IDENTITY();     -- 取刚插入的自增编号
+
+-- 修改（一定要带 WHERE！）
+UPDATE CareService SET Price = 130.00 WHERE ServiceId = 1;
+UPDATE ServiceOrder SET Status = 3 WHERE OrderId = 28 AND Status = 0;   -- 只取消“待支付”的
+
+-- 删除（一定要带 WHERE！）
+DELETE FROM Manager WHERE UserName = N'test01';
+
+-- “软删除”：不真的删，改状态。客户、服务这类被订单引用的数据通常用软删除
+UPDATE Customer SET Status = 0 WHERE CustomerId = 5;</code></pre>
+<div class="box warn"><span class="h">易错提醒：没有 WHERE 的 UPDATE / DELETE</span>
+<p><code>UPDATE CareService SET Price = 0</code> 会把所有服务改成 0 元。养成习惯：先写 <code>SELECT * FROM 表 WHERE 条件</code> 确认查到的就是你要改的那几行，再把 <code>SELECT *</code> 换成 <code>UPDATE</code>/<code>DELETE</code>。练习时改坏了，重新执行练习库脚本即可恢复。</p></div>
+<h3>事务：要么全做，要么全不做</h3>
+<pre><code>BEGIN TRY
+    BEGIN TRANSACTION;
+    UPDATE ServiceOrder SET Status = 3 WHERE OrderId = 30;
+    INSERT INTO Complaint (OrderId, Content) VALUES (30, N'临时有事取消，希望尽快退款。');
+    COMMIT TRANSACTION;
+END TRY
+BEGIN CATCH
+    ROLLBACK TRANSACTION;
+    SELECT ERROR_MESSAGE();
+END CATCH;</code></pre>
+<p>比赛中“提交订单同时扣减库存/余票”“修改订餐同时写退款记录”这类需求，用事务保证数据一致。在 C# 中对应 <code>SqlTransaction</code>（第 06 章）。</p>
+<div class="ex"><span class="h">练习 5-7　增删改</span>
+<ol>
+<li>新增一个管理者 <code>wanghui</code>，密码 <code>wh123456</code>，电话 <code>13900000004</code>；再插入一次同名用户，记下报错信息。</li>
+<li>把“中医推拿”重新上架（IsOnSale = 1），价格调整为 168 元。</li>
+<li>给客户 1（王秀英）新增一条今天的血压记录 132/84。</li>
+<li>把所有待处理投诉标记为已回复，回复内容“已收到，客服将在 24 小时内联系您”，回复时间为当前时间。</li>
+<li>尝试删除客户 1，记下报错信息，并解释为什么。</li>
+</ol>
+<details><summary>要点</summary><p>② 报错信息中会出现约束名 <code>UQ_Manager_UserName</code>——这就是给约束起名的好处。⑤ 报错是外键冲突（<code>FK_ServiceOrder_Customer</code> 等）：客户有订单、健康记录、紧急联系人引用它，不能直接删除。实际业务中用软删除。</p></details></div>
+
+<h2 id="s13"><span class="sec">13</span>视图与存储过程（了解）</h2>
+<p>视图是“保存起来的查询”，可以像表一样查询；存储过程是“保存在数据库里的一段程序”。比赛中不强制使用，但如果某个复杂查询要在桌面端和接口里都用，做成视图可以避免写两遍。</p>
+<pre><code>CREATE VIEW vOrderDetail AS
+SELECT o.OrderId, o.OrderNo, c.CustomerId, c.RealName, c.Phone,
+       s.ServiceName, o.Quantity, o.Amount, o.AppointmentTime, o.Status, o.CreatedAt
+FROM ServiceOrder o
+JOIN Customer c    ON o.CustomerId = c.CustomerId
+JOIN CareService s ON o.ServiceId = s.ServiceId;
+GO
+SELECT * FROM vOrderDetail WHERE Phone = '13800000001' ORDER BY CreatedAt DESC;</code></pre>
+
+<h2 id="s14"><span class="sec">14</span>健康数据统计（为手机端图表做准备）</h2>
+<pre><code>-- 客户 1 的血压记录，按时间升序（画折线图用）
+SELECT CONVERT(CHAR(10), MeasuredAt, 120) AS [Day], Value1 AS Systolic, Value2 AS Diastolic
+FROM HealthRecord
+WHERE CustomerId = 1 AND RecordType = N'血压'
+ORDER BY MeasuredAt;
+
+-- 平均值与偏高次数
+SELECT CAST(AVG(Value1) AS DECIMAL(6,1)) AS AvgSys,
+       CAST(AVG(Value2) AS DECIMAL(6,1)) AS AvgDia,
+       SUM(CASE WHEN Value1 &gt;= 140 OR Value2 &gt;= 90 THEN 1 ELSE 0 END) AS HighTimes,
+       COUNT(*) AS Total
+FROM HealthRecord
+WHERE CustomerId = 1 AND RecordType = N'血压';</code></pre>
+<div class="ex"><span class="h">练习 5-8</span><p>运行上面的统计，核对结果。</p>
+<details><summary>预期结果</summary><p>7 条记录；平均收缩压 135.9，平均舒张压 85.6；偏高（≥140 或 ≥90）2 次。</p></details></div>
+
+<h2 id="s15"><span class="sec">15</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>不看资料，15 分钟内写出 3 张有外键关系的表的建表语句（含 5 种约束），一次执行成功</li>
+<li>能独立写出：模糊查询、多表 JOIN、LEFT JOIN 找“没有的”、按月 GROUP BY、OFFSET 分页</li>
+<li>练习 5-2 至 5-8 的结果全部与预期一致</li>
+<li>能说出 <code>WHERE</code> 与 <code>HAVING</code>、<code>INNER JOIN</code> 与 <code>LEFT JOIN</code> 的区别</li>
+<li>能用 SSMS 生成“架构和数据”脚本，并在另一个空库中恢复</li>
+<li>为练习 5-1 的“社区活动报名”画出了 ER 图并写好数据字典</li>
+</ul></div>
+
+<div class="pager"><a href="04-csharp.html"><small>上一章</small>C# 从零开始</a><a href="06-winforms.html" style="text-align:right"><small>下一章</small>WinForms 桌面应用（模块 A）</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

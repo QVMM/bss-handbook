@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>计算思维与商务应用的结构 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a class="active" href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>计算思维与商务应用的结构</span></div>
+<main class="content">
+<p class="kicker">第 03 章 · 学习路径第一站</p>
+<h1>计算思维与商务应用的结构</h1>
+<p class="lead">在写第一行代码之前，你要先学会像软件工程师那样看问题：一个“智慧康养平台”由哪几块组成？题目里的一句话需求，怎样拆成程序能执行的步骤、裁判能核对的分数点？这一章不需要电脑，一支笔、一张纸就够。建议用 3–5 小时学完。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">程序就是“输入—处理—输出”</a></li><li><a href="#s2">一个商务软件由哪几块组成</a></li><li><a href="#s3">从场景中找出“谁、什么、做什么”</a></li><li><a href="#s4">把一句需求拆成“测量点”</a></li><li><a href="#s5">流程图与伪代码</a></li><li><a href="#s6">练习</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>程序就是“输入—处理—输出”</h2>
+<p>任何一个功能，都可以拆成三个问题：</p>
+<ol>
+<li><strong>输入</strong>：用户给了什么？（输入框里的手机号、点了哪个按钮、选了哪一天）</li>
+<li><strong>处理</strong>：程序要按什么规则做什么？（检查格式、去数据库里查、计算金额）</li>
+<li><strong>输出</strong>：用户看到什么结果？（跳转页面、弹出提示、列表刷新）</li>
+</ol>
+<p>以辽宁样卷模块 A 的“登录”为例：</p>
+<div class="tw"><table>
+<tr><th>输入</th><th>处理</th><th>输出</th></tr>
+<tr><td>用户名、密码、是否勾选“记住密码”</td><td>① 检查是否为空；② 到数据库中按用户名查找；③ 比对密码；④ 若勾选记住密码，把用户名和密码保存到本地</td><td>成功：进入用户管理界面；失败：明确提示“用户名或密码错误”</td></tr>
+</table></div>
+<p>养成习惯：读到任何一条需求，先在纸上画这样一张三栏表。你会发现很多“不知道怎么下手”的需求，拆开后每一步都很简单。</p>
+
+<h2 id="s2"><span class="sec">02</span>一个商务软件由哪几块组成</h2>
+<p>比赛里的“商务软件解决方案”，几乎都是同一个骨架：</p>
+<span class="fname">智慧康养平台的整体结构</span><pre><code> ┌──────────────────────┐          ┌──────────────────────┐
+ │  桌面端（模块 A）      │          │  手机端（模块 B）      │
+ │  面向：平台管理者       │          │  面向：客户（老人/家属）│
+ │  WinForms 窗体          │          │  Android App          │
+ └──────────┬───────────┘          └──────────┬───────────┘
+            │ 直接连接数据库（ADO.NET）            │ HTTP 请求 / JSON
+            │                                     ▼
+            │                       ┌──────────────────────┐
+            │                       │  Web API（模块 A 提供）│
+            │                       │  “Modul1 接口”         │
+            │                       └──────────┬───────────┘
+            ▼                                  ▼
+ ┌─────────────────────────────────────────────────────────┐
+ │                SQL Server 数据库                         │
+ │  用户、服务、订单、投诉、健康数据 ……                       │
+ └─────────────────────────────────────────────────────────┘</code></pre>
+<p>理解这张图，就理解了模块 A 和模块 B 的关系：<strong>手机不能直接连数据库</strong>，它要通过 HTTP 向一个“接口程序”要数据；这个接口程序读写的，和桌面端是同一个数据库。辽宁样卷模块 B 写“本模块数据来源 Modul1 接口”，指的就是这件事。</p>
+<h3>三层结构</h3>
+<p>无论桌面端还是接口，代码内部通常分三层：</p>
+<div class="tw"><table>
+<tr><th>层</th><th>负责什么</th><th>在本手册中的样子</th></tr>
+<tr><td>界面层（UI）</td><td>显示数据、接收输入</td><td>WinForms 窗体、Android 的 Activity 和布局文件</td></tr>
+<tr><td>业务层（规则）</td><td>校验、计算、判断</td><td>“密码至少 8 位且含字母和数字”“订单金额 = 单价 × 数量”</td></tr>
+<tr><td>数据层（存取）</td><td>和数据库打交道</td><td>一个 <code>DbHelper</code> 类，专门执行 SQL</td></tr>
+</table></div>
+<p>比赛时间紧，你不需要像大型项目那样严格分很多个工程。但至少要做到：<strong>SQL 不散落在每个按钮里，而是集中到一个帮助类</strong>。这样改一处就全改了，而且评价分的“代码规范”一项会好看很多。</p>
+
+<h2 id="s3"><span class="sec">03</span>从场景中找出“谁、什么、做什么”</h2>
+<p>拿到一个业务场景，先找三样东西：</p>
+<ul>
+<li><strong>参与者（谁）</strong>：谁在用这个系统？</li>
+<li><strong>实体（什么）</strong>：系统要记住哪些“东西”？它们会成为数据库里的表。</li>
+<li><strong>操作（做什么）</strong>：参与者对实体做哪些事？大多数可以归为“增、删、改、查、统计”。</li>
+</ul>
+<p>用辽宁样卷的介绍文字试一试（样卷第 22、26 页）：桌面端“整合康养服务资源、用户数据、订单信息及投诉反馈”；移动端让用户“查询优质康养服务、预约下单、管理健康数据、紧急求助”。</p>
+<div class="tw"><table>
+<tr><th>参与者</th><th>实体</th><th>典型操作</th></tr>
+<tr><td>管理者（桌面端）</td><td>管理者账号、客户用户、康养服务、订单、投诉</td><td>注册、登录；用户查询/新增/编辑/禁用；服务上下架；订单查看与状态处理；投诉回复；统计报表</td></tr>
+<tr><td>客户（手机端）</td><td>客户账号、康养服务、订单、健康数据、紧急联系人</td><td>注册、登录、重置密码；浏览与搜索服务；预约下单、取消订单；录入与查看健康数据（图表）；一键紧急求助</td></tr>
+</table></div>
+<p>这张表就是你后面设计数据库（第 05 章）、规划界面（第 06、08 章）的出发点。</p>
+
+<h2 id="s4"><span class="sec">04</span>把一句需求拆成“测量点”</h2>
+<p>这是本章最重要的一项技能。裁判是拿着评分表一项一项核对的，评分表的每一项，基本都能在题目原文里找到对应的一句话。所以读题时，你要像裁判一样把需求拆碎。</p>
+<p>示例：辽宁样卷模块 A 的注册要求（概括）——“需填写用户名（唯一）、密码（≥8 位，含字母+数字）、确认密码、联系电话（11 位），提交前校验格式，用户名重复、密码不一致、格式错误需给出明确提示”。拆开后：</p>
+<ol>
+<li>注册界面有用户名输入框</li>
+<li>有密码输入框（并且应当密文显示——这是生活常识）</li>
+<li>有确认密码输入框（密文）</li>
+<li>有联系电话输入框</li>
+<li>有提交按钮（以及返回/取消）</li>
+<li>用户名为空时提示</li>
+<li>用户名已存在时提示“用户名已存在”</li>
+<li>密码少于 8 位时提示</li>
+<li>密码只有字母或只有数字时提示</li>
+<li>两次密码不一致时提示“两次密码不一致”</li>
+<li>电话不是 11 位数字时提示</li>
+<li>全部正确时注册成功，数据写入数据库</li>
+<li>注册成功后有成功提示，并返回登录界面（或自动填入用户名）</li>
+</ol>
+<p>一句话拆出了 13 个点。如果你只做了“能注册”，可能只拿到其中两三个点的分。</p>
+<div class="box tip"><span class="h">训练建议：读题三遍法</span>
+<ol><li>第一遍：通读全部任务，只看标题和分值，决定先后顺序。</li><li>第二遍：对你要做的那个任务，用笔把每个“要求”画线、编号，写在草稿纸上变成清单。</li><li>第三遍：做完这个任务后，对着清单逐条检查，打勾。</li></ol>
+<p>赛场会提供草稿纸。这张清单就是你的“自评表”。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>流程图与伪代码</h2>
+<p>当处理步骤较多时，先用流程图或伪代码理清，再写代码。伪代码就是“用中文写的程序”，不讲究语法，只讲究步骤清楚。</p>
+<p>示例：登录按钮的伪代码</p>
+<span class="fname">伪代码</span><pre><code>当点击“登录”按钮时：
+    取出 用户名、密码
+    如果 用户名为空 或 密码为空：
+        提示“请输入用户名和密码”，结束
+    到数据库查找 用户名 对应的记录
+    如果 找不到 或 密码不匹配：
+        提示“用户名或密码错误”，结束
+    如果 勾选了“记住密码”：
+        把用户名、密码保存到本地设置
+    否则：
+        清除本地保存的密码
+    打开“用户管理”窗口，隐藏登录窗口</code></pre>
+
+<h2 id="s6"><span class="sec">06</span>练习</h2>
+<div class="ex"><span class="h">练习 3-1　拆测量点</span>
+<p>辽宁样卷模块 B 的注册要求（概括）：手机号注册，填写手机号、验证码（模拟，6 位数字，有效期 1 分钟，支持重新获取）、密码（≥8 位，含字母+数字）、确认密码；手机号 11 位校验、验证码正确性校验、密码一致性校验，失败要明确提示。请拆出至少 12 个测量点。</p>
+<details><summary>参考答案</summary>
+<ol><li>手机号输入框</li><li>验证码输入框</li><li>“获取验证码”按钮</li><li>密码输入框（密文）</li><li>确认密码输入框（密文）</li><li>注册按钮</li><li>点击获取后生成 6 位数字验证码并展示（模拟短信，如弹窗/Toast）</li><li>获取后按钮进入倒计时（如 60 秒），倒计时期间不能重复点击</li><li>倒计时结束后可重新获取，新验证码替换旧验证码</li><li>验证码超过 1 分钟失效，输入过期验证码提示“验证码已过期”</li><li>手机号不是 11 位时提示</li><li>验证码错误时提示“验证码错误”</li><li>密码不足 8 位或不同时含字母数字时提示</li><li>两次密码不一致时提示“密码不一致”</li><li>手机号已注册时提示</li><li>全部正确时注册成功（数据通过接口写入数据库），返回登录页</li></ol>
+</details></div>
+<div class="ex"><span class="h">练习 3-2　写伪代码：验证码是否有效</span>
+<p>写出“点击注册时检查验证码”的伪代码。已知：生成验证码时记录了验证码 <code>code</code> 和生成时间 <code>codeTime</code>。</p>
+<details><summary>参考答案</summary>
+<span class="fname">伪代码</span><pre><code>如果 code 为空（从未获取过）：提示“请先获取验证码”，结束
+如果 当前时间 - codeTime &gt; 60 秒：提示“验证码已过期，请重新获取”，结束
+如果 用户输入 ≠ code：提示“验证码错误”，结束
+验证码通过，继续检查密码……</code></pre>
+<p>注意顺序：先判断“有没有”，再判断“过没过期”，最后判断“对不对”。这样提示信息才准确。</p>
+</details></div>
+<div class="ex"><span class="h">练习 3-3　从场景找实体</span>
+<p>打开资料包中的湖北样题 docx，读模块 A 的“介绍”和各界面标题（航空公司：登录、查询航班、订餐服务、航班动态、航班计划管理、用户管理、机票统计、登录记录）。列出你认为数据库至少需要哪些表。</p>
+<details><summary>参考答案</summary>
+<p>用户（含角色）、角色、城市、机场、机型、航班计划（航班号、出发/到达机场、计划时间、实际时间、登机口、状态、经济舱价格）、舱位类型、机票/订单（乘客证件、航班、舱位、座位）、餐食、订餐记录、登录记录。题目实际提供了 SQL 脚本和 ERD，你的答案不必与之一致，重要的是能从业务描述想到“需要记住什么”。</p>
+</details></div>
+<div class="ex"><span class="h">练习 3-4　计算规则翻译</span>
+<p>湖北样题中有一条规则：“商务舱价格比经济舱贵 25%，头等舱比经济舱贵 50%，出现小数时四舍五入保留 2 位”。若经济舱 899.9 元，商务舱和头等舱各是多少？写出计算步骤。</p>
+<details><summary>参考答案</summary>
+<p>商务舱 = 899.9 × 1.25 = 1124.875 → 1124.88；头等舱 = 899.9 × 1.5 = 1349.85（正好两位小数，不需要舍入）。写代码时要注意两点：金额用 <code>decimal</code> 类型，避免 <code>double</code> 的二进制误差；C# 的 <code>Math.Round</code> 默认采用“银行家舍入”（恰好是 5 时向偶数靠拢），例如 <code>Math.Round(1.125m, 2)</code> 得到 1.12 而不是 1.13。题目说“四舍五入”，就要写 <code>Math.Round(x, 2, MidpointRounding.AwayFromZero)</code>。第 04 章会专门练习。</p>
+</details></div>
+<div class="box check"><span class="h">过关标准</span>
+<p>你能做到：① 给任意一条需求画出“输入—处理—输出”三栏表；② 把辽宁样卷 A、B 的 1.1/2.1 需求各拆出 12 个以上测量点；③ 画出“桌面端—接口—手机端—数据库”的关系图并讲清楚为什么手机端要经过接口。做到了，进入第 04 章。</p></div>
+
+<div class="pager"><a href="02-setup.html"><small>上一章</small>电脑环境搭建与离线演练</a><a href="04-csharp.html" style="text-align:right"><small>下一章</small>C# 从零开始</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

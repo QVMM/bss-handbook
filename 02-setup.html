@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>电脑环境搭建与离线演练 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a class="active" href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>电脑环境搭建与离线演练</span></div>
+<main class="content">
+<p class="kicker">第 02 章</p>
+<h1>电脑环境搭建与离线演练</h1>
+<p class="lead">工欲善其事，必先利其器。这一章带你装好比赛用到的全部开发工具，并逐个验证“真的能用”。最后一节教你练习断网开发——赛场电脑不能指望临时下载任何东西，你要提前知道哪些功能离线可用、哪些不可用。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">先对一下赛场的软件清单</a></li><li><a href="#s2">安装前的准备</a></li><li><a href="#s3">Visual Studio 2022</a></li><li><a href="#s4">SQL Server 2022 与 SSMS</a></li><li><a href="#s5">Android Studio</a></li><li><a href="#s6">其他小工具（练习用）</a></li><li><a href="#s7">推荐的文件夹结构</a></li><li><a href="#s8">离线演练：断网也要能开发</a></li><li><a href="#s9">环境验收清单</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>先对一下赛场的软件清单</h2>
+<div class="box official"><span class="h">文件依据</span><span class="src">辽宁文件 表 8 商务软件解决方案项目赛场提供设施、设备清单表</span>
+<div class="tw"><table>
+<tr><th>名称</th><th>技术规格</th></tr>
+<tr><td>台式机</td><td>CPU Intel i5 10 代以上，内存 16G 以上，硬盘 256GB 以上；显示器 19 英寸及以上</td></tr>
+<tr><td>Windows OS</td><td>Windows 10 及以上</td></tr>
+<tr><td>Microsoft Visual Studio</td><td>V2022 及以上</td></tr>
+<tr><td>.NET Framework</td><td>V4.8 及以上</td></tr>
+<tr><td>Microsoft SQL Server</td><td>V2022 及以上</td></tr>
+<tr><td>SQL Server Management Studio</td><td>V20.2 及以上</td></tr>
+<tr><td>Android Studio</td><td>V2023.2.1 及以上</td></tr>
+</table></div>
+<p>键盘鼠标由赛场提供，不能带存储接口；赛场禁止自带额外的软件、U 盘及其他存储设备、书籍和参考资料等。</p></div>
+<p>注意清单里<strong>没有</strong>列出 MySQL、Office、Visio、浏览器以外的接口调试工具。虽然技术描述文字中提到“MSSQL 或 MYSQL”，但赛场设备清单只列了 SQL Server，所以本手册以 SQL Server 为主线。模块 C 要编辑 docx 模板，赛场应会提供文档编辑软件，但具体是什么软件要在熟悉设备时确认。</p>
+<div class="box tip"><span class="h">训练建议：自己的电脑版本“就低不就高”</span>
+<p>清单写的是“及以上”，赛场实际可能装更新的版本。练习时用清单的版本或稍新的版本即可。真正要避免的是：你在家用了某个新版本才有的功能，到赛场发现没有。湖北 2020 年样题的赛场还是 Visual Studio 2015、SQL Server 2014、Android Studio 2.2.3，可见各赛区差别很大，<strong>一定以你赛区的清单为准</strong>。</p></div>
+
+<h2 id="s2"><span class="sec">02</span>安装前的准备</h2>
+<ol>
+<li><strong>Windows 用户名不要有中文和空格。</strong>Android SDK、Gradle 在含中文或空格的路径下容易出现莫名其妙的错误。如果你的用户名是中文，后面安装 Android SDK 时务必把 SDK 放到 <code>D:\Android\Sdk</code> 这类纯英文路径。</li>
+<li><strong>打开文件扩展名显示。</strong>资源管理器 → 查看 → 勾选“文件扩展名”。否则你分不清 <code>default.jpg</code> 和 <code>default.jpg.png</code>。</li>
+<li><strong>确认 CPU 虚拟化已开启。</strong>任务管理器 → 性能 → CPU，看“虚拟化：已启用”。没有启用要进 BIOS 打开（Intel 叫 VT-x，AMD 叫 SVM），否则 Android 模拟器无法运行。</li>
+<li><strong>准备至少 100 GB 空闲空间。</strong>Visual Studio 约 10–20 GB，SQL Server 数 GB，Android Studio 加 SDK 和一个模拟器镜像约 15–25 GB。</li>
+<li><strong>建好备赛文件夹</strong>（见本章第 7 节）。</li>
+</ol>
+
+<h2 id="s3"><span class="sec">03</span>Visual Studio 2022</h2>
+<h3>安装</h3>
+<p>到 Visual Studio 官网下载 Community（社区版，个人学习免费）安装程序，运行后会出现“工作负载”选择页。勾选：</p>
+<div class="tw"><table>
+<tr><th>工作负载 / 组件</th><th>为什么需要</th></tr>
+<tr><td><strong>.NET 桌面开发</strong></td><td>WinForms 窗体应用（模块 A 主体）</td></tr>
+<tr><td><strong>ASP.NET 和 Web 开发</strong></td><td>ASP.NET Web API（.NET Framework）项目模板与 IIS Express</td></tr>
+<tr><td>“单个组件”中搜索并确认勾选 <strong>.NET Framework 4.8 目标包</strong>（Targeting Pack）</td><td>保证能建 .NET Framework 4.8 项目</td></tr>
+<tr><td>（可选）数据存储和处理</td><td>在 VS 里直接浏览 SQL Server；不装也行，用 SSMS 即可</td></tr>
+</table></div>
+<p>界面语言可在“语言包”页勾选中文（简体）；如果你准备冲击世赛，建议同时装英文语言包，后期切换成英文界面练习（世赛只提供英文版软件）。</p>
+<h3>验证一：WinForms 能跑</h3>
+<ol>
+<li>启动 VS → 创建新项目 → 在搜索框输入“Windows 窗体”。</li>
+<li><strong>选择“Windows 窗体应用(.NET Framework)”</strong>，语言 C#。不要选没有“(.NET Framework)”字样的那个——那个是新版 .NET（.NET 6/8），和赛场要求的 .NET Framework 4.8 不是一回事。</li>
+<li>项目名 <code>HelloForms</code>，位置 <code>D:\备赛\练习\02-环境</code>，框架选 <strong>.NET Framework 4.8</strong>。</li>
+<li>从“工具箱”拖一个 Button 到窗体，双击它，在生成的方法里写：<code>MessageBox.Show("环境正常");</code></li>
+<li>按 <kbd>F5</kbd> 运行，点按钮弹出提示框，即验证通过。</li>
+</ol>
+<h3>验证二：Web API 项目能跑</h3>
+<ol>
+<li>创建新项目 → 搜索“ASP.NET Web 应用程序(.NET Framework)”，项目名 <code>HelloApi</code>，框架 .NET Framework 4.8。</li>
+<li>在模板选择页选“Web API”，取消“HTTPS 配置”（练习阶段用 HTTP 更简单）。</li>
+<li>按 <kbd>F5</kbd>，浏览器会打开一个 <code>http://localhost:端口号/</code> 的页面。在地址栏把路径改成 <code>/api/values</code>，能看到返回的数据（模板自带的示例），即验证通过。</li>
+<li>记下端口号——第 07 章要用。</li>
+</ol>
+<div class="box warn"><span class="h">易错提醒</span>
+<p>如果创建 Web API 项目时一直卡在“正在还原 NuGet 包”，或者报找不到 <code>System.Web.Http</code>，说明这台电脑缺少模板需要的包，并且没联网。家里练习时可以联网解决；但这正是赛场的风险点——第 07 章会教你一种完全不依赖 NuGet 的接口写法作为保底。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>SQL Server 2022 与 SSMS</h2>
+<h3>安装 SQL Server</h3>
+<p>从微软官网下载 SQL Server 2022 的 Developer 版（开发者版，免费，功能完整）或 Express 版（免费，体积小）。</p>
+<ol>
+<li>运行安装程序，选择“自定义”安装（能看清每一步）。进入“SQL Server 安装中心” → “全新 SQL Server 独立安装”。</li>
+<li>功能选择至少勾选“数据库引擎服务”。</li>
+<li>实例配置：Developer 版建议用“默认实例”（实例名 MSSQLSERVER），连接时服务器名写 <code>.</code> 或 <code>localhost</code>；Express 版默认是命名实例 <code>SQLEXPRESS</code>，连接时写 <code>.\SQLEXPRESS</code>。<strong>把你的实例名写进错题本。</strong></li>
+<li>数据库引擎配置 → 身份验证模式：选“混合模式”，给 <code>sa</code> 设一个密码，并点“添加当前用户”成为管理员。这样 Windows 身份验证和 SQL 身份验证两种连接方式你都能练。</li>
+<li>完成安装。</li>
+</ol>
+<h3>安装 SSMS</h3>
+<p>SSMS（SQL Server Management Studio）是管理数据库的图形工具，单独下载安装（赛场要求 20.2 及以上）。</p>
+<h3>验证：能连接、能查询</h3>
+<ol>
+<li>打开 SSMS，连接窗口中：服务器类型“数据库引擎”，服务器名称填 <code>.</code>（或 <code>.\SQLEXPRESS</code>），身份验证选“Windows 身份验证”。</li>
+<li>SSMS 20 的连接窗口默认“加密”为“强制”，本机练习时请勾选<strong>“信任服务器证书”</strong>，否则可能报证书链不受信任的错误。</li>
+<li>连接后点“新建查询”，输入 <code>SELECT @@VERSION;</code>，按 <kbd>F5</kbd> 执行，下方显示版本信息即通过。</li>
+<li>再用 SQL Server 身份验证（用户名 <code>sa</code> 和你设的密码）连接一次，确认混合模式生效。</li>
+</ol>
+<div class="box note"><span class="h">说明：关于 MySQL</span>
+<p>辽宁文件文字中写了“MySQL 或 SQL Server”。但在 .NET Framework 中连接 SQL Server 用的是系统自带的 <code>System.Data.SqlClient</code>，不需要额外下载任何东西；连接 MySQL 则需要额外的连接器库。在赛场设备清单只列出 SQL Server 的情况下，SQL Server 是更稳的选择。如果你的赛区清单列了 MySQL，请在熟悉设备时确认 MySQL 连接器是否已经安装好。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>Android Studio</h2>
+<h3>安装</h3>
+<ol>
+<li>从 Android 开发者官网下载 Android Studio（赛场要求 2023.2.1 及以上，即 Iguana 或更新）。安装时勾选 Android Virtual Device。</li>
+<li>首次启动会进入安装向导，选择 Custom（自定义），把 SDK 路径改到 <code>D:\Android\Sdk</code>（纯英文、无空格）。</li>
+<li>向导会联网下载 SDK 组件，耐心等待完成。</li>
+</ol>
+<h3>检查 SDK 组件</h3>
+<p>Tools → SDK Manager：</p>
+<ul>
+<li>SDK Platforms：至少勾选一个较新的 Android 版本（例如 Android 14，API 34）。</li>
+<li>SDK Tools：确认已装 Android SDK Build-Tools、Android Emulator、Android SDK Platform-Tools；在 Windows 上还需要硬件加速组件（新版本中通常是 Android Emulator hypervisor driver，或使用 Windows 自带的 Windows 虚拟机监控程序平台）。</li>
+</ul>
+<h3>创建模拟器</h3>
+<p>Tools → Device Manager → 创建设备：选一个常见手机型号（如 Pixel 系列），系统镜像选与上面相同 API 级别的 x86_64 镜像，完成后点运行，能看到手机桌面即可。</p>
+<h3>验证：Java 工程能跑</h3>
+<ol>
+<li>New Project → 选择 <strong>Empty Views Activity</strong>（注意不是 Empty Activity——后者是 Compose 模板，只能用 Kotlin）。</li>
+<li>Name 填 <code>HelloAndroid</code>，Language 选 <strong>Java</strong>，Minimum SDK 选 API 24 左右，Build configuration language 用默认即可。</li>
+<li>第一次创建会进行 Gradle 同步并下载依赖，可能需要十几分钟。右下角进度条走完、没有红色错误为止。</li>
+<li>选中模拟器，点绿色三角运行，模拟器中出现“Hello World!”即通过。</li>
+<li>Build → Build App Bundle(s) / APK(s) → Build APK(s)，完成后点“locate”，能找到 <code>app-debug.apk</code>。<strong>记住这个路径</strong>：<code>工程目录\app\build\outputs\apk\debug\</code>。模块 B 要求提交 APK。</li>
+</ol>
+<div class="box warn"><span class="h">易错提醒：电脑卡死</span>
+<p>Android Studio + 模拟器 + Visual Studio + SQL Server 同时开，16 GB 内存会比较吃紧，8 GB 内存会非常卡。练习时如果卡顿，可以：把模拟器的内存设为 2 GB；关闭不需要的浏览器标签；用真机调试（打开手机“开发者选项 → USB 调试”）。</p></div>
+
+<h2 id="s6"><span class="sec">06</span>其他小工具（练习用）</h2>
+<ul>
+<li><strong>curl.exe</strong>：Windows 10 1803 以后自带，在命令提示符里输入 <code>curl --version</code> 能看到版本。用它测试接口，不需要额外装软件。</li>
+<li><strong>浏览器</strong>：直接访问 GET 接口看返回的 JSON。</li>
+<li><strong>压缩</strong>：右键文件夹 → 发送到 → 压缩(zipped)文件夹，Windows 自带，赛场一般可用。练习时就用它，避免依赖某个压缩软件。</li>
+<li><strong>文档编辑</strong>：模块 C 需要编辑 docx。家里用 Office 或 WPS 都可以练，但要熟练截图（<kbd>Win</kbd>+<kbd>Shift</kbd>+<kbd>S</kbd>）、插入图片、插入表格、生成目录。</li>
+<li><strong>Draw.io 桌面版</strong>（可选）：画 ER 图、用例图。世赛技术描述列出了它的离线版。</li>
+</ul>
+
+<h2 id="s7"><span class="sec">07</span>推荐的文件夹结构</h2>
+<p>从第一天起就把文件放整齐。赛场要求“源码放在指定文件夹”，平时习惯了乱放，赛场上就容易交错文件。</p>
+<span class="fname">D:\备赛\</span><pre><code>D:\备赛\
+├─ 资料包\                    ← 解压后的《商务软件解决方案-人社口备赛资料》
+├─ 练习\
+│  ├─ 04-CSharp\              ← 每章一个文件夹，每个练习一个项目
+│  ├─ 05-SQL\                 ← .sql 脚本
+│  ├─ 06-WinForms\
+│  ├─ 07-WebApi\
+│  ├─ 08-Android\
+│  └─ 10-测试\
+├─ 样卷训练\
+│  ├─ 辽宁-第1次-2026xxxx\
+│  │  ├─ Modul1\  Modul2\  Modul3\
+│  │  └─ 自评表.xlsx
+│  └─ 湖北-第1次-2026xxxx\
+├─ 代码片段\                  ← 自己整理的“常用写法”（赛场不能带，用来背）
+└─ 训练日志.docx</code></pre>
+<p>做样卷计时训练时，<strong>完全模仿赛场</strong>：在桌面新建 <code>Modul1</code>，所有源码放进去，结束时压缩成 <code>Modul1.zip</code>，再把整个结果移到“样卷训练”里存档。</p>
+
+<h2 id="s8"><span class="sec">08</span>离线演练：断网也要能开发</h2>
+<p>赛场电脑不连外网是常态（湖北样题明确写了“选手电脑不连接 Internet”，并且“不提供原介质包以外的第三方插件与代码库”）。辽宁文件没有专门写联网规则，但禁止自带额外软件，你也不应指望比赛时能下载任何东西。下面的演练请在环境装好后做一次，在第 11 章计划的“阶段检查周”再各做一次。</p>
+<h3>演练步骤</h3>
+<ol>
+<li>断网：拔网线或关闭 Wi-Fi（开启飞行模式）。</li>
+<li><strong>VS：</strong>新建一个“Windows 窗体应用(.NET Framework)”，拖控件、写代码、连接本机 SQL Server 查一张表，运行。预期：全部正常——WinForms、ADO.NET（<code>System.Data.SqlClient</code>）、图表控件（<code>System.Windows.Forms.DataVisualization</code>）都属于 .NET Framework 自带，不需要下载。</li>
+<li><strong>VS：</strong>新建一个 Web API（.NET Framework）项目并运行。观察是否能成功还原包、编译和运行。<strong>记录结果</strong>：成功，说明你这台电脑有本地包缓存；失败，说明赛场如果同样没有缓存，你需要用第 07 章的“零依赖接口”写法。</li>
+<li><strong>Android Studio：</strong>打开之前已经成功编译过的 <code>HelloAndroid</code>，点 Build → Rebuild Project。预期：已下载过的依赖都在本机缓存中，可以编译成功。</li>
+<li><strong>Android Studio：</strong>再新建一个 Empty Views Activity 工程（与之前相同的设置）。观察是否能同步成功。如果失败并提示无法下载某个依赖，说明新工程用到的版本不在缓存里。可以尝试在 Gradle 工具窗口启用离线模式（Offline Mode）后重新同步。</li>
+<li>把演练结果记到错题本“环境”一页：哪些能离线、哪些不能、遇到了什么报错。</li>
+</ol>
+<div class="box tip"><span class="h">训练建议：赛场熟悉设备的一小时怎么用</span>
+<p>赛场的开发环境由主办方准备，依赖缓存的情况你无法提前知道。所以熟悉设备时间（辽宁文件规定不少于 1 小时）最重要的事，就是在<strong>赛场那台电脑上</strong>把上面的演练快速做一遍：WinForms 能否运行、能否连上 SQL Server（实例名是什么）、Web API 模板能否创建运行、Android 新工程能否同步编译、模拟器能否启动、APK 能否生成。发现问题立即举手报告。完整清单见第 13 章。注意：熟悉设备期间禁止修改竞赛设备参数。</p></div>
+<div class="box warn"><span class="h">易错提醒：Android 依赖与 Gradle 缓存</span>
+<p>Android 工程的界面库（如 <code>androidx.appcompat</code>、<code>com.google.android.material</code>、<code>androidx.constraintlayout</code>）并不是安装 Android Studio 就自带的，它们在第一次同步工程时从网络下载，之后存放在用户目录下的 <code>.gradle</code> 缓存里。家里断网能编译，是因为你之前联网下载过。这也是为什么本手册第 08 章坚持只用系统自带的类做网络请求和 JSON 解析——少一个依赖，就少一个赛场风险。</p></div>
+
+<h2 id="s9"><span class="sec">09</span>环境验收清单</h2>
+<ul class="cl">
+<li>能新建“Windows 窗体应用(.NET Framework)”，目标框架 4.8，运行出窗口</li>
+<li>能新建 ASP.NET Web API（.NET Framework）项目并在浏览器访问 <code>/api/values</code></li>
+<li>SSMS 能用 Windows 身份验证和 sa 两种方式连接本机 SQL Server，并执行 <code>SELECT @@VERSION</code></li>
+<li>知道自己 SQL Server 的服务器名（<code>.</code> 或 <code>.\SQLEXPRESS</code>）</li>
+<li>Android Studio 能新建 Empty Views Activity（Java）工程并在模拟器运行</li>
+<li>能生成 <code>app-debug.apk</code> 并找到它</li>
+<li>在命令提示符中 <code>curl --version</code> 有输出</li>
+<li>做过一次断网演练，并把结果写进错题本</li>
+<li>建好了 <code>D:\备赛\</code> 文件夹结构</li>
+</ul>
+
+<div class="pager"><a href="01-contest.html"><small>上一章</small>赛项全景：比赛到底考什么</a><a href="03-thinking.html" style="text-align:right"><small>下一章</small>计算思维与商务应用的结构</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

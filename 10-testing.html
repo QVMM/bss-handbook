@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>软件测试与产品操作手册（模块 C） · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a class="active" href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>应用测试与操作手册（模块 C）</span></div>
+<main class="content">
+<p class="kicker">第 10 章 · 学习路径第八站</p>
+<h1>软件测试与产品操作手册（模块 C）</h1>
+<p class="lead">模块 C 占 20 分，全部是测量分。它不需要写代码，却是最“稳”的得分模块：只要方法对、数量够、格式规范，就能拿到大部分分数。很多同学把时间全花在开发上，模块 C 临场才第一次写，白白丢分。本章教你测试用例的设计方法、样卷要求的用例格式、一份能直接套用的操作手册结构，以及兼容性、传感器、接口等专项测试。标准版 2 周（与 UML 同期），强化版 1 周。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">模块 C 考什么</a></li><li><a href="#s2">测试的基本概念</a></li><li><a href="#s3">设计用例的四种方法</a></li><li><a href="#s4">用例的写法：按样卷格式</a></li><li><a href="#s5">凑够数量还要覆盖全面：54 条用例的规划</a></li><li><a href="#s6">执行测试：模拟器操作要点</a></li><li><a href="#s7">缺陷报告</a></li><li><a href="#s8">产品操作手册</a></li><li><a href="#s9">专项测试：兼容性、传感器、接口</a></li><li><a href="#s10">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>模块 C 考什么</h2>
+<div class="box official"><span class="h">官方文件怎么说</span>
+<p>辽宁样卷模块 C：使用提供的被测 APK，完成 3.1 编写并执行测试用例（10 分）和 3.2 撰写产品操作手册（10 分）。3.1 表 1 规定了 11 个功能模块各自的最少用例数（引导页 4、主页面 6、个人中心 10、全部服务 3、新闻 2、地铁查询 4、停车场 5、定制班车 5、违章查询 5、生活缴费 5、门诊预约 5，合计至少 54 个），表 2 给出了用例格式样例。3.2 使用“平台——产品操作手册模板.docx”，分四部分编写。成果放在桌面 Modul3 文件夹，压缩为“Module3.zip”提交。</p>
+<p class="src">来源：资料包中辽宁省 2026 年技术文件模块 C 部分。表格原文请直接查看该文件。</p></div>
+<p>从功能模块名称看，样卷模块 C 的被测 App 是一个“城市服务”类应用（地铁、停车、班车、违章、缴费、门诊），和模块 A、B 的康养场景并不相同。这说明：<strong>被测 App 是赛场现场提供的，你事先看不到</strong>。所以要练的是“拿到任何一个 App 都能快速、系统地测”的能力。</p>
+<div class="box tip"><span class="h">训练建议：没有被测 APK 怎么练</span>
+<p>① 用你自己在第 08 章做的 SmartCare App 当被测对象；② 用手机上的任意常用 App（地图、外卖、银行 App 的非支付功能）练习写用例和手册，只“写”不做危险操作；③ 交换练习：两位同学互测对方的 App，这是最接近比赛的练法。</p></div>
+
+<h2 id="s2"><span class="sec">02</span>测试的基本概念</h2>
+<div class="tw"><table>
+<tr><th>术语</th><th>解释</th></tr>
+<tr><td>测试用例</td><td>一次测试的完整描述：在什么前提下、做什么操作、应该得到什么结果。好的用例别人拿去照着做，结果应该一样</td></tr>
+<tr><td>黑盒测试</td><td>不看代码，只根据功能需求，从使用者角度测试。模块 C 就是黑盒测试</td></tr>
+<tr><td>白盒测试</td><td>看着代码设计测试，让每个分支都被执行到。单元测试属于白盒</td></tr>
+<tr><td>功能测试</td><td>功能是否符合需求</td></tr>
+<tr><td>兼容性测试</td><td>不同屏幕、系统版本、横竖屏下是否正常</td></tr>
+<tr><td>缺陷（Bug）</td><td>实际结果与预期结果不一致</td></tr>
+<tr><td>回归测试</td><td>修改代码后，把以前通过的用例再跑一遍，确认没有改坏</td></tr>
+</table></div>
+
+<h2 id="s3"><span class="sec">03</span>设计用例的四种方法</h2>
+<h3>1. 等价类划分</h3>
+<p>把所有可能的输入分成几类，每类里挑一个代表就够了。以“手机号：11 位数字”为例：</p>
+<div class="tw"><table>
+<tr><th>类别</th><th>代表值</th><th>预期</th></tr>
+<tr><td>有效：11 位数字</td><td>13800000001</td><td>通过</td></tr>
+<tr><td>无效：为空</td><td>（空）</td><td>提示不能为空</td></tr>
+<tr><td>无效：位数不对</td><td>1380000</td><td>提示格式错误</td></tr>
+<tr><td>无效：含非数字</td><td>1380000000a</td><td>提示格式错误（或无法输入）</td></tr>
+</table></div>
+<h3>2. 边界值分析</h3>
+<p>错误最常出现在边界上。对“密码至少 8 位”，要测 7 位、8 位、9 位；对“验证码 1 分钟有效”，要测 59 秒和 61 秒；对“每页 10 条”，要测正好 10 条、11 条、0 条。</p>
+<h3>3. 场景法（业务流程）</h3>
+<p>按用户真实的使用路径串起来测：注册 → 登录 → 预约 → 查看订单 → 取消 → 退出登录。每条路径一个“正常流”，再加上若干“异常流”（中途断网、返回键、重复提交）。</p>
+<h3>4. 错误推测</h3>
+<p>根据经验猜哪里容易出错：快速连点按钮、输入超长文字、输入空格和特殊字符（<code>' " &lt; &gt;</code>）、旋转屏幕、切到后台再回来、没有网络、列表为空。</p>
+<div class="ex"><span class="h">练习 10-1　用四种方法设计用例</span>
+<p>对第 08 章“预约对话框”（数量、预约时间、提交）分别用四种方法各设计至少 2 条用例，共 8 条以上。标出每条用例用的是哪种方法。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>用例的写法：按样卷格式</h2>
+<p>辽宁样卷表 2 的用例格式包含以下列：<strong>系统模块、用例编号、用例描述、前置条件、操作步骤、预期结果、测试结果</strong>。比赛中严格使用题目给的列和顺序。</p>
+<h3>一条合格的用例</h3>
+<div class="tw"><table>
+<tr><th>系统模块</th><th>用例编号</th><th>用例描述</th><th>前置条件</th><th>操作步骤</th><th>预期结果</th><th>测试结果</th></tr>
+<tr><td>2. 登录</td><td>2.1.3</td><td>密码错误时登录失败</td><td>已注册账号 13800000001，处于登录页“密码登录”方式</td><td>1. 手机号输入 13800000001<br>2. 密码输入 abc00000<br>3. 点击“登录”</td><td>提示“手机号或密码错误”，停留在登录页，密码框保留输入</td><td>通过</td></tr>
+</table></div>
+<h3>写好用例的七条规则</h3>
+<ol>
+<li><strong>一条用例只测一件事</strong>。“输入错误密码和错误手机号”要拆成两条。</li>
+<li><strong>描述写目的</strong>：“密码错误时登录失败”，而不是“测试登录”。</li>
+<li><strong>前置条件写清状态</strong>：是否已登录、处于哪个页面、需要什么数据。</li>
+<li><strong>步骤编号、具体</strong>：写出实际输入的数据，“输入错误密码”不如“密码输入 abc00000”。</li>
+<li><strong>预期结果可判断</strong>：写出具体的提示、跳转、数据变化。“系统正常”是不合格的预期结果。</li>
+<li><strong>编号有规律</strong>：样卷样例用“1.1.1”三级编号，可理解为“模块.功能点.序号”。</li>
+<li><strong>测试结果如实填写</strong>：通过 / 不通过；不通过时在备注或缺陷表中写明实际结果。被测 App 可能存在缺陷，如实发现并记录它们，正是测试的价值。</li>
+</ol>
+<div class="box warn"><span class="h">易错提醒：只写不测</span>
+<p>样卷标题是“编写并执行测试用例”。“测试结果”一列必须是你在模拟器上真实操作后得出的结论。凭感觉全部填“通过”，一旦被测 App 中存在的缺陷被你漏掉，相关用例的得分就没有了。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>凑够数量还要覆盖全面：54 条用例的规划</h2>
+<p>模块 C 只有 2 小时，要写至少 54 条用例和一份完整手册，平均每条用例 1 分钟左右。必须有方法，不能想到哪写到哪。</p>
+<h3>每个模块的“用例清单模板”</h3>
+<p>面对任何一个功能模块，按下面的顺序过一遍，很快就能列出 5–10 条：</p>
+<div class="tw"><table>
+<tr><th>检查方向</th><th>典型用例</th></tr>
+<tr><td>界面展示</td><td>进入页面后各元素（标题、图片、列表、按钮）正确显示；无数据时有提示</td></tr>
+<tr><td>正常操作</td><td>按正确数据完成该功能的主流程</td></tr>
+<tr><td>输入校验</td><td>为空、格式错误、超长、边界值</td></tr>
+<tr><td>页面跳转</td><td>点击某项进入正确的详情页；返回键回到上一页</td></tr>
+<tr><td>数据一致</td><td>操作后列表、详情、个人中心中的数据同步变化</td></tr>
+<tr><td>异常情况</td><td>断网、重复点击、切后台、旋转屏幕</td></tr>
+</table></div>
+<h3>按样卷 11 个模块的思路示例</h3>
+<p>下面是根据模块名称和同类 App 的常见功能做的<strong>思路示例</strong>（不是标准答案，实际以被测 App 为准）：</p>
+<div class="tw"><table>
+<tr><th>模块（最少数）</th><th>可以测什么</th></tr>
+<tr><td>引导页（4）</td><td>首次启动显示引导页；左右滑动切换；最后一页出现“进入”按钮并进入主页；第二次启动不再显示（或按需求显示）；指示圆点与页数一致</td></tr>
+<tr><td>主页面（6）</td><td>轮播图自动切换与点击；功能入口图标齐全并能跳转；搜索框；新闻列表展示；底部导航切换；返回键退出确认</td></tr>
+<tr><td>个人中心（10）</td><td>未登录时的显示；登录（正确/错误/为空）；个人信息查看与修改（每个字段的校验）；修改密码（原密码错误、两次不一致、成功后旧密码失效）；意见反馈（为空、超长、提交成功）；退出登录</td></tr>
+<tr><td>全部服务（3）</td><td>分类展示完整；点击服务进入对应页面；搜索服务</td></tr>
+<tr><td>新闻（2）</td><td>列表显示标题、图片、时间；点击进入详情</td></tr>
+<tr><td>地铁查询（4）</td><td>线路列表；站点查询；换乘信息；无结果提示</td></tr>
+<tr><td>停车场（5）</td><td>列表按距离/空位排序；详情显示收费标准与空位；查看更多/分页；搜索；空数据</td></tr>
+<tr><td>定制班车（5）</td><td>线路列表；详情；预订（日期、人数校验）；预订成功后订单中可见；未登录时预订的处理</td></tr>
+<tr><td>违章查询（5）</td><td>车牌号格式校验；发动机号校验；查询有违章/无违章两种结果；查询记录保存</td></tr>
+<tr><td>生活缴费（5）</td><td>选择缴费类型；户号校验；查询账单；缴费金额校验；缴费记录</td></tr>
+<tr><td>门诊预约（5）</td><td>选择医院、科室、医生；就诊人信息校验（身份证号、手机号）；选择时间段（已约满的不能选）；预约成功；取消预约</td></tr>
+</table></div>
+<div class="box tip"><span class="h">训练建议：先拉框架再填内容</span>
+<p>比赛时第一个 10 分钟：在模拟器中把 App 每个模块都点一遍，同时在表格中按模块建好编号框架，每个模块先写好“用例描述”一列（数量比要求多 1–2 条作为余量）。然后逐模块执行、补全步骤和结果。这样即使时间不够，每个模块的数量都已达标，而不会出现前面写了 20 条、后面几个模块是 0 条的情况。</p></div>
+<div class="ex"><span class="h">练习 10-2　为 SmartCare App 写 54 条用例</span>
+<p>以你自己的 SmartCare App 为被测对象，按“登录 6、注册 8、重置密码 6、首页 4、服务预约 10、我的订单 6、健康数据 6、紧急求助 4、设备信息 4”分配，写满 54 条，限时 90 分钟，并真实执行。统计发现了几个缺陷。</p></div>
+
+<h2 id="s6"><span class="sec">06</span>执行测试：模拟器操作要点</h2>
+<ul>
+<li><strong>安装被测 APK</strong>：启动模拟器后，把 APK 文件拖到模拟器窗口上即可安装；也可以用命令 <code>adb install 路径\xxx.apk</code>。</li>
+<li><strong>截图</strong>：模拟器右侧工具栏的相机图标可以截图，保存位置可在 Extended controls → Settings 中设置；Windows 自带 Win + Shift + S 也可以。<strong>截图时就按“模块_功能_序号”命名</strong>，写手册时能直接找到。</li>
+<li><strong>旋转屏幕</strong>：右侧工具栏的旋转按钮。</li>
+<li><strong>断网测试</strong>：模拟器下拉通知栏关闭 Wi-Fi 和移动数据，或在 Extended controls → Cellular 中设置。</li>
+<li><strong>重置 App</strong>：设置 → 应用 → 找到 App → 存储 → 清除数据，可以回到“首次启动”的状态（测引导页时需要）。</li>
+<li><strong>传感器</strong>：Extended controls → Virtual sensors 模拟摇动、方向变化。</li>
+</ul>
+
+<h2 id="s7"><span class="sec">07</span>缺陷报告</h2>
+<p>样卷没有要求单独的缺陷报告，但发现缺陷时，在用例的测试结果中写“不通过”并附上实际结果，是基本要求。平时训练时建议同时练习规范的缺陷报告写法（企业测试岗位的核心技能，也有助于表达清晰）：</p>
+<div class="tw"><table>
+<tr><th>字段</th><th>示例</th></tr>
+<tr><td>缺陷编号</td><td>BUG-007</td></tr>
+<tr><td>关联用例</td><td>5.2.4</td></tr>
+<tr><td>标题</td><td>预约数量输入 0 时仍可提交成功</td></tr>
+<tr><td>严重程度</td><td>严重 / 一般 / 轻微 / 建议</td></tr>
+<tr><td>复现步骤</td><td>1. 登录 13800000001；2. 进入服务预约，点击“上门助浴”；3. 数量输入 0；4. 点击提交</td></tr>
+<tr><td>预期结果</td><td>提示“请输入正整数”，不能提交</td></tr>
+<tr><td>实际结果</td><td>提示预约成功，订单金额 0.00</td></tr>
+<tr><td>附件</td><td>截图 BUG-007.png</td></tr>
+<tr><td>环境</td><td>模拟器 Pixel 设备，Android 14（API 34）</td></tr>
+</table></div>
+
+<h2 id="s8"><span class="sec">08</span>产品操作手册</h2>
+<p>样卷 3.2 规定使用模板文件、分四部分编写，并给出了五条编写原则（通俗易懂、解释关键词、说明详细、图文并茂、提示相关内容的位置）。原文请看资料包中的辽宁技术文件。下面是按这四部分组织的<strong>写作提纲</strong>（训练建议，比赛以模板为准）：</p>
+<span class="fname">操作手册提纲</span><pre><code>封面：产品名称、版本、编写人（按题目要求填写，例如工位号；比赛中不要写真实姓名和学校）、日期
+目录（自动生成）
+
+第一部分  产品概述
+  1.1 产品定位：一句话说明“给谁用、解决什么问题”，再用一段话展开
+  1.2 产品特点：3–5 条，每条一句话
+  1.3 核心功能列表：表格列出功能名称和简要说明（与第三部分章节一一对应）
+  1.4 运行环境：硬件（手机/模拟器、内存、存储）、软件（Android 版本、网络）
+  1.5 术语说明：手册中出现的专业词汇（如“验证码”“定制班车”）
+
+第二部分  安装与设置
+  2.1 获取安装包
+  2.2 安装步骤（配图：安装确认界面、安装完成）
+  2.3 首次启动与权限设置（配图）
+  2.4 网络设置
+  2.5 常见安装问题及解决方法（如“安装包解析错误”“存储空间不足”）
+
+第三部分  功能操作指南
+  3.1 注册与登录（操作步骤 + 截图 + 示例）
+  3.2 ……（按核心功能逐一编写，每个功能：功能说明 → 进入方式 → 操作步骤 → 结果说明 → 截图）
+
+第四部分  注意事项与常见问题
+  4.1 使用注意事项（如“请勿频繁获取验证码”“预约时间须晚于当前时间”）
+  4.2 常见问题解答（问：收不到验证码怎么办？答：……）
+  4.3 联系与反馈</code></pre>
+<h3>Word 中要用到的功能</h3>
+<div class="tw"><table>
+<tr><th>功能</th><th>操作</th><th>作用</th></tr>
+<tr><td>标题样式</td><td>开始 → 样式 → 标题 1 / 标题 2</td><td>自动目录、导航窗格的基础</td></tr>
+<tr><td>自动目录</td><td>引用 → 目录 → 自动目录；修改后右键“更新域”</td><td>目录与页码准确</td></tr>
+<tr><td>多级编号</td><td>开始 → 多级列表，关联到标题样式</td><td>1 / 1.1 / 1.1.1 自动编号</td></tr>
+<tr><td>题注</td><td>右键图片 → 插入题注（图 3-1）</td><td>图片自动编号</td></tr>
+<tr><td>交叉引用</td><td>引用 → 交叉引用</td><td>实现原则（5）“指出被提及内容在手册中的位置”，例如“详见 3.2 节”“如图 3-4 所示”</td></tr>
+<tr><td>截图标注</td><td>插入 → 形状（红框、箭头）</td><td>在截图上圈出要点击的位置</td></tr>
+</table></div>
+<div class="box tip"><span class="h">训练建议：写手册的时间分配</span>
+<p>2 小时的模块 C 中，建议用例与手册大致各用一半时间；截图在执行用例时顺手完成。手册先把四个部分的标题和目录建好，再逐节填充——即使最后时间不够，结构也是完整的。准备一套自己熟练的手册模板思路（不是带进赛场，而是练到能在 10 分钟内搭出完整框架）。</p></div>
+<div class="ex"><span class="h">练习 10-3　为 SmartCare App 写操作手册</span>
+<p>按上面的提纲，为你的 SmartCare App 写一份完整操作手册，要求：至少 15 张带题注的截图、至少 5 处交叉引用、自动目录、常见问题至少 6 条。限时 60 分钟。写完后请一位没有接触过这个 App 的人只看手册操作，记录他卡住的地方并修改。</p></div>
+
+<h2 id="s9"><span class="sec">09</span>专项测试：兼容性、传感器、接口</h2>
+<p>辽宁能力目录中列有兼容性、传感器和接口自动化测试相关内容。以下是训练方法：</p>
+<h3>兼容性测试</h3>
+<p>在 Android Studio 的 Device Manager 中再创建两个虚拟设备：一个小屏手机（如 5 英寸）、一个平板，系统版本也选不同的 API 级别。在每台设备上执行核心用例，并重点检查：文字是否被截断、按钮是否被挡住、横屏时布局是否错乱、列表能否滚动。用例写法：</p>
+<div class="tw"><table>
+<tr><th>用例编号</th><th>用例描述</th><th>前置条件</th><th>操作步骤</th><th>预期结果</th></tr>
+<tr><td>CP-01</td><td>小屏设备登录页完整显示</td><td>5 英寸虚拟设备，Android 10</td><td>启动 App，观察登录页，弹出键盘</td><td>所有控件完整显示；弹出键盘后可滚动到登录按钮</td></tr>
+<tr><td>CP-02</td><td>横屏时服务列表正常</td><td>已登录，进入服务预约</td><td>旋转为横屏</td><td>列表正常显示，已输入的搜索词不丢失</td></tr>
+</table></div>
+<h3>传感器测试</h3>
+<p>用模拟器 Virtual sensors 修改加速度，测试：低于阈值不触发、超过阈值触发、连续摇动只弹一次、离开页面后摇动不触发（验证已注销监听）、没有联系人时摇动的处理。</p>
+<h3>接口自动化测试</h3>
+<p>手工用 curl 测接口，每次改完代码都要重测一遍，费时又容易漏。可以写一个小程序，把测试清单固化下来，一键全部执行：</p>
+<span class="fname">ApiTester\Program.cs（控制台应用 .NET Framework）</span><pre><code>using System;
+using System.Net;
+using System.Text;
+
+namespace ApiTester
+{
+    /// &lt;summary&gt;
+    /// 接口自动化测试：按清单逐条发请求，检查返回内容是否包含预期片段，最后汇总通过率。
+    /// 只用 .NET Framework 自带的 WebClient，新建“控制台应用(.NET Framework)”即可运行。
+    /// &lt;/summary&gt;
+    internal class Program
+    {
+        private static string _base = "http://localhost:5000";
+        private static int _pass, _fail;
+
+        static void Main(string[] args)
+        {
+            if (args.Length &gt; 0) _base = args[0].TrimEnd('/');
+            Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine("被测地址：" + _base + "\n");
+
+            // 编号, 方法, 路径, 请求体（GET 填 null）, 返回中应包含的片段
+            Case("API-01", "POST", "/api/customer/login", "{\"phone\":\"13800000001\",\"password\":\"abc12345\"}", "\"success\":true");
+            Case("API-02", "POST", "/api/customer/login", "{\"phone\":\"13800000001\",\"password\":\"wrong\"}", "手机号或密码错误");
+            Case("API-03", "POST", "/api/customer/login", "{\"phone\":\"13800000005\",\"password\":\"abc12345\"}", "已被禁用");
+            Case("API-04", "POST", "/api/customer/login", "{\"phone\":\"\",\"password\":\"\"}", "不能为空");
+            Case("API-05", "GET",  "/api/categories", null, "生活照料");
+            Case("API-06", "GET",  "/api/services?categoryId=3", null, "康复理疗");
+            Case("API-07", "GET",  "/api/services?keyword=" + Uri.EscapeDataString("推拿"), null, "\"data\":[]");   // 中医推拿已下架
+            Case("API-08", "POST", "/api/orders", "{\"customerId\":1,\"serviceId\":2,\"quantity\":0,\"appointmentTime\":\"2030-01-01 09:00:00\"}", "数量必须是正整数");
+            Case("API-09", "POST", "/api/orders", "{\"customerId\":1,\"serviceId\":2,\"quantity\":1,\"appointmentTime\":\"2020-01-01 09:00:00\"}", "必须晚于当前时间");
+            Case("API-10", "GET",  "/api/contacts?customerId=1", null, "王小明");
+            Case("API-11", "GET",  "/api/nothing", null, "接口不存在");
+
+            Console.WriteLine("\n共 {0} 条，通过 {1} 条，失败 {2} 条", _pass + _fail, _pass, _fail);
+        }
+
+        private static void Case(string id, string method, string path, string body, string expect)
+        {
+            string text;
+            using (WebClient wc = new WebClient())
+            {
+                wc.Encoding = Encoding.UTF8;
+                wc.Headers[HttpRequestHeader.ContentType] = "application/json; charset=utf-8";
+                try
+                {
+                    text = method == "GET" ? wc.DownloadString(_base + path) : wc.UploadString(_base + path, method, body);
+                }
+                catch (WebException ex)
+                {
+                    // 404、500 等状态码会进入这里，仍然读取返回内容进行比对
+                    if (ex.Response == null) text = "连接失败：" + ex.Message;
+                    else using (var sr = new System.IO.StreamReader(ex.Response.GetResponseStream(), Encoding.UTF8)) text = sr.ReadToEnd();
+                }
+            }
+            bool ok = text.Contains(expect);
+            if (ok) _pass++; else _fail++;
+            Console.WriteLine("{0}  {1,-4} {2,-40} {3}", id, method, path.Length &gt; 40 ? path.Substring(0, 40) : path, ok ? "通过" : "失败");
+            if (!ok) Console.WriteLine("        预期包含：{0}\n        实际返回：{1}", expect, text);
+        }
+    }
+}</code></pre>
+<p>运行结果（在练习库上，接口刚启动时）：</p>
+<pre><code>被测地址：http://localhost:5000
+
+API-01  POST /api/customer/login                      通过
+API-02  POST /api/customer/login                      通过
+……
+API-11  GET  /api/nothing                             通过
+
+共 11 条，通过 11 条，失败 0 条</code></pre>
+<p>这个程序只发送不会修改数据的请求（失败的下单），可以反复运行。需要测试会改数据的接口时，测试完重新执行练习库脚本恢复数据。</p>
+<h3>单元测试</h3>
+<p>单元测试直接测试代码中的方法，最适合校验规则这类“输入 → 输出”明确的代码。在 Visual Studio 中：解决方案右键 → 添加 → 新建项目 → “单元测试项目(.NET Framework)”（MSTest），添加对 SmartCareDesk 项目的引用，然后编写：</p>
+<span class="fname">ValidatorTests.cs</span><pre><code>using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SmartCareDesk;
+
+namespace SmartCareDesk.Tests
+{
+    [TestClass]
+    public class ValidatorTests
+    {
+        [TestMethod]
+        public void IsPhone_11Digits_True()
+        {
+            Assert.IsTrue(Validator.IsPhone("13800000001"));
+        }
+
+        [DataTestMethod]
+        [DataRow("")]                // 空
+        [DataRow("1380000000")]      // 10 位（边界 -1）
+        [DataRow("138000000012")]    // 12 位（边界 +1）
+        [DataRow("1380000000a")]     // 含字母
+        [DataRow(null)]              // null 不能抛异常
+        public void IsPhone_Invalid_False(string s)
+        {
+            Assert.IsFalse(Validator.IsPhone(s));
+        }
+
+        [DataTestMethod]
+        [DataRow("abc12345", true)]   // 恰好 8 位，字母+数字
+        [DataRow("abc1234", false)]   // 7 位
+        [DataRow("abcdefgh", false)]  // 没有数字
+        [DataRow("12345678", false)]  // 没有字母
+        [DataRow("Ab1!Ab1!", true)]   // 含符号也可以
+        public void IsPassword_Cases(string pwd, bool expected)
+        {
+            Assert.AreEqual(expected, Validator.IsPassword(pwd));
+        }
+    }
+}</code></pre>
+<p>测试 → 运行所有测试，“测试资源管理器”中全部为绿色即通过。注意这里如何用 <code>DataRow</code> 一次写出一组边界值——这正是本章前面讲的等价类和边界值方法在代码中的体现。单元测试项目模板依赖 MSTest 的 NuGet 包，断网环境下能否创建，同样需要在熟悉设备时确认。</p>
+
+<h2 id="s10"><span class="sec">10</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>能说出四种用例设计方法，并各举一个例子</li>
+<li>2 小时内，对一个没见过的 App 写出 54 条以上合格用例（真实执行）和一份四部分齐全的操作手册</li>
+<li>手册使用了标题样式、自动目录、题注和交叉引用</li>
+<li>能用多个虚拟设备完成兼容性测试</li>
+<li>能写出接口自动化测试程序和单元测试</li>
+<li>完成练习 10-1 到 10-3</li>
+</ul></div>
+
+<div class="pager"><a href="09-uml.html"><small>上一章</small>需求分析与 UML 建模</a><a href="11-schedule.html" style="text-align:right"><small>下一章</small>训练计划：标准版与强化版</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>模板与自查表 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a class="active" href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>模板、清单与自评表</span></div>
+<main class="content">
+<p class="kicker">第 15 章 · 工具箱</p>
+<h1>模板与自查表</h1>
+<p class="lead">本章汇总训练和比赛中反复要用的模板：错题本、每周复盘、模拟记录、接口文档、数据字典、测试用例、缺陷报告、说明文件，以及三个模块的交付自查表。页面已为打印优化，可以直接打印（浏览器“打印”即可，侧边栏不会打印出来）。模板只用于训练，比赛中不能携带任何资料，要靠平时练熟。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">错题本</a></li><li><a href="#s2">每周复盘表</a></li><li><a href="#s3">模拟记录表</a></li><li><a href="#s4">接口文档模板</a></li><li><a href="#s5">数据字典模板</a></li><li><a href="#s6">测试用例模板</a></li><li><a href="#s7">缺陷报告模板</a></li><li><a href="#s8">说明文件模板</a></li><li><a href="#s9">模块 A 交付自查表（桌面端）</a></li><li><a href="#s10">模块 B 交付自查表（手机端）</a></li><li><a href="#s11">模块 C 交付自查表（测试与手册）</a></li><li><a href="#s12">设计文档自查表</a></li><li><a href="#s13">赛前默写清单</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>错题本</h2>
+<p>每遇到一个卡住超过 10 分钟的问题，或者模拟中丢的每一分，都记一条。</p>
+<div class="tw"><table>
+<tr><th>日期</th><th>章节 / 题目</th><th>现象（报错原文或失分点）</th><th>原因类型</th><th>根本原因</th><th>正确做法</th><th>复查日期 ✓</th></tr>
+<tr><td>例：10-12</td><td>第 06 章 用户管理</td><td>参数化查询需要参数 @s，但未提供</td><td>会但忘了</td><td>SqlParameter("@s", 0) 被当成类型</td><td>SqlParameter("@s", SqlDbType.Int) { Value = 0 }</td><td>10-19 ✓</td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table></div>
+<p>原因类型只填四种之一：<strong>不会</strong>（回到章节重学）、<strong>会但慢</strong>（加入限时小练）、<strong>会但忘了</strong>（加入赛前默写清单）、<strong>理解错题意</strong>（加入读题训练）。</p>
+
+<h2 id="s2"><span class="sec">02</span>每周复盘表</h2>
+<div class="tw"><table>
+<tr><th>第 __ 周（__月__日—__月__日）</th><th>内容</th></tr>
+<tr><td>本周计划任务</td><td></td></tr>
+<tr><td>完成情况（完成 __ / 共 __ 项）</td><td></td></tr>
+<tr><td>未完成的原因</td><td></td></tr>
+<tr><td>实际投入时间（小时）</td><td></td></tr>
+<tr><td>限时小练：题目 / 限时 / 用时 / 完成度</td><td></td></tr>
+<tr><td>新增错题数 / 最典型的一条</td><td></td></tr>
+<tr><td>下周调整</td><td></td></tr>
+<tr><td>状态（睡眠 / 精力 / 情绪，各 1–5 分）</td><td></td></tr>
+</table></div>
+
+<h2 id="s3"><span class="sec">03</span>模拟记录表</h2>
+<div class="tw"><table>
+<tr><th>项目</th><th>模块 A</th><th>模块 B</th><th>模块 C</th></tr>
+<tr><td>日期 / 题目</td><td></td><td></td><td></td></tr>
+<tr><td>读题与准备用时</td><td></td><td></td><td></td></tr>
+<tr><td>任务 1 用时 / 完成度</td><td></td><td></td><td></td></tr>
+<tr><td>任务 2 用时 / 完成度</td><td></td><td></td><td></td></tr>
+<tr><td>任务 3 用时 / 完成度</td><td></td><td></td><td>—</td></tr>
+<tr><td>收尾与交付用时</td><td></td><td></td><td></td></tr>
+<tr><td>是否按时交付、命名正确</td><td></td><td></td><td></td></tr>
+<tr><td>测量分自评 / 满分</td><td>/ 37</td><td>/ 37</td><td>/ 20</td></tr>
+<tr><td>评价分（本人 / 同伴）</td><td>/ 3</td><td>/ 3</td><td>—</td></tr>
+<tr><td>得分率</td><td></td><td></td><td></td></tr>
+<tr><td>主要失分点（写进错题本）</td><td></td><td></td><td></td></tr>
+</table></div>
+<p>满分按辽宁样卷的分值结构填写（模块 A、B 各为 37 分测量分 + 3 分评价分，模块 C 为 20 分测量分）。练习其他题目时按该题的分值修改。</p>
+
+<h2 id="s4"><span class="sec">04</span>接口文档模板</h2>
+<span class="fname">接口文档.md（可用记事本编写）</span><pre><code># XXX 平台接口文档
+
+## 通用约定
+- 基础地址：http://localhost:5000
+- 请求体：JSON，UTF-8，请求头 Content-Type: application/json
+- 返回：{ "success": true/false, "message": "提示文字", "data": 数据 }
+- 字段命名：小驼峰；日期时间 yyyy-MM-dd HH:mm:ss；日期 yyyy-MM-dd
+- 启动方法：……
+
+## 1. 登录
+- 方法 / 地址：POST /api/customer/login
+- 请求体：
+  | 字段     | 类型   | 必填 | 说明        |
+  | phone    | string | 是   | 11 位手机号 |
+  | password | string | 是   |             |
+- 成功返回 data：客户对象（customerId, phone, realName, ...）
+- 失败 message：手机号和密码不能为空 / 手机号或密码错误 / 该账号已被禁用
+- 示例：
+  请求 {"phone":"13800000001","password":"abc12345"}
+  返回 {"success":true,"message":"成功","data":{"customerId":1, ...}}
+
+## 2. ……</code></pre>
+
+<h2 id="s5"><span class="sec">05</span>数据字典模板</h2>
+<div class="tw"><table>
+<tr><th colspan="7">表名：Customer（客户）</th></tr>
+<tr><th>字段名</th><th>类型</th><th>允许空</th><th>默认值</th><th>键 / 约束</th><th>说明</th><th>示例</th></tr>
+<tr><td>CustomerId</td><td>INT IDENTITY</td><td>否</td><td></td><td>主键</td><td>客户编号</td><td>1</td></tr>
+<tr><td>Phone</td><td>CHAR(11)</td><td>否</td><td></td><td>唯一</td><td>手机号，登录账号</td><td>13800000001</td></tr>
+<tr><td>Status</td><td>TINYINT</td><td>否</td><td>1</td><td>检查：0 或 1</td><td>1 正常，0 禁用</td><td>1</td></tr>
+<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+</table></div>
+
+<h2 id="s6"><span class="sec">06</span>测试用例模板</h2>
+<p>列名与顺序按辽宁样卷表 2；比赛时以题目给出的格式为准。</p>
+<div class="tw"><table>
+<tr><th>系统模块</th><th>用例编号</th><th>用例描述</th><th>前置条件</th><th>操作步骤</th><th>预期结果</th><th>测试结果</th></tr>
+<tr><td></td><td>_.1.1</td><td></td><td></td><td>1.<br>2.<br>3.</td><td></td><td></td></tr>
+<tr><td></td><td>_.1.2</td><td></td><td></td><td>1.<br>2.</td><td></td><td></td></tr>
+<tr><td></td><td>_.2.1</td><td></td><td></td><td>1.<br>2.</td><td></td><td></td></tr>
+</table></div>
+
+<h2 id="s7"><span class="sec">07</span>缺陷报告模板</h2>
+<div class="tw"><table>
+<tr><th>字段</th><th>内容</th></tr>
+<tr><td>缺陷编号</td><td>BUG-___</td></tr>
+<tr><td>关联用例</td><td></td></tr>
+<tr><td>标题（一句话说清问题）</td><td></td></tr>
+<tr><td>严重程度</td><td>严重 / 一般 / 轻微 / 建议</td></tr>
+<tr><td>测试环境</td><td>设备、系统版本、App 版本</td></tr>
+<tr><td>复现步骤</td><td>1.<br>2.<br>3.</td></tr>
+<tr><td>预期结果</td><td></td></tr>
+<tr><td>实际结果</td><td></td></tr>
+<tr><td>附件</td><td>截图文件名</td></tr>
+</table></div>
+
+<h2 id="s8"><span class="sec">08</span>说明文件模板</h2>
+<span class="fname">说明.txt</span><pre><code>【作品】XXX 平台（模块 _）
+
+【运行环境】
+  Windows 10 及以上 / .NET Framework 4.8 / SQL Server（实例：.）
+  Android 模拟器 API __ 及以上
+
+【数据库】
+  1. 在 SSMS 中执行 Database\xxx.sql，创建数据库 ____。
+  2. 连接字符串位于 ____.exe.config，如实例名不同，请修改 Data Source。
+
+【接口】
+  1. 运行 ____\bin\Debug\____.exe，窗口提示“已启动”后保持打开。
+  2. 浏览器访问 http://localhost:5000/api/____ 应返回 JSON。
+  3. 模拟器启动后执行：adb reverse tcp:5000 tcp:5000
+
+【测试账号】
+  桌面端：____ / ____
+  手机端：____ / ____
+
+【说明】
+  1. 题目中 ____ 未明确规定，本作品按 ____ 处理。</code></pre>
+
+<h2 id="s9"><span class="sec">09</span>模块 A 交付自查表（桌面端）</h2>
+<ul class="cl">
+<li>程序启动首先进入登录界面；窗体标题有意义</li>
+<li>每个功能都有验证和明确的错误提示；空输入、格式错误、重复数据都测过</li>
+<li>所有表格：只读、整行选中、无空白新行、中文列标题、数据多时有滚动条</li>
+<li>所有日期 YYYY-MM-DD；金额两位小数</li>
+<li>颜色区分的记录有图例；Delete / Cancel 按钮按要求为红色</li>
+<li>缺图显示 default.jpg；图片随程序复制到输出目录</li>
+<li>风格指引：Logo、主色、字体全程一致</li>
+<li>删除、禁用、退出等操作有确认</li>
+<li>控件命名规范，没有 Form1、button1</li>
+<li>接口（如有）能启动，测试清单全部通过</li>
+<li>重新生成解决方案无错误；从头运行一遍主要功能</li>
+<li>交付文件夹、压缩包名称与题目完全一致；数据库脚本、说明文件齐全</li>
+</ul>
+
+<h2 id="s10"><span class="sec">10</span>模块 B 交付自查表（手机端）</h2>
+<ul class="cl">
+<li>清单中有 INTERNET 权限和 usesCleartextTraffic</li>
+<li>接口地址正确；在全新安装的 App 上能连通接口</li>
+<li>每个输入都有校验和明确提示；请求期间防止重复提交</li>
+<li>列表为空时有提示；缺图显示默认图片</li>
+<li>日期 YYYY-MM-DD；状态有颜色区分时有说明</li>
+<li>返回键行为合理：首页返回退出、登录后不能返回登录页</li>
+<li>退出登录有确认；退出后清除登录状态</li>
+<li>传感器在 onPause 中注销；倒计时在 onDestroy 中取消</li>
+<li>横屏、小屏下主要页面可用（至少检查一次）</li>
+<li>重新 Build APK，卸载旧版后安装验证一次</li>
+<li>Modul2 中包含源码和 APK，压缩包名称与题目一致</li>
+</ul>
+
+<h2 id="s11"><span class="sec">11</span>模块 C 交付自查表（测试与手册）</h2>
+<ul class="cl">
+<li>每个功能模块的用例数都达到题目最少要求</li>
+<li>用例列名与顺序和题目格式一致；编号连续有规律</li>
+<li>每条用例：描述写目的、前置条件写状态、步骤写具体数据、预期结果可判断</li>
+<li>所有用例都真实执行并如实填写结果</li>
+<li>手册使用题目给的模板，四个部分齐全</li>
+<li>手册有自动目录、标题样式、带题注的截图、交叉引用</li>
+<li>手册语言通俗，关键术语有解释，常见问题有解决方法</li>
+<li>文件保存在 Modul3，压缩包名称与题目一致（样卷为 Module3.zip）</li>
+</ul>
+
+<h2 id="s12"><span class="sec">12</span>设计文档自查表</h2>
+<p>用于第 09 章练习 9-4 和自造新题。</p>
+<div class="tw"><table>
+<tr><th>项目</th><th>检查点</th><th>分值（自评用）</th></tr>
+<tr><td>用例图</td><td>参与者齐全；用例“动词 + 名词”命名；include / extend 使用正确；有系统边界</td><td>2</td></tr>
+<tr><td>ER 图</td><td>每个实体有主键；一对多外键在“多”方；多对多拆出中间表；标注了关系的基数</td><td>3</td></tr>
+<tr><td>数据字典</td><td>每个字段有类型、是否允许空、约束、说明；类型选择合理（金额 DECIMAL、中文 NVARCHAR）</td><td>2</td></tr>
+<tr><td>接口文档</td><td>通用约定完整；每个接口有方法、地址、参数、返回、错误提示、示例</td><td>3</td></tr>
+<tr><td>活动图</td><td>有开始和结束；每个判断都有“是 / 否”两个分支；异常分支有处理</td><td>2</td></tr>
+<tr><td colspan="2">合计</td><td>12</td></tr>
+</table></div>
+
+<h2 id="s13"><span class="sec">13</span>赛前默写清单</h2>
+<p>赛前一周每天选两项，不看任何资料默写出来，再和本手册对照：</p>
+<ul class="cl">
+<li>DbHelper 三个方法（第 06 章）</li>
+<li>分页 SQL（OFFSET / FETCH）与总页数公式</li>
+<li>手机号、密码的正则表达式</li>
+<li>记住密码的 Settings 读写</li>
+<li>DataGridView 常用属性设置（只读、整行选择、无新行、列标题、格式）</li>
+<li>HttpListener 接口的启动与路由骨架</li>
+<li>统一返回结构与 JSON 工具类</li>
+<li>Android 清单中的权限与明文流量配置</li>
+<li>ApiClient：后台线程请求、主线程回调</li>
+<li>BaseAdapter 四个方法与 ViewHolder</li>
+<li>CodeHelper：生成 6 位验证码、60 秒倒计时、过期判断</li>
+<li>传感器注册 / 注销与摇一摇判断</li>
+<li>测试用例的七列格式与一条完整示例</li>
+<li>操作手册四个部分的标题</li>
+</ul>
+
+<div class="pager"><a href="14-mistakes.html"><small>上一章</small>常见错误大全</a><a href="16-resources.html" style="text-align:right"><small>下一章</small>学习资源与官方文档</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

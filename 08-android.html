@@ -1,0 +1,2172 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Android 手机应用（模块 B） · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a class="active" href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>Android 手机应用（模块 B）</span></div>
+<main class="content">
+<p class="kicker">第 08 章 · 学习路径第六站</p>
+<h1>Android 手机应用（模块 B）</h1>
+<p class="lead">模块 B 占 40 分，并列时还优先比较模块 B 的成绩（辽宁文件规定的名次顺序为 B &gt; A &gt; C），是整场比赛最关键的模块。本章用 Java 做一个完整的“智慧康养”手机端：验证码注册与两种登录、服务查询与预约、我的订单、健康数据折线图、紧急求助（摇一摇）、设备信息。数据全部来自第 07 章的接口。标准版 6 周，强化版 4 周。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">开始之前</a></li><li><a href="#s2">建项目与认识项目结构</a></li><li><a href="#s3">布局基础：用 LinearLayout 搭界面</a></li><li><a href="#s4">页面（Activity）与页面跳转</a></li><li><a href="#s5">工具类：校验、本地存储、验证码</a></li><li><a href="#s6">访问接口：ApiClient</a></li><li><a href="#s7">注册、登录、重置密码</a></li><li><a href="#s8">首页</a></li><li><a href="#s9">列表：服务查询与预约</a></li><li><a href="#s10">我的订单</a></li><li><a href="#s11">可视化统计：自己画折线图</a></li><li><a href="#s12">传感器与系统功能：紧急求助</a></li><li><a href="#s13">设备性能参数</a></li><li><a href="#s14">打包 APK 与交付 Modul2</a></li><li><a href="#s15">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>开始之前</h2>
+<div class="box official"><span class="h">官方文件怎么说</span>
+<p>辽宁样卷模块 B：“本模块数据来源 Modul1 接口”；2.1 要求手机号注册（模拟发送 6 位验证码，1 分钟有效）、两种登录方式、重置密码；成果为 Modul2 文件夹，压缩为 Modul2.zip，需包含 APK。能力目录中还列有设备性能参数、可视化统计、传感器等内容。设备清单为 Android Studio 2023.2.1 及以上。</p>
+<p class="src">来源：资料包中辽宁省 2026 年技术文件（模块 B 与能力目录部分）</p></div>
+<p>辽宁文件没有限定 Android 的开发语言。本手册用 Java：语法和 C# 非常接近，你在第 04 章学的几乎可以直接迁移；Android 官方文档也同时提供 Java 示例。已经会 Kotlin 的同学可以用 Kotlin，思路完全相同。</p>
+<p>本章代码的设计原则：<strong>不依赖任何第三方库</strong>（网络用系统自带的 <code>HttpURLConnection</code>，JSON 用系统自带的 <code>org.json</code>，图表自己画），布局只用系统控件 <code>LinearLayout</code>、<code>ListView</code> 等。这样即使赛场电脑断网、Gradle 无法下载新依赖，代码也一样能编译。</p>
+
+<h2 id="s2"><span class="sec">02</span>建项目与认识项目结构</h2>
+<h3>新建项目</h3>
+<ol>
+<li>Android Studio → New Project → 选 <strong>Empty Views Activity</strong>（注意不是 Empty Activity，后者是 Jetpack Compose 项目，写法完全不同）。</li>
+<li>Name：<code>SmartCare</code>；Package name：<code>com.example.smartcare</code>；Save location：<code>桌面\Modul2\SmartCare</code>；Language：<strong>Java</strong>；Minimum SDK：API 24。</li>
+<li>Finish 后等待右下角 Gradle 同步完成（第一次可能要几分钟）。同步失败、提示下载失败，说明这台电脑缺少 Gradle 缓存——这正是第 02 章强调要在熟悉设备时验证的事情。</li>
+</ol>
+<h3>项目结构（Android 视图）</h3>
+<pre><code>app
+├─ manifests
+│  └─ AndroidManifest.xml      ← 应用“身份证”：权限、有哪些页面、哪个页面先启动
+├─ java
+│  └─ com.example.smartcare     ← Java 代码
+│     └─ MainActivity.java
+└─ res                          ← 资源
+   ├─ drawable                  ← 图片（png/jpg/xml 图形）
+   ├─ layout                    ← 页面布局 XML
+   │  └─ activity_main.xml
+   ├─ mipmap                    ← 应用图标
+   └─ values                    ← colors.xml、strings.xml、themes.xml
+Gradle Scripts
+└─ build.gradle(.kts) (Module :app)   ← minSdk、依赖库</code></pre>
+<h3>模板代码的两处调整</h3>
+<ul>
+<li><strong>EdgeToEdge 代码</strong>：较新版本的模板会在 <code>MainActivity.onCreate</code> 中生成 <code>EdgeToEdge.enable(this);</code> 和一段 <code>ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), …)</code>。它引用了布局根节点的 <code>android:id="@+id/main"</code>。我们会替换布局，所以把这两段删掉，否则会因找不到 <code>R.id.main</code> 而编译失败或闪退。</li>
+<li><strong>标题栏</strong>：较新模板的主题通常以 <code>NoActionBar</code> 结尾，页面顶部没有标题栏，代码中的 <code>setTitle()</code> 就看不到效果。需要标题栏时，打开 <code>res/values/themes.xml</code>，把 parent 改为 <code>Theme.MaterialComponents.Light.DarkActionBar</code>（Material 组件库是模板自带的依赖）。</li>
+</ul>
+<div class="box note"><span class="h">关于本章的主题文件</span><p>本章附带的 <code>themes.xml</code> 中的 <code>Theme.SmartCare</code> 继承的是系统主题，仅为了让示例独立成立；你在 Android Studio 中建的项目保留模板生成的主题、只按上一条调整 parent 即可。<code>HomeButton</code> 样式可以直接复制到你的 themes.xml 中。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>布局基础：用 LinearLayout 搭界面</h2>
+<h3>尺寸单位与宽高</h3>
+<div class="tw"><table>
+<tr><th>写法</th><th>含义</th></tr>
+<tr><td><code>match_parent</code></td><td>和父容器一样大</td></tr>
+<tr><td><code>wrap_content</code></td><td>内容多大就多大</td></tr>
+<tr><td><code>dp</code></td><td>控件尺寸、间距的单位，不同屏幕上看起来一样大</td></tr>
+<tr><td><code>sp</code></td><td>文字大小的单位，会跟随系统字体大小设置</td></tr>
+<tr><td><code>layout_weight</code></td><td>按比例分配剩余空间。横向平分两个按钮：宽度都写 <code>0dp</code>，weight 都写 <code>1</code></td></tr>
+<tr><td><code>android:id="@+id/etPhone"</code></td><td>给控件起名字，Java 中用 <code>findViewById(R.id.etPhone)</code> 找到它</td></tr>
+</table></div>
+<h3>常用控件</h3>
+<div class="tw"><table>
+<tr><th>控件</th><th>前缀</th><th>用途与关键属性</th></tr>
+<tr><td>TextView</td><td>tv</td><td>文字。text、textSize、textColor、textStyle</td></tr>
+<tr><td>EditText</td><td>et</td><td>输入框。hint、inputType（phone / number / textPassword）、maxLength；<code>setError()</code> 显示错误</td></tr>
+<tr><td>Button</td><td>btn</td><td>按钮。setOnClickListener</td></tr>
+<tr><td>ImageView</td><td>iv</td><td>图片。src、scaleType、contentDescription</td></tr>
+<tr><td>CheckBox / RadioButton / RadioGroup</td><td>cb / rb / rg</td><td>勾选、单选</td></tr>
+<tr><td>Spinner</td><td>sp</td><td>下拉框，需要 ArrayAdapter 提供选项</td></tr>
+<tr><td>ListView</td><td>lv</td><td>列表，需要 Adapter；<code>setEmptyView</code> 设置无数据时的提示</td></tr>
+<tr><td>ScrollView</td><td>—</td><td>可滚动容器，里面只能放一个子控件</td></tr>
+</table></div>
+<p>本章所有布局都用 <code>LinearLayout</code>（线性排列）嵌套完成。它比模板默认的 <code>ConstraintLayout</code> 直观得多，比赛中写起来也快。登录页布局如下，其他布局见下文各节：</p>
+<span class="fname">res/layout/activity_login.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!-- 外层 ScrollView：小屏幕或弹出键盘时内容可以滚动，不会被挡住 --&gt;
+&lt;ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/page_padding"&gt;
+
+        &lt;ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo" /&gt;
+
+        &lt;TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/gap"
+            android:layout_marginBottom="24dp"
+            android:text="智慧康养平台"
+            android:textColor="@color/primary"
+            android:textSize="24sp"
+            android:textStyle="bold" /&gt;
+
+        &lt;RadioGroup
+            android:id="@+id/rgMode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"&gt;
+
+            &lt;RadioButton
+                android:id="@+id/rbPwd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:checked="true"
+                android:text="密码登录" /&gt;
+
+            &lt;RadioButton
+                android:id="@+id/rbCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="验证码登录" /&gt;
+        &lt;/RadioGroup&gt;
+
+        &lt;EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap"
+            android:hint="手机号"
+            android:inputType="phone"
+            android:maxLength="11" /&gt;
+
+        &lt;LinearLayout
+            android:id="@+id/layoutPwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"&gt;
+
+            &lt;EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="密码"
+                android:inputType="textPassword" /&gt;
+
+            &lt;CheckBox
+                android:id="@+id/cbRemember"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记住密码" /&gt;
+        &lt;/LinearLayout&gt;
+
+        &lt;!-- 验证码区域默认隐藏（gone：不占位置；invisible：看不见但占位置） --&gt;
+        &lt;LinearLayout
+            android:id="@+id/layoutCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"&gt;
+
+            &lt;EditText
+                android:id="@+id/etCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="6 位验证码"
+                android:inputType="number"
+                android:maxLength="6" /&gt;
+
+            &lt;Button
+                android:id="@+id/btnGetCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取验证码" /&gt;
+        &lt;/LinearLayout&gt;
+
+        &lt;Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/primary"
+            android:text="登 录"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" /&gt;
+
+        &lt;LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap"
+            android:orientation="horizontal"&gt;
+
+            &lt;TextView
+                android:id="@+id/tvRegister"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="8dp"
+                android:text="手机号注册"
+                android:textColor="@color/primary" /&gt;
+
+            &lt;TextView
+                android:id="@+id/tvForget"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:padding="8dp"
+                android:text="忘记密码？"
+                android:textColor="@color/text_secondary" /&gt;
+        &lt;/LinearLayout&gt;
+    &lt;/LinearLayout&gt;
+&lt;/ScrollView&gt;</code></pre>
+<span class="fname">res/values/colors.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;!-- 色值以题目风格指引为准；集中定义，改一处全局生效 --&gt;
+    &lt;color name="primary"&gt;#1F4E79&lt;/color&gt;
+    &lt;color name="danger"&gt;#C00000&lt;/color&gt;
+    &lt;color name="text_secondary"&gt;#666666&lt;/color&gt;
+    &lt;color name="bg"&gt;#F4F6F9&lt;/color&gt;
+&lt;/resources&gt;</code></pre>
+<span class="fname">res/values/dimens.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;dimen name="page_padding"&gt;20dp&lt;/dimen&gt;
+    &lt;dimen name="gap"&gt;12dp&lt;/dimen&gt;
+&lt;/resources&gt;</code></pre>
+<div class="box tip"><span class="h">训练建议：颜色、尺寸集中定义</span>
+<p>风格指引规定了主色、警示色、字号时，把它们写进 <code>colors.xml</code> 和 <code>dimens.xml</code>，布局中统一引用 <code>@color/primary</code>。这样整个 App 风格一致，裁判检查“符合风格指引”时一目了然；中途要改色，也只改一处。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>页面（Activity）与页面跳转</h2>
+<p>Android 中每个页面是一个 Activity。一个 Activity = 一个 Java 类 + 一个布局 XML + 清单中的一行注册。新建页面：在包名上右键 → New → Activity → Empty Views Activity，Android Studio 会自动完成这三件事。</p>
+<h3>生命周期：只需记住四个方法</h3>
+<div class="tw"><table>
+<tr><th>方法</th><th>什么时候调用</th><th>我们在里面做什么</th></tr>
+<tr><td>onCreate</td><td>页面创建时，只调用一次</td><td>setContentView、findViewById、绑定事件、首次加载数据</td></tr>
+<tr><td>onResume</td><td>页面每次回到前台</td><td>刷新数据（例如从预约页返回订单页）、注册传感器</td></tr>
+<tr><td>onPause</td><td>页面离开前台</td><td>注销传感器</td></tr>
+<tr><td>onDestroy</td><td>页面销毁</td><td>停止倒计时等</td></tr>
+</table></div>
+<h3>跳转与传值</h3>
+<pre><code>// 跳转，并带上参数
+Intent it = new Intent(this, RegisterActivity.class);
+it.putExtra("mode", "reset");
+it.putExtra("phone", "13800000001");
+startActivity(it);
+
+// 在 RegisterActivity 中取参数
+String mode = getIntent().getStringExtra("mode");
+
+// 关闭当前页面，回到上一个页面
+finish();</code></pre>
+<h3>清单文件</h3>
+<span class="fname">AndroidManifest.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;manifest xmlns:android="http://schemas.android.com/apk/res/android"&gt;
+
+    &lt;!-- 访问网络必须声明；缺少它所有请求都会失败 --&gt;
+    &lt;uses-permission android:name="android.permission.INTERNET" /&gt;
+
+    &lt;!-- usesCleartextTraffic：允许 http:// 明文请求。Android 9 起默认禁止，不加会报 Cleartext HTTP traffic not permitted --&gt;
+    &lt;application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.SmartCare"
+        android:usesCleartextTraffic="true"&gt;
+
+        &lt;activity
+            android:name=".LoginActivity"
+            android:exported="true"&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name="android.intent.action.MAIN" /&gt;
+                &lt;category android:name="android.intent.category.LAUNCHER" /&gt;
+            &lt;/intent-filter&gt;
+        &lt;/activity&gt;
+        &lt;activity android:name=".RegisterActivity" /&gt;
+        &lt;activity android:name=".MainActivity" /&gt;
+        &lt;activity android:name=".ServiceListActivity" /&gt;
+        &lt;activity android:name=".OrderListActivity" /&gt;
+        &lt;activity android:name=".HealthActivity" /&gt;
+        &lt;activity android:name=".SosActivity" /&gt;
+        &lt;activity android:name=".DeviceInfoActivity" /&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;</code></pre>
+<div class="box warn"><span class="h">易错提醒：清单中的两个必加项</span>
+<p>① 没有 <code>INTERNET</code> 权限，所有网络请求都会失败；② 没有 <code>usesCleartextTraffic="true"</code>，在 Android 9 及以上访问 <code>http://</code> 地址会被系统拦截，报 “Cleartext HTTP traffic not permitted”。比赛中这两行最好在建项目后第一时间加上。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>工具类：校验、本地存储、验证码</h2>
+<p>先把几个各页面都要用的功能写成工具类，后面的页面代码会短很多。</p>
+<h3>格式校验</h3>
+<span class="fname">Check.java</span><pre><code>package com.example.smartcare;
+
+/** 输入格式校验，规则与桌面端保持一致 */
+public class Check {
+    public static boolean phone(String s) {
+        return s != null &amp;&amp; s.matches("^1\\d{10}$");
+    }
+
+    public static boolean password(String s) {
+        return s != null &amp;&amp; s.matches("^(?=.*[A-Za-z])(?=.*\\d).{8,}$");
+    }
+
+    public static boolean code(String s) {
+        return s != null &amp;&amp; s.matches("^\\d{6}$");
+    }
+}</code></pre>
+<p>Java 字符串中的反斜杠要写两个：正则 <code>\d</code> 在 Java 中写作 <code>"\\d"</code>。手机号这里要求“1 开头的 11 位数字”，比单纯“11 位数字”更严格；比赛中以题目描述为准。</p>
+<h3>本地存储 SharedPreferences</h3>
+<p>SharedPreferences 是 Android 的“键值对小本子”，适合保存登录状态、记住的账号密码、设置项。</p>
+<span class="fname">Prefs.java</span><pre><code>package com.example.smartcare;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+import org.json.JSONObject;
+
+/** 用 SharedPreferences 保存登录状态和“记住密码”。数据存在 App 私有目录，卸载即清除。 */
+public class Prefs {
+    private static final String NAME = "smartcare";
+
+    private static SharedPreferences sp(Context c) {
+        return c.getSharedPreferences(NAME, Context.MODE_PRIVATE);
+    }
+
+    /** 登录成功后保存当前客户 */
+    public static void saveLogin(Context c, JSONObject customer) {
+        sp(c).edit()
+                .putInt("customerId", customer.optInt("customerId"))
+                .putString("phone", customer.optString("phone"))
+                .putString("realName", customer.isNull("realName") ? "" : customer.optString("realName"))
+                .apply();
+    }
+
+    public static int customerId(Context c) { return sp(c).getInt("customerId", 0); }
+
+    public static String realName(Context c) { return sp(c).getString("realName", ""); }
+
+    public static String phone(Context c) { return sp(c).getString("phone", ""); }
+
+    public static void logout(Context c) {
+        sp(c).edit().remove("customerId").remove("phone").remove("realName").apply();
+    }
+
+    public static void saveRemember(Context c, boolean remember, String phone, String pwd) {
+        sp(c).edit()
+                .putBoolean("remember", remember)
+                .putString("savedPhone", remember ? phone : "")
+                .putString("savedPwd", remember ? pwd : "")
+                .apply();
+    }
+
+    public static boolean remember(Context c) { return sp(c).getBoolean("remember", false); }
+
+    public static String savedPhone(Context c) { return sp(c).getString("savedPhone", ""); }
+
+    public static String savedPwd(Context c) { return sp(c).getString("savedPwd", ""); }
+}</code></pre>
+<h3>模拟验证码</h3>
+<p>比赛环境没有短信网关，题目要求“模拟发送”。我们用对话框模拟一条短信，同时让“获取验证码”按钮进入 60 秒倒计时；校验时依次检查：是否已获取、手机号是否改变、是否过期、是否一致。</p>
+<span class="fname">CodeHelper.java</span><pre><code>package com.example.smartcare;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.os.CountDownTimer;
+import android.widget.Button;
+
+import java.util.Random;
+
+/**
+ * 模拟短信验证码：随机 6 位数字，1 分钟内有效。
+ * 比赛环境没有短信网关，题目要求“模拟发送”，这里用对话框模拟短信。
+ */
+public class CodeHelper {
+    private static final long VALID_MS = 60 * 1000;
+    private String code;
+    private String phone;
+    private long expireAt;
+    private CountDownTimer timer;
+
+    /** 生成验证码、弹出“模拟短信”，并让按钮进入 60 秒倒计时 */
+    public void send(Context ctx, String phone, final Button btn) {
+        this.phone = phone;
+        this.code = String.format("%06d", new Random().nextInt(1000000));   // 000000–999999，保证 6 位
+        this.expireAt = System.currentTimeMillis() + VALID_MS;
+
+        new AlertDialog.Builder(ctx)
+                .setTitle("【模拟短信】")
+                .setMessage("您的验证码是 " + code + "，1 分钟内有效。")
+                .setPositiveButton("知道了", null)
+                .show();
+
+        btn.setEnabled(false);
+        if (timer != null) timer.cancel();
+        timer = new CountDownTimer(VALID_MS, 1000) {
+            @Override
+            public void onTick(long left) {
+                btn.setText((left / 1000) + " 秒后重发");
+            }
+
+            @Override
+            public void onFinish() {
+                btn.setText("获取验证码");
+                btn.setEnabled(true);
+            }
+        }.start();
+    }
+
+    /** 校验通过返回 null，否则返回错误提示 */
+    public String check(String phone, String input) {
+        if (code == null) return "请先获取验证码";
+        if (!phone.equals(this.phone)) return "手机号已改变，请重新获取验证码";
+        if (System.currentTimeMillis() &gt; expireAt) return "验证码已过期，请重新获取";
+        if (!code.equals(input)) return "验证码错误";
+        code = null;   // 用过一次即作废
+        return null;
+    }
+
+    /** 页面销毁时调用，避免倒计时继续操作已销毁的按钮 */
+    public void cancel() {
+        if (timer != null) timer.cancel();
+    }
+}</code></pre>
+<ul>
+<li><code>String.format("%06d", …)</code> 保证不足 6 位时前面补 0（例如 4321 显示为 004321）。</li>
+<li>“1 分钟有效”用过期时间戳判断，而不是依赖倒计时，这样即使页面切到后台再回来，判断仍然准确。</li>
+<li>验证码校验通过后立即作废，防止重复使用。</li>
+</ul>
+
+<h2 id="s6"><span class="sec">06</span>访问接口：ApiClient</h2>
+<p>Android 有一条硬性规定：<strong>主线程（界面线程）不能做网络请求</strong>，否则直接抛出 <code>NetworkOnMainThreadException</code>；反过来，<strong>后台线程不能修改界面</strong>。所以每次请求都是：开一个后台线程发请求 → 拿到结果 → 切回主线程更新界面。下面的工具类把这个过程封装好，页面中只需要写“拿到结果后做什么”。</p>
+<span class="fname">ApiClient.java</span><pre><code>package com.example.smartcare;
+
+import android.os.Handler;
+import android.os.Looper;
+
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+/**
+ * 访问 Web API 的工具类。
+ * 网络请求不能放在主线程（会抛 NetworkOnMainThreadException），
+ * 所以在后台线程请求，拿到结果后切回主线程回调，回调里可以直接操作界面。
+ */
+public class ApiClient {
+
+    // 配合 adb reverse tcp:5000 tcp:5000 使用；不做映射时改为 http://10.0.2.2:5000
+    public static final String BASE_URL = "http://localhost:5000";
+
+    public interface Callback {
+        void onResult(JSONObject result);   // result 一定不为 null，先看 result.optBoolean("success")
+    }
+
+    private static final Handler MAIN = new Handler(Looper.getMainLooper());
+
+    public static void get(String path, Callback cb) {
+        request("GET", path, null, cb);
+    }
+
+    public static void post(String path, JSONObject body, Callback cb) {
+        request("POST", path, body, cb);
+    }
+
+    /** 查询参数中有中文或特殊字符时必须编码，例如 "/api/services?keyword=" + ApiClient.enc("助浴") */
+    public static String enc(String s) {
+        try {
+            return URLEncoder.encode(s, "UTF-8");
+        } catch (Exception e) {
+            return s;
+        }
+    }
+
+    private static void request(final String method, final String path, final JSONObject body, final Callback cb) {
+        new Thread(() -&gt; {
+            JSONObject result;
+            HttpURLConnection conn = null;
+            try {
+                conn = (HttpURLConnection) new URL(BASE_URL + path).openConnection();
+                conn.setRequestMethod(method);
+                conn.setConnectTimeout(5000);
+                conn.setReadTimeout(8000);
+                if (body != null) {
+                    conn.setDoOutput(true);
+                    conn.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+                    OutputStream os = conn.getOutputStream();
+                    os.write(body.toString().getBytes("UTF-8"));
+                    os.close();
+                }
+                int code = conn.getResponseCode();
+                InputStream is = code &lt; 400 ? conn.getInputStream() : conn.getErrorStream();
+                String text = is == null ? "" : readAll(is);
+                result = text.isEmpty() ? fail("服务器没有返回数据（状态码 " + code + "）") : new JSONObject(text);
+            } catch (Exception e) {
+                result = fail("网络连接失败，请确认接口已启动：" + e.getMessage());
+            } finally {
+                if (conn != null) conn.disconnect();
+            }
+            final JSONObject r = result;
+            MAIN.post(() -&gt; cb.onResult(r));
+        }).start();
+    }
+
+    private static String readAll(InputStream is) throws Exception {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        byte[] buf = new byte[4096];
+        int n;
+        while ((n = is.read(buf)) != -1) bos.write(buf, 0, n);
+        is.close();
+        return bos.toString("UTF-8");
+    }
+
+    private static JSONObject fail(String msg) {
+        JSONObject o = new JSONObject();
+        try {
+            o.put("success", false);
+            o.put("message", msg);
+        } catch (Exception ignored) {
+        }
+        return o;
+    }
+}</code></pre>
+<p>使用方法：</p>
+<pre><code>ApiClient.get("/api/categories", result -&gt; {
+    if (!result.optBoolean("success")) {           // 失败：直接显示接口返回的提示
+        Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+        return;
+    }
+    JSONArray arr = result.optJSONArray("data");    // 成功：取数据
+    for (int i = 0; i &lt; arr.length(); i++) {
+        JSONObject c = arr.optJSONObject(i);
+        String name = c.optString("categoryName");
+    }
+});</code></pre>
+<div class="tw"><table>
+<tr><th>org.json 方法</th><th>说明</th></tr>
+<tr><td><code>new JSONObject(文字)</code></td><td>把 JSON 文字解析成对象</td></tr>
+<tr><td><code>optString("key")</code> / <code>optInt</code> / <code>optDouble</code> / <code>optBoolean</code></td><td>取值；键不存在时返回空字符串或 0，不会抛异常（推荐）</td></tr>
+<tr><td><code>getString("key")</code></td><td>键不存在时抛异常，需要 try-catch</td></tr>
+<tr><td><code>isNull("key")</code></td><td>值是否为 null。注意：<code>optString</code> 取 null 值会得到字符串 <code>"null"</code>，所以可能为空的字段先用 isNull 判断</td></tr>
+<tr><td><code>optJSONArray</code> / <code>optJSONObject</code></td><td>取数组、取子对象</td></tr>
+<tr><td><code>put("key", 值)</code></td><td>构造请求体</td></tr>
+</table></div>
+<div class="box warn"><span class="h">易错提醒：模拟器连不上接口</span>
+<p>先确认第 07 章“让模拟器访问电脑上的接口”中的 <code>adb reverse</code> 已执行。<code>BASE_URL</code> 写的是 <code>http://localhost:5000</code>，它依赖端口映射；不做映射时改成 <code>http://10.0.2.2:5000</code>（此时接口端需要能接受这个主机名）。查询参数中的中文要用 <code>ApiClient.enc()</code> 编码。</p></div>
+
+<h2 id="s7"><span class="sec">07</span>注册、登录、重置密码</h2>
+<h3>登录页</h3>
+<p>两种登录方式用 RadioGroup 切换，切换时只显示对应的输入区域（<code>View.GONE</code> 隐藏且不占位置）。密码登录调用 <code>/api/customer/login</code>；验证码登录先在本地校验验证码，再调用 <code>/api/customer/loginByCode</code>。</p>
+<span class="fname">LoginActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+public class LoginActivity extends AppCompatActivity {
+
+    private EditText etPhone, etPassword, etCode;
+    private CheckBox cbRemember;
+    private RadioButton rbPwd;
+    private LinearLayout layoutPwd, layoutCode;
+    private Button btnLogin, btnGetCode;
+    private final CodeHelper codeHelper = new CodeHelper();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        etPhone = findViewById(R.id.etPhone);
+        etPassword = findViewById(R.id.etPassword);
+        etCode = findViewById(R.id.etCode);
+        cbRemember = findViewById(R.id.cbRemember);
+        rbPwd = findViewById(R.id.rbPwd);
+        layoutPwd = findViewById(R.id.layoutPwd);
+        layoutCode = findViewById(R.id.layoutCode);
+        btnLogin = findViewById(R.id.btnLogin);
+        btnGetCode = findViewById(R.id.btnGetCode);
+        RadioGroup rgMode = findViewById(R.id.rgMode);
+        TextView tvRegister = findViewById(R.id.tvRegister);
+        TextView tvForget = findViewById(R.id.tvForget);
+
+        // 已登录过且没有注销：直接进首页
+        if (Prefs.customerId(this) &gt; 0) {
+            goMain();
+            return;
+        }
+
+        // 记住密码：自动填入
+        if (Prefs.remember(this)) {
+            etPhone.setText(Prefs.savedPhone(this));
+            etPassword.setText(Prefs.savedPwd(this));
+            cbRemember.setChecked(true);
+        }
+
+        // 两种登录方式切换：只显示当前方式需要的输入框
+        rgMode.setOnCheckedChangeListener((group, checkedId) -&gt; {
+            boolean pwdMode = checkedId == R.id.rbPwd;
+            layoutPwd.setVisibility(pwdMode ? View.VISIBLE : View.GONE);
+            layoutCode.setVisibility(pwdMode ? View.GONE : View.VISIBLE);
+        });
+
+        btnGetCode.setOnClickListener(v -&gt; {
+            String phone = etPhone.getText().toString().trim();
+            if (!Check.phone(phone)) {
+                etPhone.setError("请输入 11 位手机号");
+                return;
+            }
+            codeHelper.send(this, phone, btnGetCode);
+        });
+
+        btnLogin.setOnClickListener(v -&gt; login());
+        tvRegister.setOnClickListener(v -&gt; openRegister(RegisterActivity.MODE_REGISTER));
+        tvForget.setOnClickListener(v -&gt; openRegister(RegisterActivity.MODE_RESET));
+    }
+
+    private void login() {
+        final String phone = etPhone.getText().toString().trim();
+        if (!Check.phone(phone)) {
+            etPhone.setError("请输入 11 位手机号");
+            return;
+        }
+        JSONObject body = new JSONObject();
+        try {
+            body.put("phone", phone);
+            if (rbPwd.isChecked()) {
+                final String pwd = etPassword.getText().toString();
+                if (pwd.isEmpty()) {
+                    etPassword.setError("请输入密码");
+                    return;
+                }
+                body.put("password", pwd);
+                send("/api/customer/login", body, () -&gt; Prefs.saveRemember(this, cbRemember.isChecked(), phone, pwd));
+            } else {
+                String err = codeHelper.check(phone, etCode.getText().toString().trim());
+                if (err != null) {
+                    Toast.makeText(this, err, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                send("/api/customer/loginByCode", body, null);
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /** 调用登录接口；成功后先执行 onSuccess（可为 null），再进入首页 */
+    private void send(String path, JSONObject body, final Runnable onSuccess) {
+        btnLogin.setEnabled(false);          // 防止连续点击重复提交
+        btnLogin.setText("登录中…");
+        ApiClient.post(path, body, result -&gt; {
+            btnLogin.setEnabled(true);
+            btnLogin.setText("登 录");
+            if (!result.optBoolean("success")) {
+                Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Prefs.saveLogin(this, result.optJSONObject("data"));
+            if (onSuccess != null) onSuccess.run();
+            goMain();
+        });
+    }
+
+    private void openRegister(String mode) {
+        Intent it = new Intent(this, RegisterActivity.class);
+        it.putExtra("mode", mode);
+        it.putExtra("phone", etPhone.getText().toString().trim());
+        startActivity(it);
+    }
+
+    private void goMain() {
+        startActivity(new Intent(this, MainActivity.class));
+        finish();   // 关闭登录页，按返回键不会回到这里
+    }
+
+    @Override
+    protected void onDestroy() {
+        codeHelper.cancel();
+        super.onDestroy();
+    }
+}</code></pre>
+<ul>
+<li>请求期间禁用登录按钮并显示“登录中…”，防止用户连点导致重复请求——这类细节最能体现“用户体验”。</li>
+<li>已登录（本地存有 customerId）时直接进入首页，下次打开 App 不用重新登录；“退出登录”时清除。</li>
+<li>跳到首页后 <code>finish()</code> 关闭登录页，这样在首页按返回键会直接退出 App，而不是回到登录页。</li>
+</ul>
+<h3>注册与重置密码（共用一个页面）</h3>
+<span class="fname">res/layout/activity_register.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/page_padding"&gt;
+
+        &lt;TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="手机号注册"
+            android:textColor="@color/primary"
+            android:textSize="22sp"
+            android:textStyle="bold" /&gt;
+
+        &lt;EditText
+            android:id="@+id/etPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="手机号"
+            android:inputType="phone"
+            android:maxLength="11" /&gt;
+
+        &lt;LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"&gt;
+
+            &lt;EditText
+                android:id="@+id/etCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="6 位验证码"
+                android:inputType="number"
+                android:maxLength="6" /&gt;
+
+            &lt;Button
+                android:id="@+id/btnGetCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="获取验证码" /&gt;
+        &lt;/LinearLayout&gt;
+
+        &lt;EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码（至少 8 位，含字母和数字）"
+            android:inputType="textPassword" /&gt;
+
+        &lt;EditText
+            android:id="@+id/etPassword2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="确认密码"
+            android:inputType="textPassword" /&gt;
+
+        &lt;Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/primary"
+            android:text="注 册"
+            android:textColor="#FFFFFF" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/ScrollView&gt;</code></pre>
+<span class="fname">RegisterActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONObject;
+
+/** 注册与重置密码共用一个页面：流程都是“手机号 + 验证码 + 新密码” */
+public class RegisterActivity extends AppCompatActivity {
+
+    public static final String MODE_REGISTER = "register";
+    public static final String MODE_RESET = "reset";
+
+    private EditText etPhone, etCode, etPassword, etPassword2;
+    private Button btnGetCode, btnSubmit;
+    private boolean isRegister;
+    private final CodeHelper codeHelper = new CodeHelper();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_register);
+
+        etPhone = findViewById(R.id.etPhone);
+        etCode = findViewById(R.id.etCode);
+        etPassword = findViewById(R.id.etPassword);
+        etPassword2 = findViewById(R.id.etPassword2);
+        btnGetCode = findViewById(R.id.btnGetCode);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        TextView tvTitle = findViewById(R.id.tvTitle);
+
+        isRegister = !MODE_RESET.equals(getIntent().getStringExtra("mode"));
+        tvTitle.setText(isRegister ? "手机号注册" : "重置密码");
+        btnSubmit.setText(isRegister ? "注 册" : "重置密码");
+        setTitle(isRegister ? "注册" : "重置密码");
+        String phone = getIntent().getStringExtra("phone");
+        if (phone != null) etPhone.setText(phone);
+
+        btnGetCode.setOnClickListener(v -&gt; {
+            String p = etPhone.getText().toString().trim();
+            if (!Check.phone(p)) {
+                etPhone.setError("请输入 11 位手机号");
+                return;
+            }
+            codeHelper.send(this, p, btnGetCode);
+        });
+        btnSubmit.setOnClickListener(v -&gt; submit());
+    }
+
+    private void submit() {
+        String phone = etPhone.getText().toString().trim();
+        String code = etCode.getText().toString().trim();
+        String pwd = etPassword.getText().toString();
+        String pwd2 = etPassword2.getText().toString();
+
+        // 校验顺序：从上到下，第一个错误就停下并定位到对应输入框
+        if (!Check.phone(phone)) { etPhone.setError("请输入 11 位手机号"); etPhone.requestFocus(); return; }
+        if (!Check.code(code)) { etCode.setError("请输入 6 位验证码"); etCode.requestFocus(); return; }
+        if (!Check.password(pwd)) { etPassword.setError("密码至少 8 位，且包含字母和数字"); etPassword.requestFocus(); return; }
+        if (!pwd.equals(pwd2)) { etPassword2.setError("两次输入的密码不一致"); etPassword2.requestFocus(); return; }
+        String err = codeHelper.check(phone, code);
+        if (err != null) { Toast.makeText(this, err, Toast.LENGTH_SHORT).show(); return; }
+
+        JSONObject body = new JSONObject();
+        try {
+            body.put("phone", phone);
+            body.put(isRegister ? "password" : "newPassword", pwd);
+        } catch (Exception ignored) {
+        }
+        btnSubmit.setEnabled(false);
+        ApiClient.post(isRegister ? "/api/customer/register" : "/api/customer/resetPassword", body, result -&gt; {
+            btnSubmit.setEnabled(true);
+            if (!result.optBoolean("success")) {
+                Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            Toast.makeText(this, isRegister ? "注册成功，请登录" : "密码已重置，请用新密码登录", Toast.LENGTH_LONG).show();
+            finish();   // 回到登录页
+        });
+    }
+
+    @Override
+    protected void onDestroy() {
+        codeHelper.cancel();
+        super.onDestroy();
+    }
+}</code></pre>
+<div class="ex"><span class="h">练习 8-1　对照题目逐条自测</span>
+<p>对照辽宁样卷 2.1 的要求，为注册、两种登录、重置密码各写 5 条以上测试（共 20 条以上），在模拟器上逐条执行。必须包含：验证码过期（等 61 秒再提交）、获取验证码后改了手机号、两次密码不一致、手机号已注册、用禁用账号 13800000005 登录、重置后用旧密码登录失败而新密码登录成功。</p></div>
+
+<h2 id="s8"><span class="sec">08</span>首页</h2>
+<span class="fname">res/layout/activity_main.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:orientation="vertical"
+    android:padding="@dimen/page_padding"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"&gt;
+
+        &lt;ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="Logo"
+            android:src="@drawable/logo" /&gt;
+
+        &lt;TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/gap"
+            android:layout_weight="1"
+            android:text="您好"
+            android:textColor="@color/primary"
+            android:textSize="20sp"
+            android:textStyle="bold" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;!-- 两列宫格：每行一个横向 LinearLayout，按钮用 weight 平分宽度 --&gt;
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"&gt;
+
+        &lt;Button
+            android:id="@+id/btnServices"
+            style="@style/HomeButton"
+            android:text="服务预约" /&gt;
+
+        &lt;Button
+            android:id="@+id/btnOrders"
+            style="@style/HomeButton"
+            android:text="我的订单" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+
+        &lt;Button
+            android:id="@+id/btnHealth"
+            style="@style/HomeButton"
+            android:text="健康数据" /&gt;
+
+        &lt;Button
+            android:id="@+id/btnSos"
+            style="@style/HomeButton"
+            android:backgroundTint="@color/danger"
+            android:text="紧急求助" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+
+        &lt;Button
+            android:id="@+id/btnDevice"
+            style="@style/HomeButton"
+            android:text="设备信息" /&gt;
+
+        &lt;Button
+            android:id="@+id/btnLogout"
+            style="@style/HomeButton"
+            android:backgroundTint="#888888"
+            android:text="退出登录" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">res/values/themes.xml（其中 HomeButton 样式）</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;resources&gt;
+    &lt;!-- 验证用主题。Android Studio 模板生成的项目中，这里继承的是 Theme.Material3 / Theme.AppCompat 系列，保留模板原样即可 --&gt;
+    &lt;style name="Theme.SmartCare" parent="android:Theme.Material.Light.DarkActionBar"&gt;
+        &lt;item name="android:colorPrimary"&gt;@color/primary&lt;/item&gt;
+    &lt;/style&gt;
+
+    &lt;!-- 首页宫格按钮的公共样式：写一次，6 个按钮共用 --&gt;
+    &lt;style name="HomeButton"&gt;
+        &lt;item name="android:layout_width"&gt;0dp&lt;/item&gt;
+        &lt;item name="android:layout_height"&gt;96dp&lt;/item&gt;
+        &lt;item name="android:layout_weight"&gt;1&lt;/item&gt;
+        &lt;item name="android:layout_margin"&gt;6dp&lt;/item&gt;
+        &lt;item name="android:backgroundTint"&gt;@color/primary&lt;/item&gt;
+        &lt;item name="android:textColor"&gt;#FFFFFF&lt;/item&gt;
+        &lt;item name="android:textSize"&gt;18sp&lt;/item&gt;
+    &lt;/style&gt;
+&lt;/resources&gt;</code></pre>
+<span class="fname">MainActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        TextView tvWelcome = findViewById(R.id.tvWelcome);
+        String name = Prefs.realName(this);
+        tvWelcome.setText("您好，" + (name.isEmpty() ? Prefs.phone(this) : name));
+
+        findViewById(R.id.btnServices).setOnClickListener(v -&gt; open(ServiceListActivity.class));
+        findViewById(R.id.btnOrders).setOnClickListener(v -&gt; open(OrderListActivity.class));
+        findViewById(R.id.btnHealth).setOnClickListener(v -&gt; open(HealthActivity.class));
+        findViewById(R.id.btnSos).setOnClickListener(v -&gt; open(SosActivity.class));
+        findViewById(R.id.btnDevice).setOnClickListener(v -&gt; open(DeviceInfoActivity.class));
+        findViewById(R.id.btnLogout).setOnClickListener(v -&gt; new AlertDialog.Builder(this)
+                .setMessage("确定要退出登录吗？")
+                .setPositiveButton("退出", (d, w) -&gt; {
+                    Prefs.logout(this);
+                    startActivity(new Intent(this, LoginActivity.class));
+                    finish();
+                })
+                .setNegativeButton("取消", null)
+                .show());
+    }
+
+    private void open(Class&lt;?&gt; cls) {
+        startActivity(new Intent(this, cls));
+    }
+}</code></pre>
+
+<h2 id="s9"><span class="sec">09</span>列表：服务查询与预约</h2>
+<h3>Adapter 是什么</h3>
+<p>ListView 只负责“滚动和显示一行行”，每一行长什么样、显示什么数据，由 Adapter（适配器）决定。写 Adapter 的四件事：数据有几条（getCount）、第几条是什么（getItem）、编号（getItemId）、把第几条数据填进一行布局（getView）。</p>
+<span class="fname">res/layout/item_service.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp"&gt;
+
+    &lt;ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:contentDescription="服务图片"
+        android:scaleType="centerCrop" /&gt;
+
+    &lt;LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap"
+        android:layout_weight="1"
+        android:orientation="vertical"&gt;
+
+        &lt;TextView
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#222222"
+            android:textSize="17sp"
+            android:textStyle="bold" /&gt;
+
+        &lt;TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/text_secondary" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;TextView
+        android:id="@+id/tvPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/danger"
+        android:textSize="17sp" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">ServiceAdapter.java</span><pre><code>package com.example.smartcare;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/** 服务列表适配器：把 JSONObject 列表“翻译”成一行一行的界面 */
+public class ServiceAdapter extends BaseAdapter {
+    private final Context ctx;
+    private final List&lt;JSONObject&gt; data = new ArrayList&lt;&gt;();
+
+    public ServiceAdapter(Context ctx) {
+        this.ctx = ctx;
+    }
+
+    public void setData(List&lt;JSONObject&gt; list) {
+        data.clear();
+        data.addAll(list);
+        notifyDataSetChanged();   // 通知 ListView 刷新
+    }
+
+    @Override public int getCount() { return data.size(); }
+
+    @Override public JSONObject getItem(int position) { return data.get(position); }
+
+    @Override public long getItemId(int position) { return getItem(position).optLong("serviceId"); }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ViewHolder h;
+        if (convertView == null) {          // 只有第一次才加载布局，滚动时复用旧的行，列表才流畅
+            convertView = LayoutInflater.from(ctx).inflate(R.layout.item_service, parent, false);
+            h = new ViewHolder();
+            h.ivImage = convertView.findViewById(R.id.ivImage);
+            h.tvName = convertView.findViewById(R.id.tvName);
+            h.tvInfo = convertView.findViewById(R.id.tvInfo);
+            h.tvPrice = convertView.findViewById(R.id.tvPrice);
+            convertView.setTag(h);
+        } else {
+            h = (ViewHolder) convertView.getTag();
+        }
+        JSONObject s = getItem(position);
+        h.tvName.setText(s.optString("serviceName"));
+        h.tvInfo.setText(s.optString("categoryName") + " · " + s.optInt("durationMinutes") + " 分钟");
+        h.tvPrice.setText(String.format("¥%.2f", s.optDouble("price")));
+        ImageUtil.show(ctx, h.ivImage, s.isNull("imageName") ? null : s.optString("imageName"));
+        return convertView;
+    }
+
+    static class ViewHolder {
+        ImageView ivImage;
+        TextView tvName, tvInfo, tvPrice;
+    }
+}</code></pre>
+<p><code>convertView</code> 复用与 <code>ViewHolder</code> 是 ListView 的标准写法：列表有 100 行，屏幕上同时只显示 8 行，滚动时把移出屏幕的那一行“回收”拿来显示新数据，而不是每次都新建。数据多时，不这样写会明显卡顿。功能更复杂的列表可以用 RecyclerView，它强制采用这种复用方式，但需要 AndroidX 的 recyclerview 依赖。</p>
+<h3>默认图片</h3>
+<span class="fname">ImageUtil.java</span><pre><code>package com.example.smartcare;
+
+import android.content.Context;
+import android.widget.ImageView;
+
+/**
+ * 按接口返回的图片文件名（如 "bath.jpg"）显示打包在 res/drawable 中的同名图片；
+ * 文件名为空或找不到对应资源时显示默认图片 img_default。
+ * 注意：资源名只能用小写字母、数字和下划线，并且不能叫 default（Java 关键字），
+ * 所以题目给的 default.jpg 要改名为 img_default.jpg 再放进 drawable。
+ */
+public class ImageUtil {
+    public static void show(Context ctx, ImageView iv, String fileName) {
+        int id = 0;
+        if (fileName != null &amp;&amp; !fileName.isEmpty() &amp;&amp; !"null".equals(fileName)) {
+            String name = fileName.toLowerCase();
+            int dot = name.lastIndexOf('.');
+            if (dot &gt; 0) name = name.substring(0, dot);          // 去掉扩展名
+            name = name.replaceAll("[^a-z0-9_]", "_");            // 非法字符换成下划线
+            id = ctx.getResources().getIdentifier(name, "drawable", ctx.getPackageName());
+        }
+        iv.setImageResource(id != 0 ? id : R.drawable.img_default);
+    }
+}</code></pre>
+<div class="box warn"><span class="h">易错提醒：图片资源命名</span>
+<p>res/drawable 中的文件名只能包含<strong>小写字母、数字、下划线</strong>，不能以数字开头，也不能使用 Java 关键字。题目给的 <code>default.jpg</code> 直接放进去会编译报错，要改名为 <code>img_default.jpg</code>；<code>Bath-01.JPG</code> 要改为 <code>bath_01.jpg</code>。改名后，代码中按同样规则把接口返回的文件名转换一下再查找（上面的 ImageUtil 已处理）。</p></div>
+<h3>页面与预约对话框</h3>
+<span class="fname">res/layout/activity_service_list.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/gap"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"&gt;
+
+        &lt;EditText
+            android:id="@+id/etKeyword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="搜索服务名称"
+            android:inputType="text" /&gt;
+
+        &lt;Button
+            android:id="@+id/btnSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;Spinner
+        android:id="@+id/spCategory"
+        android:layout_width="match_parent"
+        android:layout_height="48dp" /&gt;
+
+    &lt;!-- ListView 占满剩余空间：高度 0dp + weight 1 --&gt;
+    &lt;ListView
+        android:id="@+id/lvServices"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="暂无符合条件的服务"
+        android:textColor="@color/text_secondary" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">res/layout/dialog_order.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/page_padding"&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数量" /&gt;
+
+    &lt;EditText
+        android:id="@+id/etQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:maxLength="3"
+        android:text="1" /&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap"
+        android:text="预约时间（点击修改）" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvTime"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/primary"
+        android:textSize="17sp" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap"
+        android:textColor="@color/danger"
+        android:textSize="17sp" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">ServiceListActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
+
+public class ServiceListActivity extends AppCompatActivity {
+
+    private EditText etKeyword;
+    private Spinner spCategory;
+    private ServiceAdapter adapter;
+    private final List&lt;Integer&gt; categoryIds = new ArrayList&lt;&gt;();   // 与下拉框选项一一对应
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_service_list);
+        setTitle("服务预约");
+
+        etKeyword = findViewById(R.id.etKeyword);
+        spCategory = findViewById(R.id.spCategory);
+        ListView lvServices = findViewById(R.id.lvServices);
+        lvServices.setEmptyView(findViewById(R.id.tvEmpty));      // 没有数据时显示“暂无数据”
+        adapter = new ServiceAdapter(this);
+        lvServices.setAdapter(adapter);
+
+        findViewById(R.id.btnSearch).setOnClickListener(v -&gt; loadServices());
+        lvServices.setOnItemClickListener((parent, view, position, id) -&gt; showOrderDialog(adapter.getItem(position)));
+        loadCategories();
+    }
+
+    private void loadCategories() {
+        ApiClient.get("/api/categories", result -&gt; {
+            List&lt;String&gt; names = new ArrayList&lt;&gt;();
+            names.add("全部分类");
+            categoryIds.clear();
+            categoryIds.add(0);
+            JSONArray arr = result.optJSONArray("data");
+            if (arr != null) {
+                for (int i = 0; i &lt; arr.length(); i++) {
+                    JSONObject c = arr.optJSONObject(i);
+                    names.add(c.optString("categoryName"));
+                    categoryIds.add(c.optInt("categoryId"));
+                }
+            }
+            ArrayAdapter&lt;String&gt; a = new ArrayAdapter&lt;&gt;(this, android.R.layout.simple_spinner_item, names);
+            a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spCategory.setAdapter(a);
+            loadServices();
+        });
+    }
+
+    private void loadServices() {
+        String path = "/api/services?keyword=" + ApiClient.enc(etKeyword.getText().toString().trim());
+        int pos = spCategory.getSelectedItemPosition();
+        if (pos &gt; 0) path += "&amp;categoryId=" + categoryIds.get(pos);
+        ApiClient.get(path, result -&gt; {
+            if (!result.optBoolean("success")) {
+                Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+                return;
+            }
+            List&lt;JSONObject&gt; list = new ArrayList&lt;&gt;();
+            JSONArray arr = result.optJSONArray("data");
+            for (int i = 0; arr != null &amp;&amp; i &lt; arr.length(); i++) list.add(arr.optJSONObject(i));
+            adapter.setData(list);
+        });
+    }
+
+    /** 预约对话框：数量 + 预约时间，金额随数量自动计算 */
+    private void showOrderDialog(final JSONObject service) {
+        View v = getLayoutInflater().inflate(R.layout.dialog_order, null);
+        final EditText etQty = v.findViewById(R.id.etQuantity);
+        final TextView tvTime = v.findViewById(R.id.tvTime);
+        final TextView tvAmount = v.findViewById(R.id.tvAmount);
+        final double price = service.optDouble("price");
+        final Calendar time = Calendar.getInstance();
+        time.add(Calendar.DAY_OF_MONTH, 1);                       // 默认明天 09:00
+        time.set(Calendar.HOUR_OF_DAY, 9);
+        time.set(Calendar.MINUTE, 0);
+        tvTime.setText(format(time));
+        tvAmount.setText(String.format(Locale.CHINA, "金额：¥%.2f", price));
+
+        etQty.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence s, int a, int b, int c) { }
+            @Override public void onTextChanged(CharSequence s, int a, int b, int c) { }
+            @Override
+            public void afterTextChanged(Editable s) {
+                int q = parseQty(s.toString());
+                tvAmount.setText(q &gt; 0 ? String.format(Locale.CHINA, "金额：¥%.2f", price * q) : "金额：--");
+            }
+        });
+
+        // 先选日期，再选时间
+        tvTime.setOnClickListener(x -&gt; {
+            DatePickerDialog dp = new DatePickerDialog(this, (view, y, m, d) -&gt; {
+                time.set(y, m, d);
+                new TimePickerDialog(this, (tp, h, min) -&gt; {
+                    time.set(Calendar.HOUR_OF_DAY, h);
+                    time.set(Calendar.MINUTE, min);
+                    tvTime.setText(format(time));
+                }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true).show();
+            }, time.get(Calendar.YEAR), time.get(Calendar.MONTH), time.get(Calendar.DAY_OF_MONTH));
+            dp.getDatePicker().setMinDate(System.currentTimeMillis());   // 不能选过去的日期
+            dp.show();
+        });
+
+        final AlertDialog dlg = new AlertDialog.Builder(this)
+                .setTitle("预约：" + service.optString("serviceName"))
+                .setView(v)
+                .setPositiveButton("提交预约", null)      // 先传 null，下面自己处理点击，校验失败时对话框不关闭
+                .setNegativeButton("取消", null)
+                .create();
+        dlg.show();
+        dlg.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(x -&gt; {
+            int q = parseQty(etQty.getText().toString());
+            if (q &lt;= 0) { etQty.setError("请输入正整数"); return; }
+            if (time.getTimeInMillis() &lt;= System.currentTimeMillis()) {
+                Toast.makeText(this, "预约时间必须晚于当前时间", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            JSONObject body = new JSONObject();
+            try {
+                body.put("customerId", Prefs.customerId(this));
+                body.put("serviceId", service.optInt("serviceId"));
+                body.put("quantity", q);
+                body.put("appointmentTime", format(time) + ":00");
+            } catch (Exception ignored) { }
+            ApiClient.post("/api/orders", body, result -&gt; {
+                if (!result.optBoolean("success")) {
+                    Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                dlg.dismiss();
+                JSONObject d = result.optJSONObject("data");
+                new AlertDialog.Builder(this).setTitle("预约成功")
+                        .setMessage("订单号：" + d.optString("orderNo") + "\n金额：¥" + String.format(Locale.CHINA, "%.2f", d.optDouble("amount")))
+                        .setPositiveButton("好的", null).show();
+            });
+        });
+    }
+
+    private static int parseQty(String s) {
+        try { return Integer.parseInt(s.trim()); } catch (Exception e) { return 0; }
+    }
+
+    /** yyyy-MM-dd HH:mm */
+    private static String format(Calendar c) {
+        return String.format(Locale.CHINA, "%04d-%02d-%02d %02d:%02d",
+                c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c.get(Calendar.DAY_OF_MONTH),
+                c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE));
+    }
+}</code></pre>
+<ul>
+<li>分类下拉框的第一项是“全部分类”，选项文字和分类编号分别放在两个列表里，下标一一对应。</li>
+<li>预约对话框的“提交”按钮先传 <code>null</code>，<code>show()</code> 之后再自己设置点击事件——这样校验不通过时对话框不会自动关闭，用户不用重新填写。</li>
+<li><code>Calendar.MONTH</code> 从 0 开始（0 表示 1 月），显示时要加 1；<code>DatePickerDialog</code> 回调中的月份也是从 0 开始。</li>
+<li>金额随数量实时变化（TextWatcher）；日期选择器禁止选择过去的日期；接口端还会再校验一次。</li>
+</ul>
+<div class="ex"><span class="h">练习 8-2　服务详情页</span>
+<p>点击列表项先进入“服务详情页”（大图、名称、分类、时长、价格、介绍），详情页底部有“立即预约”按钮再弹出预约对话框。要求：用 Intent 传 serviceId，详情页自己调用接口取数据（提示：可以在接口中增加 <code>GET /api/services/detail?id=</code>，或调用列表接口后按 id 查找）。</p></div>
+
+<h2 id="s10"><span class="sec">10</span>我的订单</h2>
+<span class="fname">res/layout/item_order.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+
+        &lt;TextView
+            android:id="@+id/tvService"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="17sp"
+            android:textStyle="bold" /&gt;
+
+        &lt;TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold" /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;TextView
+        android:id="@+id/tvOrderNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/danger" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">OrderListActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.app.AlertDialog;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class OrderListActivity extends AppCompatActivity {
+
+    private static final String[] STATUS = {"待支付", "已支付", "已完成", "已取消"};
+    private static final int[] STATUS_COLOR = {Color.rgb(230, 145, 0), Color.rgb(31, 78, 121), Color.rgb(46, 125, 50), Color.GRAY};
+
+    private final List&lt;JSONObject&gt; orders = new ArrayList&lt;&gt;();
+    private BaseAdapter adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_order_list);
+        setTitle("我的订单");
+
+        ListView lv = findViewById(R.id.lvOrders);
+        lv.setEmptyView(findViewById(R.id.tvEmpty));
+        adapter = new BaseAdapter() {      // 简单列表可以直接写匿名适配器
+            @Override public int getCount() { return orders.size(); }
+            @Override public Object getItem(int p) { return orders.get(p); }
+            @Override public long getItemId(int p) { return p; }
+
+            @Override
+            public View getView(int p, View cv, ViewGroup parent) {
+                if (cv == null) cv = getLayoutInflater().inflate(R.layout.item_order, parent, false);
+                JSONObject o = orders.get(p);
+                int st = o.optInt("status");
+                ((TextView) cv.findViewById(R.id.tvService)).setText(o.optString("serviceName") + " × " + o.optInt("quantity"));
+                ((TextView) cv.findViewById(R.id.tvOrderNo)).setText("订单号：" + o.optString("orderNo"));
+                ((TextView) cv.findViewById(R.id.tvTime)).setText("预约时间：" + o.optString("appointmentTime"));
+                ((TextView) cv.findViewById(R.id.tvAmount)).setText(String.format(Locale.CHINA, "¥%.2f", o.optDouble("amount")));
+                TextView tvStatus = cv.findViewById(R.id.tvStatus);
+                tvStatus.setText(st &gt;= 0 &amp;&amp; st &lt; STATUS.length ? STATUS[st] : "未知");
+                tvStatus.setTextColor(st &gt;= 0 &amp;&amp; st &lt; STATUS.length ? STATUS_COLOR[st] : Color.BLACK);
+                return cv;
+            }
+        };
+        lv.setAdapter(adapter);
+
+        // 长按取消订单：只有待支付、已支付可以取消
+        lv.setOnItemLongClickListener((parent, view, position, id) -&gt; {
+            final JSONObject o = orders.get(position);
+            int st = o.optInt("status");
+            if (st != 0 &amp;&amp; st != 1) {
+                Toast.makeText(this, "该订单" + STATUS[st] + "，不能取消", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+            new AlertDialog.Builder(this)
+                    .setMessage("确定取消订单 " + o.optString("orderNo") + " 吗？")
+                    .setPositiveButton("确定取消", (d, w) -&gt; cancel(o.optInt("orderId")))
+                    .setNegativeButton("再想想", null)
+                    .show();
+            return true;
+        });
+    }
+
+    @Override
+    protected void onResume() {        // 每次回到本页都刷新（例如刚下完单回来）
+        super.onResume();
+        load();
+    }
+
+    private void load() {
+        ApiClient.get("/api/orders?customerId=" + Prefs.customerId(this), result -&gt; {
+            orders.clear();
+            JSONArray arr = result.optJSONArray("data");
+            for (int i = 0; arr != null &amp;&amp; i &lt; arr.length(); i++) orders.add(arr.optJSONObject(i));
+            adapter.notifyDataSetChanged();
+            if (!result.optBoolean("success")) Toast.makeText(this, result.optString("message"), Toast.LENGTH_SHORT).show();
+        });
+    }
+
+    private void cancel(int orderId) {
+        JSONObject body = new JSONObject();
+        try {
+            body.put("orderId", orderId);
+            body.put("customerId", Prefs.customerId(this));
+        } catch (Exception ignored) { }
+        ApiClient.post("/api/orders/cancel", body, result -&gt; {
+            Toast.makeText(this, result.optBoolean("success") ? "已取消" : result.optString("message"), Toast.LENGTH_SHORT).show();
+            load();
+        });
+    }
+}</code></pre>
+<p>两个值得模仿的细节：数据在 <code>onResume</code> 中加载，所以从别的页面返回时列表自动刷新；状态用不同颜色显示，并在页面顶部用文字说明操作方式。</p>
+
+<h2 id="s11"><span class="sec">11</span>可视化统计：自己画折线图</h2>
+<p>能力目录中有“可视化统计”。赛场如果不能下载第三方图表库，就只能自己画。自定义 View 的核心只有一个方法 <code>onDraw(Canvas)</code>：用 <code>drawLine</code> 画线、<code>drawCircle</code> 画点、<code>drawText</code> 写字。关键是把“数据值”换算成“屏幕坐标”：</p>
+<pre><code>y 坐标 = 底边 - (值 - 最小值) / (最大值 - 最小值) × 绘图区高度
+x 坐标 = 左边 + 间距 × 序号</code></pre>
+<p>屏幕坐标的原点在<strong>左上角</strong>，y 向下增大，所以数值越大，y 越小，要用“底边减去”。</p>
+<span class="fname">HealthChartView.java</span><pre><code>package com.example.smartcare;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.AttributeSet;
+import android.view.View;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 自绘折线图：不依赖任何第三方图表库。
+ * 支持 1 条或 2 条折线（血压有收缩压、舒张压两条），超过警戒值的点画成红色。
+ */
+public class HealthChartView extends View {
+
+    private final List&lt;String&gt; labels = new ArrayList&lt;&gt;();
+    private final List&lt;Float&gt; values1 = new ArrayList&lt;&gt;();
+    private final List&lt;Float&gt; values2 = new ArrayList&lt;&gt;();
+    private String name1 = "", name2 = "";
+    private float warn = Float.MAX_VALUE;     // 警戒值，超过显示红点
+
+    private final Paint axis = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint line = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint text = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint dot = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    public HealthChartView(Context context, AttributeSet attrs) {   // 在 XML 中使用必须有这个构造函数
+        super(context, attrs);
+        float dp = getResources().getDisplayMetrics().density;
+        axis.setColor(Color.GRAY);
+        axis.setStrokeWidth(1 * dp);
+        line.setStrokeWidth(2 * dp);
+        line.setStyle(Paint.Style.STROKE);
+        text.setColor(Color.DKGRAY);
+        text.setTextSize(11 * dp);
+    }
+
+    /** values2 可以传 null（只有一条线） */
+    public void setData(List&lt;String&gt; labels, List&lt;Float&gt; values1, String name1,
+                        List&lt;Float&gt; values2, String name2, float warn) {
+        this.labels.clear(); this.labels.addAll(labels);
+        this.values1.clear(); this.values1.addAll(values1);
+        this.values2.clear(); if (values2 != null) this.values2.addAll(values2);
+        this.name1 = name1; this.name2 = name2 == null ? "" : name2;
+        this.warn = warn;
+        invalidate();          // 请求重绘，系统随后会调用 onDraw
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        float dp = getResources().getDisplayMetrics().density;
+        float left = 40 * dp, right = getWidth() - 16 * dp, top = 30 * dp, bottom = getHeight() - 30 * dp;
+
+        if (values1.isEmpty()) {
+            canvas.drawText("暂无数据", getWidth() / 2f - 24 * dp, getHeight() / 2f, text);
+            return;
+        }
+        // 1. 计算纵轴范围（上下各留 10% 空白）
+        float max = -Float.MAX_VALUE, min = Float.MAX_VALUE;   // 注意不要用 Float.MIN_VALUE，它是最小的正数
+        for (float v : values1) { max = Math.max(max, v); min = Math.min(min, v); }
+        for (float v : values2) { max = Math.max(max, v); min = Math.min(min, v); }
+        float pad = (max - min) * 0.1f + 1;
+        max += pad; min -= pad;
+
+        // 2. 坐标轴与纵轴刻度
+        canvas.drawLine(left, top, left, bottom, axis);
+        canvas.drawLine(left, bottom, right, bottom, axis);
+        for (int i = 0; i &lt;= 4; i++) {
+            float v = min + (max - min) * i / 4;
+            float y = bottom - (bottom - top) * i / 4;
+            canvas.drawText(String.valueOf(Math.round(v)), 4 * dp, y + 4 * dp, text);
+        }
+        // 3. 横轴标签
+        int n = values1.size();
+        float step = n &gt; 1 ? (right - left - 20 * dp) / (n - 1) : 0;
+        for (int i = 0; i &lt; n; i++) {
+            float x = left + 10 * dp + step * i;
+            canvas.drawText(labels.get(i), x - 14 * dp, bottom + 16 * dp, text);
+        }
+        // 4. 折线
+        drawSeries(canvas, values1, Color.rgb(31, 78, 121), left, step, top, bottom, min, max, dp);
+        if (!values2.isEmpty()) drawSeries(canvas, values2, Color.rgb(46, 160, 67), left, step, top, bottom, min, max, dp);
+        // 5. 图例
+        drawLegend(canvas, name1, Color.rgb(31, 78, 121), left, dp);
+        if (!values2.isEmpty()) drawLegend(canvas, name2, Color.rgb(46, 160, 67), left + 90 * dp, dp);
+        if (warn != Float.MAX_VALUE) drawLegend(canvas, "超出警戒", Color.RED, left + 180 * dp, dp);
+    }
+
+    private void drawSeries(Canvas c, List&lt;Float&gt; vs, int color, float left, float step,
+                            float top, float bottom, float min, float max, float dp) {
+        line.setColor(color);
+        float px = 0, py = 0;
+        for (int i = 0; i &lt; vs.size(); i++) {
+            float x = left + 10 * dp + step * i;
+            float y = bottom - (vs.get(i) - min) / (max - min) * (bottom - top);
+            if (i &gt; 0) c.drawLine(px, py, x, y, line);
+            dot.setColor(vs.get(i) &gt;= warn ? Color.RED : color);
+            c.drawCircle(x, y, 4 * dp, dot);
+            c.drawText(trim(vs.get(i)), x - 10 * dp, y - 8 * dp, text);     // 在点上方显示数值
+            px = x; py = y;
+        }
+    }
+
+    private void drawLegend(Canvas c, String name, int color, float x, float dp) {
+        dot.setColor(color);
+        c.drawCircle(x + 5 * dp, 12 * dp, 5 * dp, dot);
+        c.drawText(name, x + 14 * dp, 16 * dp, text);
+    }
+
+    private static String trim(float v) {        // 72.0 显示为 72，6.1 保持 6.1
+        return v == Math.round(v) ? String.valueOf(Math.round(v)) : String.valueOf(v);
+    }
+}</code></pre>
+<span class="fname">res/layout/activity_health.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/gap"&gt;
+
+    &lt;RadioGroup
+        android:id="@+id/rgType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"&gt;
+
+        &lt;RadioButton
+            android:id="@+id/rbPressure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:checked="true"
+            android:text="血压" /&gt;
+
+        &lt;RadioButton
+            android:id="@+id/rbSugar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="血糖" /&gt;
+
+        &lt;RadioButton
+            android:id="@+id/rbHeart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="心率" /&gt;
+    &lt;/RadioGroup&gt;
+
+    &lt;!-- 自定义控件在 XML 中要写完整类名 --&gt;
+    &lt;com.example.smartcare.HealthChartView
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginTop="@dimen/gap" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvSummary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap"
+        android:textSize="15sp" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">HealthActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.os.Bundle;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+
+public class HealthActivity extends AppCompatActivity {
+
+    private HealthChartView chart;
+    private TextView tvSummary;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_health);
+        setTitle("健康数据");
+
+        chart = findViewById(R.id.chart);
+        tvSummary = findViewById(R.id.tvSummary);
+        RadioGroup rg = findViewById(R.id.rgType);
+        rg.setOnCheckedChangeListener((g, id) -&gt; load(typeOf(id)));
+        load("血压");
+    }
+
+    private static String typeOf(int checkedId) {
+        if (checkedId == R.id.rbSugar) return "血糖";
+        if (checkedId == R.id.rbHeart) return "心率";
+        return "血压";
+    }
+
+    private void load(final String type) {
+        ApiClient.get("/api/health?customerId=" + Prefs.customerId(this) + "&amp;type=" + ApiClient.enc(type), result -&gt; {
+            List&lt;String&gt; labels = new ArrayList&lt;&gt;();
+            List&lt;Float&gt; v1 = new ArrayList&lt;&gt;(), v2 = new ArrayList&lt;&gt;();
+            JSONArray arr = result.optJSONArray("data");
+            for (int i = 0; arr != null &amp;&amp; i &lt; arr.length(); i++) {
+                JSONObject r = arr.optJSONObject(i);
+                labels.add(r.optString("measuredAt").substring(5, 10));   // "2026-10-01 08:00:00" -&gt; "10-01"
+                v1.add((float) r.optDouble("value1"));
+                if (!r.isNull("value2")) v2.add((float) r.optDouble("value2"));
+            }
+            // 警戒值为练习设定，比赛以题目为准
+            if ("血压".equals(type)) chart.setData(labels, v1, "收缩压", v2, "舒张压", 140f);
+            else if ("血糖".equals(type)) chart.setData(labels, v1, "血糖 mmol/L", null, null, 7.0f);
+            else chart.setData(labels, v1, "心率 次/分", null, null, 100f);
+            tvSummary.setText(summary(v1, "血压".equals(type) ? "收缩压" : type));
+        });
+    }
+
+    private static String summary(List&lt;Float&gt; v, String type) {
+        if (v.isEmpty()) return "暂无" + type + "记录";
+        float max = v.get(0), min = v.get(0), sum = 0;
+        for (float x : v) { max = Math.max(max, x); min = Math.min(min, x); sum += x; }
+        return String.format(Locale.CHINA, "%s 共 %d 次　最高 %.1f　最低 %.1f　平均 %.1f　最近一次 %.1f",
+                type, v.size(), max, min, sum / v.size(), v.get(v.size() - 1));
+    }
+}</code></pre>
+<p>用练习库验证：客户 1（王秀英）的血压有 7 条记录，收缩压最高 145、最低 128；超过 140 的两个点（142、145）应显示为红色。血糖 3 条，其中 7.4 超过 7.0 显示为红色。</p>
+<div class="ex"><span class="h">练习 8-3　柱状图与切换</span>
+<p>① 给 HealthChartView 增加“柱状图”模式（<code>drawRect</code>），页面上加一个开关在折线和柱状之间切换；② 在图表下方增加“近 7 天 / 全部”筛选；③ 点击某个数据点时用 Toast 显示该点的日期和数值（提示：重写 <code>onTouchEvent</code>，找离触点最近的点）。</p></div>
+
+<h2 id="s12"><span class="sec">12</span>传感器与系统功能：紧急求助</h2>
+<p>传感器使用的固定套路：取得 <code>SensorManager</code> → 取得某种传感器（可能为 null，要判断）→ <code>onResume</code> 注册监听、<code>onPause</code> 注销 → 在 <code>onSensorChanged</code> 中处理数据。</p>
+<span class="fname">res/layout/activity_sos.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/gap"&gt;
+
+    &lt;Button
+        android:id="@+id/btnCallFirst"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:backgroundTint="@color/danger"
+        android:text="一键呼叫紧急联系人"
+        android:textColor="#FFFFFF"
+        android:textSize="22sp" /&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap"
+        android:text="摇一摇手机也可以发起呼叫"
+        android:textColor="@color/text_secondary" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvSensor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_secondary" /&gt;
+
+    &lt;TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/gap"
+        android:text="紧急联系人（点击拨号）"
+        android:textStyle="bold" /&gt;
+
+    &lt;ListView
+        android:id="@+id/lvContacts"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" /&gt;
+
+    &lt;TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="暂无紧急联系人"
+        android:textColor="@color/text_secondary" /&gt;
+&lt;/LinearLayout&gt;</code></pre>
+<span class="fname">SosActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/** 紧急求助：联系人列表、一键拨号、摇一摇求助（加速度传感器） */
+public class SosActivity extends AppCompatActivity implements SensorEventListener {
+
+    private static final float SHAKE_THRESHOLD = 15f;   // 练习阈值，静止时加速度约 9.8
+    private SensorManager sensorManager;
+    private Sensor accelerometer;
+    private long lastShake;
+    private boolean dialogShowing;
+    private final List&lt;Map&lt;String, String&gt;&gt; contacts = new ArrayList&lt;&gt;();
+    private SimpleAdapter adapter;
+    private TextView tvSensor;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sos);
+        setTitle("紧急求助");
+
+        tvSensor = findViewById(R.id.tvSensor);
+        ListView lv = findViewById(R.id.lvContacts);
+        lv.setEmptyView(findViewById(R.id.tvEmpty));
+        // SimpleAdapter：用系统自带的两行布局显示“姓名（关系）”和电话
+        adapter = new SimpleAdapter(this, contacts, android.R.layout.simple_list_item_2,
+                new String[]{"title", "phone"}, new int[]{android.R.id.text1, android.R.id.text2});
+        lv.setAdapter(adapter);
+        lv.setOnItemClickListener((p, v, position, id) -&gt; dial(contacts.get(position).get("phone")));
+
+        findViewById(R.id.btnCallFirst).setOnClickListener(v -&gt; {
+            if (contacts.isEmpty()) Toast.makeText(this, "还没有紧急联系人", Toast.LENGTH_SHORT).show();
+            else dial(contacts.get(0).get("phone"));
+        });
+
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        accelerometer = sensorManager == null ? null : sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (accelerometer == null) tvSensor.setText("本设备没有加速度传感器，摇一摇不可用");
+
+        loadContacts();
+    }
+
+    private void loadContacts() {
+        ApiClient.get("/api/contacts?customerId=" + Prefs.customerId(this), result -&gt; {
+            contacts.clear();
+            JSONArray arr = result.optJSONArray("data");
+            for (int i = 0; arr != null &amp;&amp; i &lt; arr.length(); i++) {
+                JSONObject c = arr.optJSONObject(i);
+                Map&lt;String, String&gt; m = new HashMap&lt;&gt;();
+                m.put("title", c.optString("contactName") + "（" + c.optString("relation") + "）");
+                m.put("phone", c.optString("phone"));
+                contacts.add(m);
+            }
+            adapter.notifyDataSetChanged();
+        });
+    }
+
+    /** 打开拨号界面并填好号码。ACTION_DIAL 不需要拨打电话权限，由用户自己按下拨打 */
+    private void dial(String phone) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phone)));
+    }
+
+    // ---------- 传感器：页面可见时注册，离开时注销，否则会一直耗电 ----------
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (accelerometer != null) sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (accelerometer != null) sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent e) {
+        float x = e.values[0], y = e.values[1], z = e.values[2];
+        double g = Math.sqrt(x * x + y * y + z * z);
+        tvSensor.setText(String.format("加速度 x=%.1f y=%.1f z=%.1f　合计 %.1f", x, y, z, g));
+        long now = System.currentTimeMillis();
+        if (g &gt; SHAKE_THRESHOLD &amp;&amp; now - lastShake &gt; 2000 &amp;&amp; !dialogShowing &amp;&amp; !contacts.isEmpty()) {
+            lastShake = now;                 // 2 秒内只触发一次，防止连续弹窗
+            dialogShowing = true;
+            new AlertDialog.Builder(this)
+                    .setTitle("检测到摇一摇")
+                    .setMessage("是否呼叫紧急联系人 " + contacts.get(0).get("title") + "？")
+                    .setPositiveButton("呼叫", (d, w) -&gt; dial(contacts.get(0).get("phone")))
+                    .setNegativeButton("取消", null)
+                    .setOnDismissListener(d -&gt; dialogShowing = false)
+                    .show();
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) { }
+}</code></pre>
+<ul>
+<li>摇一摇判断：三个方向加速度合成的大小超过阈值。静止时约等于重力加速度 9.8，阈值 15 是练习值，真机上可以按手感调整。</li>
+<li>在模拟器中测试：模拟器右侧工具栏 “⋯”（Extended controls）→ Virtual sensors，拖动手机模型或修改加速度数值。</li>
+<li><code>ACTION_DIAL</code> 只是打开拨号界面并填好号码，不需要申请拨打电话权限；如果题目要求“直接拨出”，需要 <code>ACTION_CALL</code> 和运行时申请 <code>CALL_PHONE</code> 权限，复杂得多，没有要求时不要自找麻烦。</li>
+<li>2 秒防抖和“对话框显示中不再弹出”这两个判断，避免一次摇动弹出一串对话框。</li>
+</ul>
+
+<h2 id="s13"><span class="sec">13</span>设备性能参数</h2>
+<span class="fname">res/layout/activity_device_info.xml</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+
+    &lt;LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/page_padding"&gt;
+
+        &lt;Button
+            android:id="@+id/btnRefresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="刷新" /&gt;
+
+        &lt;TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/gap"
+            android:lineSpacingExtra="4dp"
+            android:textIsSelectable="true"
+            android:textSize="15sp" /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/ScrollView&gt;</code></pre>
+<span class="fname">DeviceInfoActivity.java</span><pre><code>package com.example.smartcare;
+
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.os.BatteryManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.StatFs;
+import android.text.format.Formatter;
+import android.util.DisplayMetrics;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+/** 设备性能参数：型号、系统版本、屏幕、内存、存储、电池、传感器数量 */
+public class DeviceInfoActivity extends AppCompatActivity {
+
+    private TextView tvInfo;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_device_info);
+        setTitle("设备信息");
+        tvInfo = findViewById(R.id.tvInfo);
+        findViewById(R.id.btnRefresh).setOnClickListener(v -&gt; refresh());
+        refresh();
+    }
+
+    private void refresh() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("品牌：").append(Build.BRAND).append('\n');
+        sb.append("型号：").append(Build.MODEL).append('\n');
+        sb.append("厂商：").append(Build.MANUFACTURER).append('\n');
+        sb.append("Android 版本：").append(Build.VERSION.RELEASE)
+          .append("（API ").append(Build.VERSION.SDK_INT).append("）\n");
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        sb.append("屏幕：").append(dm.widthPixels).append(" × ").append(dm.heightPixels)
+          .append(" 像素，").append(dm.densityDpi).append(" dpi\n");
+
+        // 内存
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        am.getMemoryInfo(mi);
+        sb.append("内存：可用 ").append(Formatter.formatFileSize(this, mi.availMem))
+          .append(" / 共 ").append(Formatter.formatFileSize(this, mi.totalMem)).append('\n');
+
+        // 内部存储
+        StatFs fs = new StatFs(Environment.getDataDirectory().getPath());
+        sb.append("存储：可用 ").append(Formatter.formatFileSize(this, fs.getAvailableBytes()))
+          .append(" / 共 ").append(Formatter.formatFileSize(this, fs.getTotalBytes())).append('\n');
+
+        // 电池：电量变化是“粘性广播”，传 null 接收者即可立即读到最近一次的值
+        Intent battery = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        if (battery != null) {
+            int level = battery.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = battery.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
+            int status = battery.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
+            boolean charging = status == BatteryManager.BATTERY_STATUS_CHARGING || status == BatteryManager.BATTERY_STATUS_FULL;
+            sb.append("电量：").append(level * 100 / scale).append("%　").append(charging ? "充电中" : "未充电").append('\n');
+        }
+
+        SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sm != null) {
+            sb.append("传感器：共 ").append(sm.getSensorList(Sensor.TYPE_ALL).size()).append(" 个\n");
+            for (Sensor s : sm.getSensorList(Sensor.TYPE_ALL)) sb.append("　· ").append(s.getName()).append('\n');
+        }
+        tvInfo.setText(sb.toString());
+    }
+}</code></pre>
+<div class="ex"><span class="h">练习 8-4　实时刷新与性能曲线</span>
+<p>把设备信息页改为每 2 秒自动刷新一次可用内存和电量（提示：<code>Handler.postDelayed</code> 循环，在 <code>onPause</code> 中 <code>removeCallbacks</code> 停止），并用 HealthChartView 显示最近 20 次的可用内存曲线。</p></div>
+
+<h2 id="s14"><span class="sec">14</span>打包 APK 与交付 Modul2</h2>
+<ol>
+<li>菜单 Build → Build App Bundle(s) / APK(s) → <strong>Build APK(s)</strong>。完成后右下角提示 “locate”，点击打开文件夹。</li>
+<li>调试版 APK 位于 <code>app\build\outputs\apk\debug\app-debug.apk</code>。调试版已经自动签名，可以直接安装到模拟器或手机上。</li>
+<li>验证：把 APK 拖到模拟器窗口即可安装。卸载旧版本后安装一次，从头走一遍主要功能。</li>
+<li>按题目要求整理：样卷要求 Modul2 文件夹包含源码和 APK，压缩为 Modul2.zip。<strong>训练建议</strong>的结构如下（题目另有要求时以题目为准）：</li>
+</ol>
+<pre><code>桌面\Modul2\
+├─ SmartCare\            ← Android 项目源码（可删除 app\build 和 .gradle 文件夹减小体积）
+├─ SmartCare.apk         ← 从 app-debug.apk 复制并改名
+└─ 说明.txt              ← 接口地址、启动方法、端口映射、测试账号（见第 07 章）</code></pre>
+<div class="box warn"><span class="h">易错提醒：APK 用的是旧代码</span>
+<p>改完代码后忘记重新 Build APK，提交的就是旧版本。交付前最后一步永远是：重新 Build APK → 复制到 Modul2 → 在模拟器上卸载重装验证一次。</p></div>
+
+<h2 id="s15"><span class="sec">15</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>90 分钟内从新建项目开始，完成：验证码注册、两种登录、重置密码、首页，全部连通接口（对应样卷 2.1）</li>
+<li>能独立写出 Adapter 并解释 convertView 复用</li>
+<li>能独立写出一个自定义 View 折线图，图例、数值标签、警戒色齐全</li>
+<li>能使用加速度传感器并正确注册 / 注销</li>
+<li>能说出 INTERNET 权限、明文流量、主线程网络限制三者分别会导致什么错误</li>
+<li>能在 5 分钟内打包 APK 并完成 Modul2 交付</li>
+<li>完成练习 8-1 到 8-4</li>
+</ul></div>
+
+<div class="pager"><a href="07-webapi.html"><small>上一章</small>Web API 与接口契约</a><a href="09-uml.html" style="text-align:right"><small>下一章</small>需求分析与 UML 建模</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

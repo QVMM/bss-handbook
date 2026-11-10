@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WinForms 桌面应用（模块 A） · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a class="active" href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>WinForms 桌面应用（模块 A）</span></div>
+<main class="content">
+<p class="kicker">第 06 章 · 学习路径第四站</p>
+<h1>WinForms 桌面应用（模块 A）</h1>
+<p class="lead">这是全书分量最重的一章。我们用 WinForms 做一个完整的“智慧康养平台管理端”：登录与记住密码、注册与校验、用户列表的查询与分页、新增编辑与图片、禁用启用、统计图表。做完它，你就具备了完成模块 A 绝大部分题型的能力。标准版用 6 周，强化版用 3 周。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">为什么是 WinForms</a></li><li><a href="#s2">WinForms 入门：窗体、控件、事件</a></li><li><a href="#s3">项目准备：连接练习库</a></li><li><a href="#s4">登录窗体与“记住密码”</a></li><li><a href="#s5">注册窗体：完整的校验流程</a></li><li><a href="#s6">首页：用户列表、查询与分页</a></li><li><a href="#s7">新增与编辑：一个窗体两种模式</a></li><li><a href="#s8">统计与图表</a></li><li><a href="#s9">更多常见功能的写法</a></li><li><a href="#s10">风格指引与界面规范</a></li><li><a href="#s11">交付：Modul1 文件夹与压缩包</a></li><li><a href="#s12">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>为什么是 WinForms</h2>
+<p>辽宁文件要求模块 A“使用 .NET 开发平台 Visual Studio 开发”，赛场提供 .NET Framework 4.8 及以上。在 .NET Framework 上做 Windows 桌面程序，主要有 WinForms 和 WPF 两种技术。辽宁样卷模块 A 登录界面截图的窗口标题是 <code>FrmLogin</code>，外观就是典型的 WinForms 窗体。WinForms 拖拽控件即可布局，学习曲线最平缓，数据表格控件 <code>DataGridView</code> 和图表控件 <code>Chart</code> 都是 .NET Framework 自带的，<strong>不依赖任何额外下载</strong>。本手册因此选择 WinForms。已经熟练掌握 WPF 的同学可以继续用 WPF，本章的数据访问、校验、分页思路完全通用。</p>
+
+<h2 id="s2"><span class="sec">02</span>WinForms 入门：窗体、控件、事件</h2>
+<h3>三个核心概念</h3>
+<ul>
+<li><strong>窗体（Form）</strong>：一个窗口。每个窗体由三个文件组成：<code>FrmLogin.cs</code>（你写的代码）、<code>FrmLogin.Designer.cs</code>（设计器自动生成，<strong>不要手动改</strong>）、<code>FrmLogin.resx</code>（资源）。</li>
+<li><strong>控件（Control）</strong>：窗体上的按钮、文本框、表格等。从“工具箱”拖到窗体上，在“属性”窗口设置外观。</li>
+<li><strong>事件（Event）</strong>：用户的动作（点击、输入、选择）触发的代码。双击按钮会自动生成它的 <code>Click</code> 事件方法。其他事件：选中控件 → 属性窗口顶部的闪电图标 → 找到事件名双击。</li>
+</ul>
+<h3>常用控件速查</h3>
+<div class="tw"><table>
+<tr><th>控件</th><th>前缀</th><th>用途</th><th>常用属性 / 事件</th></tr>
+<tr><td>Label</td><td>lbl</td><td>显示文字</td><td>Text、Font、ForeColor</td></tr>
+<tr><td>TextBox</td><td>txt</td><td>输入文字</td><td>Text、UseSystemPasswordChar（密码）、ReadOnly、MaxLength、Multiline</td></tr>
+<tr><td>Button</td><td>btn</td><td>按钮</td><td>Text、Click、Enabled、ForeColor</td></tr>
+<tr><td>CheckBox</td><td>chk</td><td>勾选</td><td>Checked、CheckedChanged</td></tr>
+<tr><td>RadioButton</td><td>rdo</td><td>单选（同一容器内互斥）</td><td>Checked</td></tr>
+<tr><td>ComboBox</td><td>cbo</td><td>下拉框</td><td>Items、SelectedIndex、SelectedItem、DropDownStyle、DataSource/DisplayMember/ValueMember、SelectedIndexChanged</td></tr>
+<tr><td>DateTimePicker</td><td>dtp</td><td>日期选择</td><td>Value、Format=Custom、CustomFormat="yyyy-MM-dd"、MinDate、MaxDate</td></tr>
+<tr><td>NumericUpDown</td><td>nud</td><td>数字输入</td><td>Value、Minimum、Maximum</td></tr>
+<tr><td>DataGridView</td><td>dgv</td><td>表格</td><td>DataSource、Columns、CurrentRow、ReadOnly、AllowUserToAddRows、SelectionMode、CellFormatting、CellDoubleClick</td></tr>
+<tr><td>PictureBox</td><td>pic</td><td>图片</td><td>Image、ImageLocation、SizeMode=Zoom</td></tr>
+<tr><td>Panel / GroupBox</td><td>pnl / grp</td><td>容器，分区布局</td><td>Dock、AutoScroll</td></tr>
+<tr><td>FlowLayoutPanel</td><td>flp</td><td>自动排列的容器（做“卡片列表”很方便）</td><td>FlowDirection、AutoScroll、WrapContents</td></tr>
+<tr><td>TabControl</td><td>tab</td><td>选项卡</td><td>TabPages、SelectedIndex</td></tr>
+<tr><td>MenuStrip</td><td>mnu</td><td>菜单栏</td><td>Items、Click</td></tr>
+<tr><td>Timer</td><td>tmr</td><td>定时器（倒计时、刷新）</td><td>Interval（毫秒）、Tick、Start()、Stop()</td></tr>
+<tr><td>Chart</td><td>chart</td><td>图表（工具箱“数据”分组）</td><td>Series、ChartAreas、Legends</td></tr>
+<tr><td>ErrorProvider</td><td>err</td><td>在控件旁显示错误图标</td><td>SetError(控件, 文字)</td></tr>
+<tr><td>LinkLabel</td><td>lnk</td><td>超链接样式文字</td><td>LinkClicked</td></tr>
+</table></div>
+<div class="ex"><span class="h">练习 6-1　热身：BMI 计算器</span>
+<p>新建“Windows 窗体应用(.NET Framework)”项目 <code>WarmUp</code>。窗体上放：身高（cm）和体重（kg）两个文本框、一个“计算”按钮、一个显示结果的标签。点击计算：输入非数字或不在合理范围（身高 50–250、体重 20–300）时用 <code>MessageBox</code> 提示；否则显示“BMI：22.9（正常）”（BMI = 体重 / 身高米数²，保留 1 位；&lt;18.5 偏瘦，18.5–24 正常，≥24 偏胖，练习用划分）。要求所有控件按规范命名，窗体启动时居中（<code>StartPosition = CenterScreen</code>），不能拉伸（<code>FormBorderStyle = FixedSingle</code>，<code>MaximizeBox = False</code>），按回车等于点击计算（窗体 <code>AcceptButton = btnCalc</code>）。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>项目准备：连接练习库</h2>
+<h3>建项目</h3>
+<ol>
+<li>新建“Windows 窗体应用(.NET Framework)”，项目名 <code>SmartCareDesk</code>，框架 4.8。</li>
+<li>删除默认的 <code>Form1</code>（右键 → 删除），稍后新建 <code>FrmLogin</code>。</li>
+<li><strong>添加引用</strong>：解决方案资源管理器 → 项目下的“引用” → 右键“添加引用” → 程序集 → 勾选 <code>System.Configuration</code>（读取 App.config 需要）和 <code>System.Windows.Forms.DataVisualization</code>（图表需要）。</li>
+</ol>
+<div class="box warn"><span class="h">易错提醒</span><p>忘记添加 <code>System.Configuration</code> 引用时，<code>ConfigurationManager</code> 下面会出现红色波浪线，提示“当前上下文中不存在名称”。这不是代码写错，而是少了引用。</p></div>
+<h3>连接字符串</h3>
+<p>打开项目中的 <code>App.config</code>，在 <code>&lt;configuration&gt;</code> 内加入 <code>connectionStrings</code> 节：</p>
+<span class="fname">App.config</span><pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;configuration&gt;
+  &lt;connectionStrings&gt;
+    &lt;!-- Data Source：默认实例写 . ；Express 版写 .\SQLEXPRESS ；赛场以实际实例名为准 --&gt;
+    &lt;add name="SmartCare"
+         connectionString="Data Source=.;Initial Catalog=SmartCare;Integrated Security=True"
+         providerName="System.Data.SqlClient" /&gt;
+  &lt;/connectionStrings&gt;
+  &lt;startup&gt;
+    &lt;supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.8" /&gt;
+  &lt;/startup&gt;
+&lt;/configuration&gt;</code></pre>
+<div class="tw"><table>
+<tr><th>情况</th><th>连接字符串</th></tr>
+<tr><td>默认实例 + Windows 身份验证</td><td><code>Data Source=.;Initial Catalog=SmartCare;Integrated Security=True</code></td></tr>
+<tr><td>Express 命名实例</td><td><code>Data Source=.\SQLEXPRESS;Initial Catalog=SmartCare;Integrated Security=True</code></td></tr>
+<tr><td>SQL 身份验证（sa）</td><td><code>Data Source=.;Initial Catalog=SmartCare;User ID=sa;Password=你的密码</code></td></tr>
+</table></div>
+<p>连接字符串放在 App.config 里而不是写死在代码中，好处是：赛场实例名和你家里不一样时，只改这一处。程序编译后，App.config 会变成 <code>bin\Debug\SmartCareDesk.exe.config</code>，裁判换机器运行时也只需改这个文件。</p>
+<h3>数据访问帮助类 DbHelper</h3>
+<p>新建类文件 <code>DbHelper.cs</code>。它提供三个方法：查询（返回 DataTable）、执行增删改（返回影响行数）、取单个值。<strong>所有 SQL 都用参数（@名字）传值，绝不拼接用户输入。</strong></p>
+<span class="fname">DbHelper.cs</span><pre><code>using System;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+
+namespace SmartCareDesk
+{
+    /// &lt;summary&gt;
+    /// 数据访问帮助类：所有 SQL 都通过这里执行，统一使用参数化查询。
+    /// &lt;/summary&gt;
+    public static class DbHelper
+    {
+        // 连接字符串写在 App.config 中，名字叫 SmartCare
+        private static readonly string ConnStr =
+            ConfigurationManager.ConnectionStrings["SmartCare"].ConnectionString;
+
+        /// &lt;summary&gt;执行查询，返回一张 DataTable。&lt;/summary&gt;
+        public static DataTable Query(string sql, params SqlParameter[] ps)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (ps != null) cmd.Parameters.AddRange(ps);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);              // Fill 会自动打开和关闭连接
+                return dt;
+            }
+        }
+
+        /// &lt;summary&gt;执行增删改，返回受影响的行数。&lt;/summary&gt;
+        public static int Execute(string sql, params SqlParameter[] ps)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (ps != null) cmd.Parameters.AddRange(ps);
+                conn.Open();
+                return cmd.ExecuteNonQuery();
+            }
+        }
+
+        /// &lt;summary&gt;执行查询，返回第一行第一列（如 COUNT(*)、SCOPE_IDENTITY()）。&lt;/summary&gt;
+        public static object Scalar(string sql, params SqlParameter[] ps)
+        {
+            using (SqlConnection conn = new SqlConnection(ConnStr))
+            using (SqlCommand cmd = new SqlCommand(sql, conn))
+            {
+                if (ps != null) cmd.Parameters.AddRange(ps);
+                conn.Open();
+                object v = cmd.ExecuteScalar();
+                return v == DBNull.Value ? null : v;
+            }
+        }
+    }
+}</code></pre>
+<div class="box warn"><span class="h">易错提醒：为什么一定要参数化</span>
+<p>如果写成 <code>"... WHERE UserName = '" + txtUserName.Text + "'"</code>，用户名里只要有一个单引号（例如 <code>O'Neil</code>）SQL 就会报错；更严重的是，输入 <code>' OR '1'='1</code> 可以不用密码直接登录（SQL 注入）。裁判可能会专门测试这种输入，评价分里的“安全”也会关注这一点。</p></div>
+<div class="box warn"><span class="h">易错提醒：SqlParameter 的数字 0 陷阱</span>
+<p><code>new SqlParameter("@s", 0)</code> 中的 <code>0</code> 会被编译器当成 <code>SqlDbType</code> 枚举值，而不是参数值，结果参数没有值，执行报错。传整数时统一写成 <code>new SqlParameter("@s", SqlDbType.Int) { Value = 0 }</code>，本章代码都采用这种写法。</p></div>
+<p>再新建 <code>Validator.cs</code>（直接用第 04 章练习 4-7 的成果）和 <code>Session.cs</code>（保存当前登录者）：</p>
+<span class="fname">Validator.cs</span><pre><code>using System.Text.RegularExpressions;
+
+namespace SmartCareDesk
+{
+    /// &lt;summary&gt;输入校验规则集中放在这里，桌面端各窗体共用。&lt;/summary&gt;
+    public static class Validator
+    {
+        public static bool IsPhone(string s)    { return Regex.IsMatch(s ?? "", @"^\d{11}$"); }
+        public static bool IsPassword(string s) { return Regex.IsMatch(s ?? "", @"^(?=.*[A-Za-z])(?=.*\d).{8,}$"); }
+
+        /// &lt;summary&gt;校验注册信息，返回第一条错误；全部通过返回空字符串。&lt;/summary&gt;
+        public static string ValidateRegister(string user, string pwd, string pwd2, string phone)
+        {
+            if (string.IsNullOrWhiteSpace(user)) return "用户名不能为空";
+            if (!IsPassword(pwd)) return "密码至少 8 位，且必须同时包含字母和数字";
+            if (pwd != pwd2) return "两次输入的密码不一致";
+            if (!IsPhone(phone)) return "联系电话必须是 11 位数字";
+            return "";
+        }
+    }
+}</code></pre>
+<span class="fname">Session.cs</span><pre><code>namespace SmartCareDesk
+{
+    /// &lt;summary&gt;当前登录的管理者信息，登录成功时赋值。&lt;/summary&gt;
+    public static class Session
+    {
+        public static int ManagerId { get; set; }
+        public static string UserName { get; set; }
+    }
+}</code></pre>
+
+<h2 id="s4"><span class="sec">04</span>登录窗体与“记住密码”</h2>
+<h3>界面布局</h3>
+<p>添加 → 窗体(Windows 窗体)，命名 <code>FrmLogin</code>。按下表放置控件（位置参考辽宁样卷 1.1 的截图：Logo 与标题居中，下方用户名、密码、记住密码、登录按钮、注册链接）：</p>
+<div class="tw"><table>
+<tr><th>控件</th><th>Name</th><th>关键属性</th></tr>
+<tr><td>PictureBox</td><td>picLogo</td><td>Image 选择题目提供的 Logo；SizeMode = Zoom</td></tr>
+<tr><td>Label</td><td>lblTitle</td><td>Text = 智慧康养平台；字号按风格指引</td></tr>
+<tr><td>TextBox</td><td>txtUserName</td><td>MaxLength = 50</td></tr>
+<tr><td>TextBox</td><td>txtPassword</td><td>UseSystemPasswordChar = True</td></tr>
+<tr><td>CheckBox</td><td>chkRemember</td><td>Text = 记住密码</td></tr>
+<tr><td>Button</td><td>btnLogin</td><td>Text = 登录；窗体的 AcceptButton 设为它</td></tr>
+<tr><td>LinkLabel</td><td>lnkRegister</td><td>Text = 立即注册</td></tr>
+</table></div>
+<p>窗体属性：<code>Text</code> 写成有意义的标题（如“智慧康养平台 - 登录”）、<code>StartPosition = CenterScreen</code>、<code>FormBorderStyle = FixedSingle</code>、<code>MaximizeBox = False</code>。</p>
+<h3>用“设置”保存记住的密码</h3>
+<p>“记住密码”需要把用户名和密码保存在本机，下次启动时读出。最简单的办法是项目自带的“设置”：</p>
+<ol>
+<li>解决方案资源管理器 → 项目 → Properties → 双击 <code>Settings.settings</code>（没有就右键项目 → 属性 → 设置 → 点击创建）。</li>
+<li>添加三行，范围都选“用户”：<code>SavedUser</code>（string）、<code>SavedPwd</code>（string）、<code>RememberPwd</code>（bool，值 False）。</li>
+<li>代码中用 <code>Properties.Settings.Default.SavedUser</code> 读写，修改后调用 <code>Properties.Settings.Default.Save()</code> 保存。</li>
+</ol>
+<p>“用户”范围的设置保存在当前 Windows 用户的配置目录中，重新编译不会丢失。</p>
+<h3>代码</h3>
+<span class="fname">FrmLogin.cs</span><pre><code>using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
+namespace SmartCareDesk
+{
+    public partial class FrmLogin : Form
+    {
+        public FrmLogin()
+        {
+            InitializeComponent();
+        }
+
+        // 窗体加载：如果上次勾选了“记住密码”，自动填入
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            FillRemembered();
+        }
+
+        private void FillRemembered()
+        {
+            var st = Properties.Settings.Default;
+            chkRemember.Checked = st.RememberPwd;
+            txtUserName.Text = st.RememberPwd ? st.SavedUser : "";
+            txtPassword.Text = st.RememberPwd ? st.SavedPwd : "";
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string user = txtUserName.Text.Trim();
+            string pwd = txtPassword.Text;
+            if (user == "" || pwd == "")
+            {
+                MessageBox.Show("请输入用户名和密码", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DataTable dt;
+            try
+            {
+                dt = DbHelper.Query(
+                    "SELECT ManagerId, UserName FROM Manager WHERE UserName = @u AND Password = @p",
+                    new SqlParameter("@u", user), new SqlParameter("@p", pwd));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("无法连接数据库：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("用户名或密码错误", "登录失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtPassword.Clear();
+                txtPassword.Focus();
+                return;
+            }
+
+            Session.ManagerId = Convert.ToInt32(dt.Rows[0]["ManagerId"]);
+            Session.UserName = dt.Rows[0]["UserName"].ToString();
+
+            // 记住密码：勾选则保存，不勾选则清除
+            var st = Properties.Settings.Default;
+            st.RememberPwd = chkRemember.Checked;
+            st.SavedUser = chkRemember.Checked ? user : "";
+            st.SavedPwd = chkRemember.Checked ? pwd : "";
+            st.Save();
+
+            // 打开首页（用户管理），隐藏登录窗
+            FrmUserManage main = new FrmUserManage();
+            main.FormClosed += (s, args) =&gt;
+            {
+                if (main.IsLogout) { FillRemembered(); this.Show(); }
+                else this.Close();          // 关闭登录窗 = 退出程序
+            };
+            main.Show();
+            this.Hide();
+        }
+
+        private void lnkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            using (FrmRegister f = new FrmRegister())
+            {
+                if (f.ShowDialog(this) == DialogResult.OK)
+                {
+                    txtUserName.Text = f.RegisteredUserName;   // 注册成功后自动填入用户名
+                    txtPassword.Clear();
+                    txtPassword.Focus();
+                }
+            }
+        }
+    }
+}</code></pre>
+<p>记得把 <code>FrmLogin_Load</code> 绑定到窗体的 <code>Load</code> 事件（双击窗体空白处即可自动生成并绑定）。最后在 <code>Program.cs</code> 中把启动窗体改为 <code>FrmLogin</code>：</p>
+<span class="fname">Program.cs</span><pre><code>using System;
+using System.Windows.Forms;
+namespace SmartCareDesk
+{
+    internal static class Program
+    {
+        [STAThread]
+        static void Main()
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FrmLogin());
+        }
+    }
+}</code></pre>
+<div class="box tip"><span class="h">训练建议：主窗体与登录窗体的关系</span>
+<p><code>Application.Run(new FrmLogin())</code> 让登录窗体成为“主窗体”，它关闭程序就退出。所以登录成功后我们只是 <code>Hide()</code> 登录窗，而不是关闭它；首页关闭时再根据“注销”还是“退出”决定是重新显示登录窗，还是关闭它结束程序。这是比赛中最常用、最不容易出错的模式。</p></div>
+<div class="ex"><span class="h">练习 6-2　登录自测</span>
+<p>导入练习库后运行程序，逐项测试并记录结果：① 用户名或密码为空；② <code>admin</code> + 错误密码；③ <code>admin</code> + <code>admin123</code> 不勾选记住密码，登录后注销，看登录框是否清空；④ 勾选记住密码登录，关闭程序再打开，看是否自动填入；⑤ 用户名输入 <code>' OR '1'='1</code>、密码随便输，确认不能登录；⑥ 在 App.config 中把数据库名改错，看是否给出友好提示而不是崩溃。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>注册窗体：完整的校验流程</h2>
+<div class="tw"><table>
+<tr><th>控件</th><th>Name</th><th>说明</th></tr>
+<tr><td>TextBox</td><td>txtUserName</td><td>用户名</td></tr>
+<tr><td>TextBox</td><td>txtPassword、txtPassword2</td><td>密码、确认密码；UseSystemPasswordChar = True</td></tr>
+<tr><td>TextBox</td><td>txtPhone</td><td>联系电话；MaxLength = 11</td></tr>
+<tr><td>Label</td><td>lblRule</td><td>灰色小字提示规则：“密码至少 8 位，需包含字母和数字”</td></tr>
+<tr><td>Button</td><td>btnSubmit、btnCancel</td><td>btnCancel 的 ForeColor 设为红色（不少题目要求 Cancel/Delete 为红色）</td></tr>
+</table></div>
+<span class="fname">FrmRegister.cs</span><pre><code>using System;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+
+namespace SmartCareDesk
+{
+    public partial class FrmRegister : Form
+    {
+        public string RegisteredUserName { get; private set; }
+
+        public FrmRegister()
+        {
+            InitializeComponent();
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string user = txtUserName.Text.Trim();
+            string pwd = txtPassword.Text;
+            string pwd2 = txtPassword2.Text;
+            string phone = txtPhone.Text.Trim();
+
+            // 1. 格式校验
+            string err = Validator.ValidateRegister(user, pwd, pwd2, phone);
+            if (err != "")
+            {
+                MessageBox.Show(err, "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                // 2. 唯一性校验
+                int exists = Convert.ToInt32(DbHelper.Scalar(
+                    "SELECT COUNT(*) FROM Manager WHERE UserName = @u", new SqlParameter("@u", user)));
+                if (exists &gt; 0)
+                {
+                    MessageBox.Show("用户名已存在，请换一个", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtUserName.Focus();
+                    return;
+                }
+
+                // 3. 写入数据库
+                DbHelper.Execute(
+                    "INSERT INTO Manager (UserName, Password, Phone) VALUES (@u, @p, @ph)",
+                    new SqlParameter("@u", user), new SqlParameter("@p", pwd), new SqlParameter("@ph", phone));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("注册失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("注册成功，请登录", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            RegisteredUserName = user;
+            DialogResult = DialogResult.OK;    // 对话框模式下，设置 DialogResult 会自动关闭窗体
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+    }
+}</code></pre>
+<p>校验顺序是“格式 → 唯一性 → 写入”。先在本地把能判断的都判断完，再访问数据库，既快又能给出最准确的提示。</p>
+<div class="box tip"><span class="h">训练建议：提示信息要“明确”</span>
+<p>辽宁样卷要求“用户名重复、密码不一致、格式错误需给出明确提示”。“输入有误”不算明确；“两次输入的密码不一致”才算。每条提示都要让用户知道<strong>哪里错了、该怎么改</strong>。此外，可以考虑在用户离开输入框时（<code>Leave</code> 事件）就即时校验，并用 <code>ErrorProvider</code> 在输入框旁显示红色图标——这类细节容易在评价分上体现出“高于行业标准”。</p></div>
+<div class="ex"><span class="h">练习 6-3　注册自测表</span>
+<p>为注册功能写一张至少 10 行的测试表（输入数据、预期提示、实际结果），逐条执行。这是你写的第一份“测试用例”，第 10 章会教你规范格式。</p></div>
+
+<h2 id="s6"><span class="sec">06</span>首页：用户列表、查询与分页</h2>
+<p>辽宁样卷写明登录成功后进入“系统首页（用户管理界面）”。用户管理是比赛中最典型的界面：查询条件 + 表格 + 分页 + 新增/编辑/删除按钮。湖北评分表中的“用户管理”就有界面元素、按条件查询、字段显示、每页 10 条、分页按钮、页码跳转、编辑/新增跳转等十余个细项。</p>
+<h3>界面布局</h3>
+<div class="tw"><table>
+<tr><th>区域</th><th>控件（Name）</th></tr>
+<tr><td>顶部</td><td>picLogo、lblTitle、lblWelcome（欢迎，某某）、btnStatistics（统计）、btnLogout（注销）</td></tr>
+<tr><td>查询栏</td><td>txtKeyword（姓名或手机号）、cboStatus（全部/正常/禁用，DropDownStyle = DropDownList）、btnSearch</td></tr>
+<tr><td>表格</td><td>dgvUsers（Anchor 设为上下左右，窗体放大时跟着放大）</td></tr>
+<tr><td>操作栏</td><td>btnAdd（新增）、btnEdit（编辑）、btnToggle（禁用/启用）、lblLegend（图例：浅红色行 = 已禁用）</td></tr>
+<tr><td>分页栏</td><td>btnFirst、btnPrev、btnNext、btnLast、cboPage（跳转）、lblPageInfo（共 N 条，第 x/y 页）</td></tr>
+</table></div>
+<h3>代码</h3>
+<span class="fname">FrmUserManage.cs</span><pre><code>using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace SmartCareDesk
+{
+    public partial class FrmUserManage : Form
+    {
+        private const int PageSize = 10;
+        private int _pageIndex = 1;     // 当前页，从 1 开始
+        private int _pageCount = 1;     // 总页数
+        private bool _loading;          // 正在填充页码下拉框时，忽略它的选择事件
+
+        /// &lt;summary&gt;点击“注销”时为 true，登录窗据此决定是重新显示还是退出程序。&lt;/summary&gt;
+        public bool IsLogout { get; private set; }
+
+        public FrmUserManage()
+        {
+            InitializeComponent();
+        }
+
+        private void FrmUserManage_Load(object sender, EventArgs e)
+        {
+            lblWelcome.Text = "欢迎，" + Session.UserName;
+            cboStatus.Items.AddRange(new object[] { "全部", "正常", "禁用" });
+            cboStatus.SelectedIndex = 0;
+
+            dgvUsers.ReadOnly = true;
+            dgvUsers.AllowUserToAddRows = false;      // 去掉最后一行空白行
+            dgvUsers.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvUsers.MultiSelect = false;
+            dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvUsers.RowHeadersVisible = false;
+
+            LoadData();
+        }
+
+        /// &lt;summary&gt;按当前查询条件和页码加载数据。&lt;/summary&gt;
+        private void LoadData()
+        {
+            // 1. 拼接查询条件（只拼“条件结构”，值一律用参数）
+            string where = " WHERE 1 = 1";
+            List&lt;SqlParameter&gt; ps = new List&lt;SqlParameter&gt;();
+            string kw = txtKeyword.Text.Trim();
+            if (kw != "")
+            {
+                where += " AND (RealName LIKE @kw OR Phone LIKE @kw)";
+                ps.Add(new SqlParameter("@kw", "%" + kw + "%"));
+            }
+            if (cboStatus.SelectedIndex == 1) where += " AND Status = 1";
+            if (cboStatus.SelectedIndex == 2) where += " AND Status = 0";
+
+            try
+            {
+                // 2. 先查总数，算总页数
+                int total = Convert.ToInt32(DbHelper.Scalar("SELECT COUNT(*) FROM Customer" + where, CloneParams(ps)));
+                _pageCount = Math.Max(1, (total + PageSize - 1) / PageSize);
+                if (_pageIndex &gt; _pageCount) _pageIndex = _pageCount;
+                if (_pageIndex &lt; 1) _pageIndex = 1;
+
+                // 3. 再查当前页
+                string sql = @"SELECT CustomerId, ISNULL(RealName, N'') AS RealName, ISNULL(Gender, N'') AS Gender,
+                                      BirthDate, Phone, ISNULL(Address, N'') AS Address,
+                                      CASE Status WHEN 1 THEN N'正常' ELSE N'禁用' END AS StatusText, CreatedAt
+                               FROM Customer" + where + @"
+                               ORDER BY CustomerId
+                               OFFSET @skip ROWS FETCH NEXT @take ROWS ONLY";
+                List&lt;SqlParameter&gt; ps2 = new List&lt;SqlParameter&gt;(CloneParams(ps));
+                ps2.Add(new SqlParameter("@skip", SqlDbType.Int) { Value = (_pageIndex - 1) * PageSize });
+                ps2.Add(new SqlParameter("@take", SqlDbType.Int) { Value = PageSize });
+                dgvUsers.DataSource = DbHelper.Query(sql, ps2.ToArray());
+
+                SetupColumns();
+                lblPageInfo.Text = string.Format("共 {0} 条，第 {1}/{2} 页", total, _pageIndex, _pageCount);
+                FillPageCombo();
+                UpdatePagerButtons();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("加载数据失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // SqlParameter 对象不能同时属于两个命令，所以每次执行前复制一份
+        private static SqlParameter[] CloneParams(List&lt;SqlParameter&gt; src)
+        {
+            List&lt;SqlParameter&gt; list = new List&lt;SqlParameter&gt;();
+            foreach (SqlParameter p in src) list.Add(new SqlParameter(p.ParameterName, p.Value));
+            return list.ToArray();
+        }
+
+        private void SetupColumns()
+        {
+            dgvUsers.Columns["CustomerId"].HeaderText = "编号";
+            dgvUsers.Columns["RealName"].HeaderText = "姓名";
+            dgvUsers.Columns["Gender"].HeaderText = "性别";
+            dgvUsers.Columns["BirthDate"].HeaderText = "出生日期";
+            dgvUsers.Columns["BirthDate"].DefaultCellStyle.Format = "yyyy-MM-dd";
+            dgvUsers.Columns["Phone"].HeaderText = "手机号";
+            dgvUsers.Columns["Address"].HeaderText = "地址";
+            dgvUsers.Columns["StatusText"].HeaderText = "状态";
+            dgvUsers.Columns["CreatedAt"].HeaderText = "注册时间";
+            dgvUsers.Columns["CreatedAt"].DefaultCellStyle.Format = "yyyy-MM-dd HH:mm";
+        }
+
+        private void FillPageCombo()
+        {
+            _loading = true;
+            cboPage.Items.Clear();
+            for (int i = 1; i &lt;= _pageCount; i++) cboPage.Items.Add(i);
+            cboPage.SelectedIndex = _pageIndex - 1;
+            _loading = false;
+        }
+
+        private void UpdatePagerButtons()
+        {
+            btnFirst.Enabled = btnPrev.Enabled = _pageIndex &gt; 1;
+            btnNext.Enabled = btnLast.Enabled = _pageIndex &lt; _pageCount;
+        }
+
+        // 被禁用的客户整行显示为浅红色（界面上要有图例说明颜色含义）
+        private void dgvUsers_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.RowIndex &lt; 0) return;
+            DataGridViewRow row = dgvUsers.Rows[e.RowIndex];
+            if (Convert.ToString(row.Cells["StatusText"].Value) == "禁用")
+                e.CellStyle.BackColor = Color.MistyRose;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e) { _pageIndex = 1; LoadData(); }
+        private void btnFirst_Click(object sender, EventArgs e)  { _pageIndex = 1; LoadData(); }
+        private void btnPrev_Click(object sender, EventArgs e)   { _pageIndex--; LoadData(); }
+        private void btnNext_Click(object sender, EventArgs e)   { _pageIndex++; LoadData(); }
+        private void btnLast_Click(object sender, EventArgs e)   { _pageIndex = _pageCount; LoadData(); }
+
+        private void cboPage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_loading || cboPage.SelectedIndex &lt; 0) return;
+            _pageIndex = cboPage.SelectedIndex + 1;
+            LoadData();
+        }
+
+        /// &lt;summary&gt;取当前选中行的客户编号；没有选中返回 0。&lt;/summary&gt;
+        private int SelectedId()
+        {
+            if (dgvUsers.CurrentRow == null) return 0;
+            return Convert.ToInt32(dgvUsers.CurrentRow.Cells["CustomerId"].Value);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            using (FrmUserEdit f = new FrmUserEdit(0))
+            {
+                if (f.ShowDialog(this) == DialogResult.OK) LoadData();
+            }
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            int id = SelectedId();
+            if (id == 0) { MessageBox.Show("请先选择一位客户", "提示"); return; }
+            using (FrmUserEdit f = new FrmUserEdit(id))
+            {
+                if (f.ShowDialog(this) == DialogResult.OK) LoadData();
+            }
+        }
+
+        // 双击行 = 编辑，符合用户习惯
+        private void dgvUsers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex &gt;= 0) btnEdit_Click(sender, EventArgs.Empty);
+        }
+
+        // 禁用 / 启用（软删除）
+        private void btnToggle_Click(object sender, EventArgs e)
+        {
+            int id = SelectedId();
+            if (id == 0) { MessageBox.Show("请先选择一位客户", "提示"); return; }
+            string name = Convert.ToString(dgvUsers.CurrentRow.Cells["RealName"].Value);
+            bool disabled = Convert.ToString(dgvUsers.CurrentRow.Cells["StatusText"].Value) == "禁用";
+            string action = disabled ? "启用" : "禁用";
+            if (MessageBox.Show("确定要" + action + "客户“" + name + "”吗？", "确认",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+            DbHelper.Execute("UPDATE Customer SET Status = @s WHERE CustomerId = @id",
+                new SqlParameter("@s", SqlDbType.TinyInt) { Value = disabled ? 1 : 0 },
+                new SqlParameter("@id", SqlDbType.Int) { Value = id });
+            LoadData();
+        }
+
+        private void btnStatistics_Click(object sender, EventArgs e)
+        {
+            using (FrmStatistics f = new FrmStatistics()) f.ShowDialog(this);
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定要注销并返回登录界面吗？", "确认", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes) return;
+            IsLogout = true;
+            Close();
+        }
+
+        // 点右上角关闭：确认是否退出
+        private void FrmUserManage_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (IsLogout) return;
+            if (MessageBox.Show("确定要退出系统吗？", "确认", MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) != DialogResult.Yes) e.Cancel = true;
+        }
+    }
+}</code></pre>
+<p>需要绑定的事件：窗体 <code>Load</code>、<code>FormClosing</code>；dgvUsers 的 <code>CellFormatting</code>、<code>CellDoubleClick</code>；cboPage 的 <code>SelectedIndexChanged</code>；各按钮的 <code>Click</code>。</p>
+<h3>这段代码覆盖了哪些得分点</h3>
+<ul class="cl">
+<li>模糊查询（姓名或手机号）与状态筛选可以组合</li>
+<li>每页 10 条；不足 10 条只显示实际行数，没有空白行（<code>AllowUserToAddRows = false</code>）</li>
+<li>首页、上一页、下一页、尾页、页码下拉跳转；在第一页时“上一页”不可点</li>
+<li>显示“共 N 条，第 x/y 页”</li>
+<li>日期按 yyyy-MM-dd 显示</li>
+<li>禁用的客户整行变色，并有图例说明颜色含义</li>
+<li>数据超出表格区域时，DataGridView 自动出现滚动条，否则不显示（默认行为即满足题目的滚动条要求，不要把 ScrollBars 设成 None）</li>
+<li>禁用前确认；操作后列表立即刷新</li>
+<li>退出确认；注销返回登录</li>
+</ul>
+<div class="box warn"><span class="h">易错提醒：查询后页码不回到第 1 页</span>
+<p>用户在第 3 页时输入新条件查询，结果只有 1 页，如果页码还停在 3，就会显示空表。代码中 <code>btnSearch_Click</code> 先把 <code>_pageIndex = 1</code>，<code>LoadData</code> 中又把页码限制在 1 到总页数之间，两道保险。</p></div>
+
+<h2 id="s7"><span class="sec">07</span>新增与编辑：一个窗体两种模式</h2>
+<p>新增和编辑的界面几乎一样，用同一个窗体，通过构造函数参数区分：<code>new FrmUserEdit(0)</code> 是新增，<code>new FrmUserEdit(编号)</code> 是编辑。以 <code>ShowDialog</code> 方式打开（模态对话框），保存成功返回 <code>DialogResult.OK</code>，列表据此刷新。</p>
+<h3>图片：默认图片与不锁文件</h3>
+<p>辽宁样卷要求“需要加载图片时，如果没有提供对应图片，显示默认图片 default.jpg”。把题目给的图片和 <code>default.jpg</code> 放到项目的 <code>Images</code> 文件夹，选中这些文件，在属性窗口把“复制到输出目录”设为“如果较新则复制”，它们就会跟着程序出现在 <code>bin\Debug\Images\</code> 下。</p>
+<span class="fname">ImageHelper.cs</span><pre><code>using System.Drawing;
+using System.IO;
+
+namespace SmartCareDesk
+{
+    public static class ImageHelper
+    {
+        /// &lt;summary&gt;
+        /// 从程序目录下的 Images 文件夹加载图片；文件名为空或文件不存在时加载 default.jpg。
+        /// 先读入内存再创建 Image，避免图片文件被程序占用（锁定）。
+        /// &lt;/summary&gt;
+        public static Image Load(string fileName)
+        {
+            string dir = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "Images");
+            string path = string.IsNullOrWhiteSpace(fileName) ? null : Path.Combine(dir, fileName);
+            if (path == null || !File.Exists(path)) path = Path.Combine(dir, "default.jpg");
+            if (!File.Exists(path)) return null;
+            byte[] bytes = File.ReadAllBytes(path);
+            using (MemoryStream ms = new MemoryStream(bytes))
+            {
+                return new Bitmap(Image.FromStream(ms));
+            }
+        }
+    }
+}</code></pre>
+<div class="box warn"><span class="h">易错提醒：Image.FromFile 会锁住文件</span>
+<p>用 <code>Image.FromFile(path)</code> 加载的图片，在程序关闭前文件一直被占用；如果用户接着要替换这张照片，<code>File.Copy</code> 会报“文件正由另一进程使用”。上面的写法先把字节读进内存再创建图片，避免了这个问题。</p></div>
+<h3>编辑窗体代码</h3>
+<p>控件：txtName、cboGender、dtpBirth、txtPhone、txtAddress、picAvatar（SizeMode = Zoom）、btnChoosePhoto、btnSave、btnCancel（红色）。</p>
+<span class="fname">FrmUserEdit.cs</span><pre><code>using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Windows.Forms;
+
+namespace SmartCareDesk
+{
+    public partial class FrmUserEdit : Form
+    {
+        private readonly int _id;          // 0 表示新增，大于 0 表示编辑
+        private string _avatarName;        // 数据库中保存的图片文件名
+        private string _newPhotoPath;      // 本次新选择的图片（尚未复制）
+
+        public FrmUserEdit(int id)
+        {
+            InitializeComponent();
+            _id = id;
+        }
+
+        private void FrmUserEdit_Load(object sender, EventArgs e)
+        {
+            cboGender.DropDownStyle = ComboBoxStyle.DropDownList;   // 只能选，不能乱输
+            cboGender.Items.AddRange(new object[] { "男", "女" });
+            dtpBirth.Format = DateTimePickerFormat.Custom;
+            dtpBirth.CustomFormat = "yyyy-MM-dd";
+            dtpBirth.MaxDate = DateTime.Today;                       // 出生日期不能晚于今天
+
+            if (_id == 0)
+            {
+                Text = "新增客户";
+                picAvatar.Image = ImageHelper.Load(null);
+                return;
+            }
+
+            Text = "编辑客户";
+            txtPhone.ReadOnly = true;     // 手机号是登录账号，编辑时不允许修改
+            DataTable dt = DbHelper.Query("SELECT * FROM Customer WHERE CustomerId = @id",
+                new SqlParameter("@id", SqlDbType.Int) { Value = _id });
+            if (dt.Rows.Count == 0) { MessageBox.Show("该客户不存在"); Close(); return; }
+            DataRow r = dt.Rows[0];
+            txtName.Text = Convert.ToString(r["RealName"]);
+            txtPhone.Text = Convert.ToString(r["Phone"]);
+            txtAddress.Text = Convert.ToString(r["Address"]);
+            cboGender.SelectedItem = Convert.ToString(r["Gender"]);
+            if (r["BirthDate"] != DBNull.Value) dtpBirth.Value = Convert.ToDateTime(r["BirthDate"]);
+            _avatarName = Convert.ToString(r["Avatar"]);
+            picAvatar.Image = ImageHelper.Load(_avatarName);
+        }
+
+        private void btnChoosePhoto_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Filter = "图片文件|*.jpg;*.jpeg;*.png";
+                if (dlg.ShowDialog(this) != DialogResult.OK) return;
+                if (new FileInfo(dlg.FileName).Length &gt; 100 * 1024)
+                {
+                    MessageBox.Show("照片不能超过 100KB", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                _newPhotoPath = dlg.FileName;
+                picAvatar.ImageLocation = _newPhotoPath;   // 先预览
+            }
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            string name = txtName.Text.Trim();
+            string phone = txtPhone.Text.Trim();
+            if (name == "") { MessageBox.Show("请输入姓名"); txtName.Focus(); return; }
+            if (!Validator.IsPhone(phone)) { MessageBox.Show("手机号必须是 11 位数字"); txtPhone.Focus(); return; }
+            if (cboGender.SelectedIndex &lt; 0) { MessageBox.Show("请选择性别"); return; }
+
+            try
+            {
+                if (_id == 0)
+                {
+                    int exists = Convert.ToInt32(DbHelper.Scalar(
+                        "SELECT COUNT(*) FROM Customer WHERE Phone = @ph", new SqlParameter("@ph", phone)));
+                    if (exists &gt; 0) { MessageBox.Show("该手机号已注册"); return; }
+                }
+
+                // 复制新照片到 Images 文件夹，文件名用“手机号_时间戳”避免重名
+                if (_newPhotoPath != null)
+                {
+                    string dir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
+                    Directory.CreateDirectory(dir);
+                    _avatarName = phone + "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + Path.GetExtension(_newPhotoPath);
+                    File.Copy(_newPhotoPath, Path.Combine(dir, _avatarName), true);
+                }
+
+                SqlParameter[] ps =
+                {
+                    new SqlParameter("@name", name),
+                    new SqlParameter("@gender", cboGender.SelectedItem.ToString()),
+                    new SqlParameter("@birth", SqlDbType.Date) { Value = dtpBirth.Value.Date },
+                    new SqlParameter("@addr", txtAddress.Text.Trim()),
+                    new SqlParameter("@avatar", (object)_avatarName ?? DBNull.Value),
+                    new SqlParameter("@phone", phone),
+                    new SqlParameter("@id", SqlDbType.Int) { Value = _id }
+                };
+
+                if (_id == 0)
+                    DbHelper.Execute(@"INSERT INTO Customer (Phone, Password, RealName, Gender, BirthDate, Address, Avatar)
+                                       VALUES (@phone, 'sc' + RIGHT(@phone, 6), @name, @gender, @birth, @addr, @avatar)", ps);
+                else
+                    DbHelper.Execute(@"UPDATE Customer SET RealName = @name, Gender = @gender, BirthDate = @birth,
+                                       Address = @addr, Avatar = @avatar WHERE CustomerId = @id", ps);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("保存失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("保存成功", "提示");
+            DialogResult = DialogResult.OK;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            DialogResult = DialogResult.Cancel;
+        }
+    }
+}</code></pre>
+<p>值得注意的细节：</p>
+<ul>
+<li>性别下拉框设为 <code>DropDownList</code>，只能选不能乱输；出生日期最大值为今天。</li>
+<li>编辑时手机号只读——它是登录账号（湖北样题“Email 不可修改”是同一类要求）。</li>
+<li>照片限制 100KB（湖北样题原有要求），选择后先预览，保存时才复制，并换成不会重名的文件名。</li>
+<li>新增客户时的初始密码规则（“sc”+手机号后 6 位）是本练习自拟的；比赛中按题目规定实现。</li>
+<li>INSERT 和 UPDATE 共用一组参数；SQL 中没用到的参数会被忽略，不影响执行。</li>
+</ul>
+<div class="ex"><span class="h">练习 6-4　服务管理（独立完成）</span>
+<p>仿照用户管理，为 <code>CareService</code> 表做“服务管理”窗体：按名称模糊查询、按分类筛选（分类下拉框从 <code>ServiceCategory</code> 表加载，第一项为“全部”）、每页 10 条分页、新增/编辑（名称必填、价格为非负数且最多两位小数、时长为正整数、可选图片）、上架/下架切换（下架行灰色显示并有图例）、价格列右对齐并显示两位小数。</p>
+<details><summary>提示：下拉框绑定数据表</summary>
+<pre><code>DataTable dt = DbHelper.Query("SELECT 0 AS CategoryId, N'全部' AS CategoryName UNION ALL " +
+                              "SELECT CategoryId, CategoryName FROM ServiceCategory ORDER BY CategoryId");
+cboCategory.DisplayMember = "CategoryName";   // 显示的文字
+cboCategory.ValueMember = "CategoryId";       // 背后的值
+cboCategory.DataSource = dt;
+int cid = Convert.ToInt32(cboCategory.SelectedValue);   // 取值</code></pre>
+<p>价格列格式：<code>dgv.Columns["Price"].DefaultCellStyle.Format = "0.00";</code> <code>dgv.Columns["Price"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;</code></p></details></div>
+<div class="ex"><span class="h">练习 6-5　订单管理与投诉回复（独立完成）</span>
+<p>① 订单管理：显示订单号、客户姓名、服务名称、数量、金额、预约时间、状态（中文），可按状态和下单日期范围筛选；“已取消”行红色、“待支付”行黄色，有图例；选中“待支付”或“已支付”订单可以“取消订单”（确认后修改状态）。② 投诉处理：列出投诉（待处理在前），选中后在右侧显示详情，输入回复内容并提交，写入 <code>Reply</code>、<code>RepliedAt</code>、<code>Status</code>；已回复的投诉不能再次回复。</p></div>
+
+<h2 id="s8"><span class="sec">08</span>统计与图表</h2>
+<p>比赛中经常要求“统计结果以表格和图表显示”（湖北样题“机票统计”：数据网格 + 折线图，可通过 View by 切换显示的数据，勾选 Show Amount 时折线上显示数值）。.NET Framework 自带 <code>Chart</code> 控件，在工具箱“数据”分组中（如果没有，先确认已添加 <code>System.Windows.Forms.DataVisualization</code> 引用，再右键工具箱 → 选择项 → 勾选 Chart）。</p>
+<h3>界面</h3>
+<p>dtpFrom、dtpTo（统计时间范围）、cboViewBy（订单数/营业额）、chkShowValue（显示数值）、btnStat、dgvStat（左侧或上方）、chart1（右侧或下方）。</p>
+<span class="fname">FrmStatistics.cs</span><pre><code>using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
+
+namespace SmartCareDesk
+{
+    public partial class FrmStatistics : Form
+    {
+        private DataTable _data;
+
+        public FrmStatistics()
+        {
+            InitializeComponent();
+        }
+
+        private void FrmStatistics_Load(object sender, EventArgs e)
+        {
+            dtpFrom.Format = dtpTo.Format = DateTimePickerFormat.Custom;
+            dtpFrom.CustomFormat = dtpTo.CustomFormat = "yyyy-MM-dd";
+            dtpFrom.Value = new DateTime(DateTime.Today.Year, 1, 1);
+            dtpTo.Value = DateTime.Today;
+            cboViewBy.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboViewBy.Items.AddRange(new object[] { "订单数", "营业额" });
+            cboViewBy.SelectedIndex = 0;
+            chkShowValue.Checked = true;
+            dgvStat.ReadOnly = true;
+            dgvStat.AllowUserToAddRows = false;
+            dgvStat.RowHeadersVisible = false;
+            dgvStat.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void btnStat_Click(object sender, EventArgs e)
+        {
+            if (dtpFrom.Value.Date &gt; dtpTo.Value.Date)
+            {
+                MessageBox.Show("开始日期不能晚于结束日期", "提示");
+                return;
+            }
+            _data = DbHelper.Query(@"
+                SELECT CONVERT(CHAR(7), CreatedAt, 120) AS [Month],
+                       COUNT(*) AS OrderCount,
+                       SUM(Amount) AS Revenue
+                FROM ServiceOrder
+                WHERE Status &lt;&gt; 3 AND CreatedAt &gt;= @from AND CreatedAt &lt; @to
+                GROUP BY CONVERT(CHAR(7), CreatedAt, 120)
+                ORDER BY [Month]",
+                new SqlParameter("@from", SqlDbType.DateTime) { Value = dtpFrom.Value.Date },
+                new SqlParameter("@to", SqlDbType.DateTime) { Value = dtpTo.Value.Date.AddDays(1) });  // 包含结束当天
+
+            dgvStat.DataSource = _data;
+            dgvStat.Columns["Month"].HeaderText = "月份";
+            dgvStat.Columns["OrderCount"].HeaderText = "订单数";
+            dgvStat.Columns["Revenue"].HeaderText = "营业额（元）";
+            dgvStat.Columns["Revenue"].DefaultCellStyle.Format = "0.00";
+            DrawChart();
+        }
+
+        private void DrawChart()
+        {
+            if (_data == null) return;
+            chart1.Series.Clear();
+            string col = cboViewBy.SelectedIndex == 0 ? "OrderCount" : "Revenue";
+            Series s = new Series(cboViewBy.Text);
+            s.ChartType = SeriesChartType.Line;
+            s.BorderWidth = 3;
+            s.MarkerStyle = MarkerStyle.Circle;
+            s.IsValueShownAsLabel = chkShowValue.Checked;   // 是否在折线上显示数值
+            foreach (DataRow r in _data.Rows)
+                s.Points.AddXY(r["Month"].ToString(), Convert.ToDouble(r[col]));
+            chart1.Series.Add(s);
+            chart1.ChartAreas[0].AxisX.Interval = 1;
+            chart1.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+        }
+
+        // 切换“查看”方式或“显示数值”时，图表立即刷新
+        private void cboViewBy_SelectedIndexChanged(object sender, EventArgs e) { DrawChart(); }
+        private void chkShowValue_CheckedChanged(object sender, EventArgs e)   { DrawChart(); }
+    }
+}</code></pre>
+<ul>
+<li>结束日期“包含当天”：条件写成 <code>CreatedAt &lt; 结束日期 + 1 天</code>，不要写 <code>&lt;= 结束日期</code>（那样会漏掉当天 00:00 以后的记录）。</li>
+<li>切换“查看方式”和“显示数值”时立即重画，不需要再点统计按钮——这正是评分表中“自动更新数据信息”一类的细项。</li>
+<li>改成柱状图：<code>SeriesChartType.Column</code>；饼图：<code>SeriesChartType.Pie</code>，饼图显示百分比：<code>s.Label = "#VALX #PERCENT{P1}";</code>。</li>
+</ul>
+<div class="ex"><span class="h">练习 6-6　分类饼图</span>
+<p>新增一个选项卡，用饼图显示“各服务分类的订单金额占比”（不含已取消），扇区标签显示“分类名 百分比”，图例在右侧。用练习库核对：生活照料、医疗护理、康复理疗、精神慰藉四类的金额分别是多少？</p>
+<details><summary>预期结果（以刚导入、未改动过的练习库为准）</summary><p>生活照料 2055.00（上门助浴 600 + 助餐配送 1375 + 居家保洁 80）、医疗护理 1050.00（150 + 600 + 300）、康复理疗 1300.00、精神慰藉 560.00（480 + 80），合计 4965.00。</p></details></div>
+
+<h2 id="s9"><span class="sec">09</span>更多常见功能的写法</h2>
+<h3>验证码（失败 3 次后出现）</h3>
+<p>湖北样题：登录失败 3 次后出现验证码，4 位同时包含字母和数字，点击验证码可刷新。</p>
+<span class="fname">Captcha.cs</span><pre><code>using System;
+using System.Text;
+
+namespace SmartCareDesk
+{
+    public static class Captcha
+    {
+        private static readonly Random Rnd = new Random();
+        private const string Letters = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz";  // 去掉易混淆的 I、O、l、o
+        private const string Digits = "23456789";                                      // 去掉 0、1
+
+        /// &lt;summary&gt;生成指定长度、同时包含字母和数字的验证码。&lt;/summary&gt;
+        public static string Create(int length)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(Letters[Rnd.Next(Letters.Length)]);      // 保证至少一个字母
+            sb.Append(Digits[Rnd.Next(Digits.Length)]);        // 保证至少一个数字
+            string all = Letters + Digits;
+            while (sb.Length &lt; length) sb.Append(all[Rnd.Next(all.Length)]);
+            // 打乱顺序，避免总是“字母+数字”开头
+            char[] arr = sb.ToString().ToCharArray();
+            for (int i = arr.Length - 1; i &gt; 0; i--)
+            {
+                int j = Rnd.Next(i + 1);
+                char t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+            }
+            return new string(arr);
+        }
+    }
+}</code></pre>
+<span class="fname">在 FrmLogin 中使用（片段）</span><pre><code>private int _failCount;
+private string _captcha;
+
+private void ShowCaptcha()
+{
+    _captcha = Captcha.Create(4);
+    lblCaptcha.Text = _captcha;          // 简单做法：用一个大号、带背景色的 Label 显示
+    lblCaptcha.Visible = txtCaptcha.Visible = lblCaptchaTip.Visible = true;
+}
+
+private void lblCaptcha_Click(object sender, EventArgs e) { ShowCaptcha(); }   // 点击刷新
+
+// 在登录按钮中：
+//   if (_failCount &gt;= 3 &amp;&amp; !string.Equals(txtCaptcha.Text.Trim(), _captcha, StringComparison.OrdinalIgnoreCase))
+//   { MessageBox.Show("验证码错误"); ShowCaptcha(); return; }
+//   登录失败时：_failCount++; if (_failCount &gt;= 3) ShowCaptcha();</code></pre>
+<h3>倒计时按钮（Timer）</h3>
+<pre><code>private int _seconds;
+private void btnGetCode_Click(object sender, EventArgs e)
+{
+    _seconds = 60;
+    btnGetCode.Enabled = false;
+    tmrCode.Interval = 1000;           // 每 1000 毫秒触发一次 Tick
+    tmrCode.Start();
+}
+private void tmrCode_Tick(object sender, EventArgs e)
+{
+    _seconds--;
+    btnGetCode.Text = _seconds + " 秒后重试";
+    if (_seconds &lt;= 0)
+    {
+        tmrCode.Stop();
+        btnGetCode.Text = "获取验证码";
+        btnGetCode.Enabled = true;
+    }
+}</code></pre>
+<h3>登录记录（登入、登出时间）</h3>
+<p>湖北样题有“登录记录”界面。思路：建一张 <code>LoginLog(LogId, ManagerId, LoginTime, LogoutTime NULL)</code>；登录成功时插入一行并用 <code>SCOPE_IDENTITY()</code> 取回 LogId 存到 Session；注销或退出时 <code>UPDATE LoginLog SET LogoutTime = GETDATE() WHERE LogId = @id</code>。注意：练习库没有这张表，你可以自己用 <code>CREATE TABLE</code> 加上——这也是“题目要求时才可以修改数据库结构”的一个例子。</p>
+<h3>事务（多条语句要么全成功要么全失败）</h3>
+<pre><code>using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SmartCare"].ConnectionString))
+{
+    conn.Open();
+    SqlTransaction tran = conn.BeginTransaction();
+    try
+    {
+        SqlCommand c1 = new SqlCommand("UPDATE ServiceOrder SET Status = 3 WHERE OrderId = @id", conn, tran);
+        c1.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = orderId });
+        c1.ExecuteNonQuery();
+
+        SqlCommand c2 = new SqlCommand("INSERT INTO Complaint (OrderId, Content) VALUES (@id, @ct)", conn, tran);
+        c2.Parameters.Add(new SqlParameter("@id", SqlDbType.Int) { Value = orderId });
+        c2.Parameters.Add(new SqlParameter("@ct", "用户取消订单"));
+        c2.ExecuteNonQuery();
+
+        tran.Commit();
+    }
+    catch
+    {
+        tran.Rollback();
+        throw;
+    }
+}</code></pre>
+<h3>动态布局（卡片列表）</h3>
+<p>湖北样题“查询航班”要求“布局随查询到的航班多少动态调整”。表格之外，常用做法是 <code>FlowLayoutPanel</code>（AutoScroll = True）里动态添加用户控件（UserControl）作为“卡片”：</p>
+<pre><code>flpServices.Controls.Clear();
+foreach (DataRow r in dt.Rows)
+{
+    Panel card = new Panel { Width = 220, Height = 90, BorderStyle = BorderStyle.FixedSingle, Margin = new Padding(6) };
+    card.Controls.Add(new Label { Text = r["ServiceName"].ToString(), Location = new Point(8, 8), AutoSize = true,
+                                  Font = new Font("微软雅黑", 11, FontStyle.Bold) });
+    card.Controls.Add(new Label { Text = Convert.ToDecimal(r["Price"]).ToString("0.00") + " 元",
+                                  Location = new Point(8, 40), AutoSize = true });
+    flpServices.Controls.Add(card);
+}</code></pre>
+<h3>打印与“报表形式”</h3>
+<p>湖北样题“航班动态”要求“查询结果以报表形式呈现，便于导出及直接打印”。Visual Studio 2022 中的 RDLC 报表需要额外安装扩展和包，赛场未必具备。<strong>训练建议</strong>：准备一个不依赖额外组件的方案——用格式整齐的 DataGridView（标题、表头、序号列、无网格竖线）呈现“报表”，再用 <code>PrintDocument</code> + <code>PrintPreviewDialog</code> 实现打印预览，或导出为 CSV。熟悉设备时确认赛场有无报表组件，有则用，无则用这个保底方案。</p>
+
+<h2 id="s10"><span class="sec">10</span>风格指引与界面规范</h2>
+<p>辽宁样卷写明“保持在整个开发过程中使用所提供的风格指引”，湖北评分表在“员工菜单和管理员菜单”中专门有“页面风格符合风格指引”的细项（Logo 和标题位置、每个界面都有 Logo、主色一致）。正式比赛会提供风格指引文件，通常规定：主色/辅色（色值）、字体与字号、Logo 用法、按钮样式等。</p>
+<h3>做法：把风格集中到一个地方</h3>
+<span class="fname">Style.cs（示例，色值以题目风格指引为准）</span><pre><code>using System.Drawing;
+using System.Windows.Forms;
+
+public static class Style
+{
+    public static readonly Color Primary = Color.FromArgb(31, 78, 121);    // 主色
+    public static readonly Color Danger  = Color.FromArgb(192, 0, 0);      // 删除 / 取消
+    public static readonly Font TitleFont = new Font("微软雅黑", 16F, FontStyle.Bold);
+    public static readonly Font BodyFont  = new Font("微软雅黑", 10.5F);
+
+    /// &lt;summary&gt;在每个窗体的构造函数 InitializeComponent() 之后调用一次。&lt;/summary&gt;
+    public static void Apply(Form f)
+    {
+        f.Font = BodyFont;
+        f.StartPosition = FormStartPosition.CenterScreen;
+        foreach (Control c in f.Controls) ApplyTo(c);
+    }
+
+    private static void ApplyTo(Control c)
+    {
+        Button b = c as Button;
+        if (b != null)
+        {
+            bool danger = b.Name.StartsWith("btnDelete") || b.Name.StartsWith("btnCancel");
+            b.FlatStyle = FlatStyle.Flat;
+            b.BackColor = danger ? Color.White : Primary;
+            b.ForeColor = danger ? Danger : Color.White;
+        }
+        foreach (Control child in c.Controls) ApplyTo(child);   // 递归处理容器里的控件
+    }
+}</code></pre>
+<h3>界面规范自查</h3>
+<ul class="cl">
+<li>每个窗体（简单对话框除外）都有 Logo 和标题，位置一致</li>
+<li>主色、字体全程一致；没有出现“这个窗体蓝色、那个窗体灰色”</li>
+<li>Delete / Cancel 类按钮是红色（题目要求时）</li>
+<li>用颜色区分记录时，界面上有图例说明</li>
+<li>控件对齐（用“格式”菜单的对齐工具），间距统一</li>
+<li>Tab 键顺序合理（视图 → Tab 键顺序）</li>
+<li>回车 = 确认（AcceptButton），Esc = 取消（CancelButton）</li>
+<li>窗体标题（Text）有意义，没有“Form1”</li>
+<li>日期全部 YYYY-MM-DD</li>
+<li>缺图显示 default.jpg</li>
+<li>表格只读、整行选中、没有空白新行，列标题是中文（或题目要求的语言）</li>
+</ul>
+
+<h2 id="s11"><span class="sec">11</span>交付：Modul1 文件夹与压缩包</h2>
+<p>辽宁样卷要求“将设计开发源码存放在桌面 Modul1 文件夹中，形成压缩文件 Modul1.zip 提交至 U 盘”。<strong>训练建议</strong>的目录组织（题目另有要求时以题目为准）：</p>
+<pre><code>桌面\Modul1\
+├─ SmartCareDesk\          ← 解决方案文件夹（.sln 和各项目）
+│  ├─ SmartCareDesk.sln
+│  ├─ SmartCareDesk\       ← 桌面端项目
+│  └─ SmartCareApi\        ← 接口项目（第 07 章）
+├─ Database\
+│  └─ SmartCare.sql         ← 用 SSMS“生成脚本（架构和数据）”导出
+└─ 说明.txt                 ← 如何运行：数据库名、连接字符串位置、接口地址与启动方式、测试账号</code></pre>
+<p>一开始就在 <code>Modul1</code> 里创建解决方案，而不是做完再复制——复制容易漏文件。压缩前关闭 Visual Studio，删除各项目下的 <code>bin</code> 与 <code>obj</code> 可减小体积，但如果题目要求提交可执行程序（湖北样题要求 <code>EXE</code> 目录），要先把 <code>bin\Debug</code> 的内容复制到指定位置。</p>
+
+<h2 id="s12"><span class="sec">12</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>不看书，60 分钟内从空白项目做出：登录（含记住密码）+ 注册（含 5 项校验）+ 用户列表（查询、分页、编辑、禁用）</li>
+<li>独立完成练习 6-4 服务管理、6-5 订单与投诉、6-6 饼图，数据与预期一致</li>
+<li>所有窗体通过“界面规范自查”</li>
+<li>能讲清楚：为什么参数化、为什么用 ShowDialog、为什么登录窗只 Hide</li>
+<li>能把整个解决方案按 Modul1 结构交付并在另一台电脑（或另一个 Windows 用户）上运行起来</li>
+</ul></div>
+
+<div class="pager"><a href="05-sql.html"><small>上一章</small>SQL Server 与数据库设计</a><a href="07-webapi.html" style="text-align:right"><small>下一章</small>Web API 与接口契约</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

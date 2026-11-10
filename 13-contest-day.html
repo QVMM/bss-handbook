@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>赛前与比赛当天 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a class="active" href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>赛场战术与时间分配</span></div>
+<main class="content">
+<p class="kicker">第 13 章 · 训练与实战</p>
+<h1>赛前与比赛当天</h1>
+<p class="lead">比赛当天你不会再学到新东西，能决定成绩的，是你能否把训练中的水平完整发挥出来。本章包括：赛前一周的安排、熟悉设备那 1 小时要检查什么、每个模块开场 10 分钟怎么做、比赛中的时间控制与应急处理、最后 15 分钟的收尾流程。规则部分依据辽宁技术文件，其余为训练建议；你所参加比赛的规则以该赛事的技术文件和赛场通知为准。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">赛前一周</a></li><li><a href="#s2">熟悉设备：最重要的一小时</a></li><li><a href="#s3">比赛流程与规则要点（辽宁文件）</a></li><li><a href="#s4">每个模块的开场 10 分钟</a></li><li><a href="#s5">比赛中的时间控制</a></li><li><a href="#s6">最后 15 分钟：收尾流程</a></li><li><a href="#s7">常见突发情况</a></li><li><a href="#s8">模块之间与比赛结束后</a></li><li><a href="#s9">赛前最后检查清单</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>赛前一周</h2>
+<ul class="cl">
+<li>不学新内容，不改变已经练熟的写法（例如不要临时从 HttpListener 换成别的接口方案）</li>
+<li>每天 1–2 次限时小练，保持手感：登录 + 记住密码、查询 + 分页、接口 + 手机端列表、10 条测试用例</li>
+<li>把错题本从头到尾读一遍，重点看“会但忘了”一类</li>
+<li>默写一遍核心代码骨架：DbHelper、分页 SQL、ApiClient、Adapter、验证码倒计时</li>
+<li>重读你所参加比赛的技术文件：模块时长、分值、交付命名、禁带物品清单</li>
+<li>准备证件：辽宁文件规定选手赛前 30 分钟凭参赛证和身份证检录</li>
+<li>作息调整到比赛时段：比赛几点开始，这一周就几点开始做题</li>
+</ul>
+
+<h2 id="s2"><span class="sec">02</span>熟悉设备：最重要的一小时</h2>
+<div class="box official"><span class="h">官方文件怎么说</span>
+<p>辽宁文件规定：赛场提供不少于 1 小时的熟悉设备（场地）时间，熟悉设备期间禁止修改竞赛设备参数。</p>
+<p class="src">来源：资料包中辽宁省 2026 年技术文件“竞赛流程”部分</p></div>
+<p>这一小时不是“看看电脑长什么样”，而是排查所有可能让你在比赛中卡住的环境问题。按下面的清单逐项确认（只检查、不修改设备参数；发现问题举手报告）：</p>
+<h3>熟悉设备检查清单</h3>
+<div class="tw"><table>
+<tr><th>#</th><th>检查项</th><th>怎么检查</th><th>有问题怎么办（建议）</th></tr>
+<tr><td>1</td><td>各软件版本</td><td>VS、SSMS 帮助 → 关于；Android Studio Help → About</td><td>记下版本，比赛中避免用该版本不支持的功能</td></tr>
+<tr><td>2</td><td>SQL Server 实例名与身份验证</td><td>SSMS 连接：先试 <code>.</code>，再试 <code>.\SQLEXPRESS</code>；记下成功的写法和验证方式</td><td>把可用的连接字符串写在草稿纸上</td></tr>
+<tr><td>3</td><td>WinForms 项目能否新建、编译、运行</td><td>新建“Windows 窗体应用(.NET Framework)”，拖一个按钮，F5</td><td>失败立即举手</td></tr>
+<tr><td>4</td><td>Chart 控件是否可用</td><td>工具箱“数据”分组中找 Chart，拖到窗体上运行</td><td>不可用时比赛中改用自绘图表</td></tr>
+<tr><td>5</td><td>Web API 2 项目能否新建并运行</td><td>新建 ASP.NET Web 应用程序(.NET Framework) → Web API，F5</td><td>NuGet 还原失败 → 比赛中直接用 HttpListener 方案</td></tr>
+<tr><td>6</td><td>HttpListener 控制台程序能否监听</td><td>新建控制台应用，写 10 行启动 <code>http://localhost:5000/</code>，浏览器访问</td><td>换端口再试</td></tr>
+<tr><td>7</td><td>Android 新项目能否同步并运行</td><td>New Project → Empty Views Activity → Java，等 Gradle 同步，运行到模拟器</td><td>同步失败立即举手——这是最致命的问题，必须在熟悉设备时发现</td></tr>
+<tr><td>8</td><td>模拟器</td><td>Device Manager 中是否已有虚拟设备；启动耗时多久</td><td>记下启动时间，比赛开始后第一件事就是启动模拟器</td></tr>
+<tr><td>9</td><td>adb reverse</td><td>模拟器启动后执行 <code>adb reverse tcp:5000 tcp:5000</code></td><td>找不到 adb 时记下 SDK 路径</td></tr>
+<tr><td>10</td><td>模拟器访问接口</td><td>模拟器浏览器访问 <code>http://localhost:5000/</code></td><td>不通时改用 10.0.2.2 方案并相应调整接口</td></tr>
+<tr><td>11</td><td>APK 打包</td><td>Build → Build APK(s)</td><td>记下 APK 输出路径</td></tr>
+<tr><td>12</td><td>Office / 模板</td><td>Word 能否打开；有无产品操作手册模板</td><td>没有 Office 时问清模块 C 的文档格式要求</td></tr>
+<tr><td>13</td><td>压缩工具</td><td>右键文件夹 → 发送到 → 压缩(zipped)文件夹</td><td>记下可用的压缩方式</td></tr>
+<tr><td>14</td><td>输入法、键盘</td><td>中英文切换、常用符号</td><td>赛场统一提供键盘鼠标，提前适应手感</td></tr>
+<tr><td>15</td><td>保存位置</td><td>确认“指定盘符”和桌面路径</td><td>记在草稿纸上</td></tr>
+</table></div>
+<div class="box tip"><span class="h">训练建议：熟悉设备也要演练</span>
+<p>在最后一次全真模拟前，按这张清单在练习机上完整演练一次，计时 60 分钟。熟练的同学 30 分钟就能检查完，剩下的时间可以再跑一遍“新建项目 → 连数据库 → 打包”的完整流程。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>比赛流程与规则要点（辽宁文件）</h2>
+<div class="tw"><table>
+<tr><th>环节</th><th>规定</th></tr>
+<tr><td>检录</td><td>赛前 30 分钟凭参赛证和身份证检录；现场抽签确定工位</td></tr>
+<tr><td>赛前准备</td><td>每一模块赛前选手统一进场；赛前 10 分钟提供竞赛设备确认单</td></tr>
+<tr><td>领取赛题</td><td>赛前 5 分钟在发卷区统一领取赛题；裁判长宣布开始后才可以操作</td></tr>
+<tr><td>比赛中</td><td>数据文件必须存储在指定盘符并随时保存，数据丢失责任自负；有问题只能向裁判长反映；休息、饮水、去洗手间均计入比赛时间</td></tr>
+<tr><td>设备故障</td><td>由技术人员出具书面说明，抽签启用备用机位；非选手个人原因造成的故障可视情况延时，原则上不超过本模块竞赛时间的 20%；选手个人原因造成的不予延时</td></tr>
+<tr><td>结束提示</td><td>比赛结束前 15 分钟提示</td></tr>
+<tr><td>提交</td><td>结束铃声响起后立即停止工作；3 分钟内提交竞赛作品、图纸、U 盘、草稿纸等全部竞赛文件，并签名确认（文件另有“10 分钟内交至指定地点”的流程表述，以现场裁判要求为准）</td></tr>
+<tr><td>提前结束</td><td>需报裁判员批准，之后不得再进行任何比赛相关工作，原地等待至本场结束</td></tr>
+<tr><td>禁带物品</td><td>额外的软件、通讯设备（手机、智能手表、蓝牙耳机等）、U 盘等存储设备、照相录像设备、书籍和参考资料等；键盘鼠标由赛场统一提供</td></tr>
+<tr><td>作品评判</td><td>竞赛作品加密后交评分裁判组打分</td></tr>
+</table></div>
+<div class="box warn"><span class="h">易错提醒：作品中不要出现个人信息</span>
+<p>作品是加密后评分的。不要在代码注释、窗体标题、文档封面、文件名中写自己的姓名、学校或其他可识别身份的信息（题目要求填写工位号等时按要求填写）。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>每个模块的开场 10 分钟</h2>
+<ol>
+<li><strong>领到赛题后的 5 分钟（还不能操作）</strong>：快速通读一遍，在题目上圈出“必须”“至少”“不能”、数字和格式要求；记下交付文件夹和压缩包的<strong>准确名称</strong>。</li>
+<li><strong>开始后第 1 分钟</strong>：启动需要时间的东西——模拟器（模块 B）、SSMS、Visual Studio / Android Studio。</li>
+<li><strong>第 2–5 分钟</strong>：在桌面按题目要求建好交付文件夹（如 Modul1），在其中新建项目；导入题目给的数据库脚本，或建库。</li>
+<li><strong>第 5–10 分钟</strong>：在草稿纸上列出得分点清单（第 03 章的拆点法），按“分值大、依赖少”排出顺序，写上每个任务的计划完成时间（用第 12 章你的节奏表）。</li>
+</ol>
+
+<h2 id="s5"><span class="sec">05</span>比赛中的时间控制</h2>
+<h3>三条铁律（训练建议）</h3>
+<ol>
+<li><strong>先完成，再完美</strong>：每个任务先把所有测量点做出“能用”的版本，再回头美化。测量分占绝大多数，而“做出来”是拿到它们的前提。</li>
+<li><strong>15 分钟卡住原则</strong>：一个问题卡住 15 分钟没有进展，立即跳过，做下一个；在草稿纸上记下来，最后有时间再回来。</li>
+<li><strong>每完成一个功能就保存和备份</strong>：Ctrl + Shift + S，每 30 分钟把交付文件夹复制一份到同一盘符的备份文件夹（备份文件夹不要放进交付文件夹里）。</li>
+</ol>
+<h3>时间检查点</h3>
+<p>以 2 小时模块为例（仅为参考，请用你自己模拟训练得出的节奏表）：</p>
+<div class="tw"><table>
+<tr><th>时间点</th><th>应该完成</th><th>落后时怎么办</th></tr>
+<tr><td>0:10</td><td>环境就绪、得分点清单</td><td>—</td></tr>
+<tr><td>0:40</td><td>任务 1（10 分）全部测量点</td><td>剩余的小点记下来，先开始任务 2</td></tr>
+<tr><td>1:15</td><td>任务 2 主体功能</td><td>任务 2 中耗时的部分（如图表细节）后放</td></tr>
+<tr><td>1:45</td><td>任务 3 主体功能</td><td>停止开发新功能，转入收尾</td></tr>
+<tr><td>1:45–2:00</td><td>收尾：自查 + 交付</td><td>见下文</td></tr>
+</table></div>
+
+<h2 id="s6"><span class="sec">06</span>最后 15 分钟：收尾流程</h2>
+<p>听到“还剩 15 分钟”的提示后，按以下顺序操作，不要再写新功能：</p>
+<ol>
+<li><strong>让程序能编译、能运行</strong>（3 分钟）：如果正在改的代码导致编译不过，立即注释掉或撤销。一个编译不过的项目，很可能所有功能都无法评分。</li>
+<li><strong>快速冒烟测试</strong>（4 分钟）：从启动开始，把主要功能点一遍。</li>
+<li><strong>更新交付物</strong>（3 分钟）：模块 B 重新 Build APK 并复制到交付文件夹；导出数据库脚本（如需要）；检查说明文件。</li>
+<li><strong>关闭开发工具</strong>（1 分钟）：关闭 Visual Studio / Android Studio，避免文件被占用导致压缩不完整。</li>
+<li><strong>压缩并检查</strong>（3 分钟）：按题目要求的准确名称压缩；打开压缩包确认内容完整（源码、APK、文档都在）；复制到 U 盘或指定位置。</li>
+<li><strong>留 1 分钟余量</strong>。</li>
+</ol>
+<div class="box warn"><span class="h">易错提醒：压缩包名称</span>
+<p>辽宁样卷中模块 C 的文件夹叫 Modul3，压缩包却叫 Module3.zip。正式比赛时，严格照抄你拿到的赛题上的写法；拿不准就举手问。名称错误可能导致作品找不到或无法评分。</p></div>
+
+<h2 id="s7"><span class="sec">07</span>常见突发情况</h2>
+<div class="tw"><table>
+<tr><th>情况</th><th>应对（建议）</th></tr>
+<tr><td>电脑死机、蓝屏、软件无法启动</td><td>立即举手报告裁判长，不要自己反复重启折腾；按规定由技术人员处理，必要时更换备用机位</td></tr>
+<tr><td>Visual Studio 设计器打不开窗体（报错页）</td><td>先“生成 → 重新生成解决方案”，再关闭设计器标签重新打开；仍不行，检查最近修改的 Designer.cs</td></tr>
+<tr><td>Gradle 同步失败</td><td>File → Sync Project with Gradle Files；检查是否误加了需要下载的依赖，删除后再同步</td></tr>
+<tr><td>模拟器起不来或极慢</td><td>Device Manager 中 Cold Boot；仍不行举手</td></tr>
+<tr><td>数据库连接失败</td><td>对照熟悉设备时记下的实例名；检查数据库名拼写；SSMS 中确认数据库存在</td></tr>
+<tr><td>手机端所有请求失败</td><td>按顺序查：接口是否运行 → 电脑浏览器能否访问 → adb reverse → INTERNET 权限 → 明文流量设置</td></tr>
+<tr><td>题目有歧义</td><td>先按最合理的理解做，并在说明文件中写明你的理解；涉及交付格式的问题举手问裁判长</td></tr>
+<tr><td>心态崩了</td><td>停下来深呼吸 30 秒，喝口水，看一眼得分点清单，挑一个最简单的点先做完。拿到一个点，状态就回来了</td></tr>
+</table></div>
+
+<h2 id="s8"><span class="sec">08</span>模块之间与比赛结束后</h2>
+<ul>
+<li>模块之间：不讨论上一个模块（无法改变了），吃点东西、活动一下，回顾下一个模块的开场 10 分钟流程。</li>
+<li>比赛结束后：按要求签字确认、清理工位、恢复设备原始状态，所有赛场物品不得带离。</li>
+<li>回去后：趁记忆清晰，把题目要点、自己的完成情况、遇到的问题写下来。无论结果如何，这份记录对下一次比赛（以及指导你的学弟学妹）都是最宝贵的材料。</li>
+</ul>
+
+<h2 id="s9"><span class="sec">09</span>赛前最后检查清单</h2>
+<div class="box check"><span class="h">出发前</span>
+<ul class="cl">
+<li>参赛证、身份证</li>
+<li>已确认比赛地点、检录时间、交通路线</li>
+<li>没有携带任何禁带物品（手机等按赛场要求存放）</li>
+<li>前一晚睡眠充足</li>
+<li>早餐吃好，带水（以赛场规定为准）</li>
+<li>脑中过一遍：熟悉设备清单、开场 10 分钟、三条铁律、收尾流程</li>
+</ul></div>
+
+<div class="pager"><a href="12-mock.html"><small>上一章</small>样卷精练：辽宁、湖北与国际题</a><a href="14-mistakes.html" style="text-align:right"><small>下一章</small>常见错误大全</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

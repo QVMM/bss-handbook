@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>需求分析与 UML 设计 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a class="active" href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>需求分析与 UML 建模</span></div>
+<main class="content">
+<p class="kicker">第 09 章 · 学习路径第七站</p>
+<h1>需求分析与 UML 设计</h1>
+<p class="lead">省赛样卷没有单独的“画图”任务，但每一道开发题都要先读懂需求、理清数据和流程，才能写得又快又对。UML（统一建模语言）就是把这些想法画出来的通用画法。WorldSkills 的专家能力要求中明确列出了 UML 等系统分析与设计方法，走向国赛、世赛，这一章是必修课。标准版 1 周，强化版穿插在模拟训练中完成。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">为什么要先画图再写代码</a></li><li><a href="#s2">工具</a></li><li><a href="#s3">用例图：系统给谁用、能做什么</a></li><li><a href="#s4">活动图（流程图）：一件事按什么步骤做</a></li><li><a href="#s5">类图：程序里有哪些类、类之间什么关系</a></li><li><a href="#s6">时序图：一次操作中各部分如何配合</a></li><li><a href="#s7">ER 图与线框图</a></li><li><a href="#s8">需求分析的完整流程（比赛版）</a></li><li><a href="#s9">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>为什么要先画图再写代码</h2>
+<ul>
+<li><strong>读题更准</strong>：把一段文字需求画成用例图、流程图，漏掉的条件会自己“冒出来”（例如“如果手机号已注册怎么办？”）。</li>
+<li><strong>写得更快</strong>：数据库表和接口一旦在图上定好，桌面端、接口、手机端可以照着写，不会写到一半推倒重来。</li>
+<li><strong>评价分</strong>：判断分（评价分）看重“作品是否专业”。清晰的接口文档、ER 图、操作手册里的流程图，都是专业度的直接体现。</li>
+<li><strong>团队沟通</strong>：企业中需求、开发、测试三方就是靠这些图对齐理解的。</li>
+</ul>
+<div class="box tip"><span class="h">训练建议：比赛中画图用多少时间</span>
+<p>比赛时不需要画精美的图。拿到题目后用 5–10 分钟在草稿纸上画出：实体和关系（简易 ER 图）、页面跳转图、接口清单。这 10 分钟往往能省下后面一个小时的返工。平时训练时则要用工具认真画，练出“看到需求就能想到图”的能力。</p></div>
+
+<h2 id="s2"><span class="sec">02</span>工具</h2>
+<div class="tw"><table>
+<tr><th>工具</th><th>说明</th></tr>
+<tr><td>draw.io（diagrams.net）桌面版</td><td>免费，可离线使用，内置 UML、ER、流程图图形库。WSC2026 技术说明中列出了 Draw.io offline</td></tr>
+<tr><td>Microsoft Visio</td><td>湖北样题赛场软件清单中有 Visio 2010</td></tr>
+<tr><td>SSMS 数据库关系图</td><td>在数据库的“数据库关系图”节点右键新建，可自动根据外键生成表关系图，适合导出 ER 图</td></tr>
+<tr><td>纸和笔</td><td>比赛中最快的工具</td></tr>
+</table></div>
+
+<h2 id="s3"><span class="sec">03</span>用例图：系统给谁用、能做什么</h2>
+<p>用例图回答两个问题：<strong>谁</strong>（参与者 Actor，小人图标）使用系统，能<strong>做什么</strong>（用例 Use Case，椭圆）。系统边界用方框表示。</p>
+<span class="fname">智慧康养平台用例图（文字版）</span><pre><code>                ┌──────────────── 智慧康养平台 ────────────────┐
+                │                                              │
+   管理员 ──────┼──( 登录 )                                     │
+     │          │──( 管理客户 )──«include»──( 查询客户 )       │
+     │          │──( 管理服务 )                                 │
+     │          │──( 处理投诉 )                                 │
+     └──────────┼──( 查看统计 )                                 │
+                │                                              │
+   客户 ────────┼──( 注册 )──«include»──( 获取验证码 )         │
+     │          │──( 登录 )◀──«extend»──( 验证码登录 )         │
+     │          │──( 预约服务 )                                 │
+     │          │──( 查看订单 )◀──«extend»──( 取消订单 )       │
+     │          │──( 查看健康数据 )                             │
+     └──────────┼──( 紧急求助 )                                 │
+                └──────────────────────────────────────────────┘</code></pre>
+<ul>
+<li><strong>«include»（包含）</strong>：执行 A 时<strong>一定</strong>会执行 B。注册一定要获取验证码。</li>
+<li><strong>«extend»（扩展）</strong>：在某些条件下<strong>才</strong>执行的附加行为。查看订单时可以（但不一定）取消订单。</li>
+<li>一个用例用“动词 + 名词”命名：预约服务、处理投诉。</li>
+</ul>
+<div class="ex"><span class="h">练习 9-1　画湖北样题的用例图</span>
+<p>打开资料包中的湖北样题（Word 文档），通读模块 A 的 11 个界面描述，找出所有参与者（提示：员工与管理员菜单不同），用 draw.io 画出用例图。每个用例旁标注它对应题目中的哪个界面编号。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>活动图（流程图）：一件事按什么步骤做</h2>
+<p>活动图描述一个用例内部的步骤和判断。它和中学学过的流程图几乎一样：圆角矩形是活动，菱形是判断，实心圆是开始，带圈实心圆是结束。</p>
+<span class="fname">注册流程（文字版活动图）</span><pre><code>  ●
+  │
+ [输入手机号] → &lt;手机号格式正确?&gt; ──否──▶ [提示“请输入 11 位手机号”] ──┐
+                     │是                                           │
+               [点击获取验证码 → 生成 6 位码，记录过期时间]          │
+                     │                                           │
+               [输入验证码、密码、确认密码]                        │
+                     │                                           │
+               &lt;密码 ≥8 位且含字母数字?&gt; ──否──▶ [提示规则] ───────┤
+                     │是                                           │
+               &lt;两次密码一致?&gt; ──否──▶ [提示不一致] ───────────────┤
+                     │是                                           │
+               &lt;验证码正确且未过期?&gt; ──否──▶ [提示错误/过期] ──────┤
+                     │是                                           │
+               [调用注册接口] → &lt;手机号已注册?&gt; ──是──▶ [提示已注册] ┤
+                     │否                                           │
+               [写入数据库，提示成功，返回登录页]                    │
+                     │                                       (返回修改)
+                     ◉</code></pre>
+<p>这张图直接就是代码的结构（对照第 08 章 RegisterActivity 的 submit 方法），也直接就是测试用例的来源：<strong>每一个“否”分支至少对应一条测试用例</strong>（第 10 章）。</p>
+<div class="ex"><span class="h">练习 9-2　画“预约服务”的活动图</span>
+<p>从“点击服务列表项”开始，到“显示预约成功”结束。必须包含：数量校验、时间校验、服务已下架、网络失败四个分支。然后数一数：这张图能派生出多少条测试用例？</p></div>
+
+<h2 id="s5"><span class="sec">05</span>类图：程序里有哪些类、类之间什么关系</h2>
+<p>类图的每个类是一个三格方框：类名 / 属性 / 方法。<code>+</code> 表示 public，<code>-</code> 表示 private。</p>
+<span class="fname">智慧康养桌面端核心类（文字版类图）</span><pre><code>┌──────────────────────┐          ┌──────────────────────┐
+│ DbHelper «static»    │          │ Validator «static»   │
+├──────────────────────┤          ├──────────────────────┤
+│ - ConnStr : string   │          │ + IsPhone(s) : bool  │
+├──────────────────────┤          │ + IsPassword(s): bool│
+│ + Query(sql, ps)     │          └──────────▲───────────┘
+│ + Execute(sql, ps)   │                     │ 使用
+│ + Scalar(sql, ps)    │◀────── 使用 ──┐      │
+└──────────────────────┘               │      │
+                                ┌──────┴──────┴────────┐       ┌───────────────────┐
+                                │ FrmUserManage        │──────▶│ FrmUserEdit       │
+                                ├──────────────────────┤ 打开  ├───────────────────┤
+                                │ - _pageIndex : int   │       │ - _id : int       │
+                                │ - PageSize : int=10  │       ├───────────────────┤
+                                ├──────────────────────┤       │ + FrmUserEdit(id) │
+                                │ - LoadData()         │       │ - btnSave_Click() │
+                                │ - btnSearch_Click()  │       └───────────────────┘
+                                └──────────────────────┘
+               Form ◁─────────── FrmUserManage、FrmUserEdit（空心三角箭头 = 继承）</code></pre>
+<div class="tw"><table>
+<tr><th>关系</th><th>画法</th><th>含义与例子</th></tr>
+<tr><td>继承（泛化）</td><td>实线 + 空心三角</td><td>FrmLogin 继承 Form；LoginActivity 继承 AppCompatActivity</td></tr>
+<tr><td>实现</td><td>虚线 + 空心三角</td><td>SosActivity 实现 SensorEventListener 接口</td></tr>
+<tr><td>关联</td><td>实线（可带箭头）</td><td>订单关联一个客户</td></tr>
+<tr><td>聚合 / 组合</td><td>实线 + 空心 / 实心菱形</td><td>整体与部分：Adapter 持有数据列表</td></tr>
+<tr><td>依赖</td><td>虚线箭头</td><td>FrmUserManage 使用 DbHelper</td></tr>
+</table></div>
+
+<h2 id="s6"><span class="sec">06</span>时序图：一次操作中各部分如何配合</h2>
+<p>时序图横向排列参与的对象，纵向是时间，箭头是消息。它最适合讲清楚“手机—接口—数据库”这种跨系统的配合。</p>
+<span class="fname">验证码登录时序图（文字版）</span><pre><code> 客户        LoginActivity        CodeHelper         ApiClient          Web API          SQL Server
+  │  输入手机号   │                   │                  │                 │                  │
+  │─────────────▶│  send(phone)      │                  │                 │                  │
+  │  点获取验证码 │──────────────────▶│ 生成6位码,记过期  │                 │                  │
+  │◀─── 模拟短信对话框 ──────────────│                  │                 │                  │
+  │  输入验证码   │  check(phone,code)│                  │                 │                  │
+  │─────────────▶│──────────────────▶│                  │                 │                  │
+  │              │◀──── null(通过) ──│                  │                 │                  │
+  │              │  post(loginByCode)                   │                 │                  │
+  │              │─────────────────────────────────────▶│ POST JSON       │                  │
+  │              │                                      │────────────────▶│ SELECT ... Phone │
+  │              │                                      │                 │─────────────────▶│
+  │              │                                      │                 │◀──── 客户记录 ───│
+  │              │                                      │◀── {success,data}│                  │
+  │              │◀──────── onResult（主线程）──────────│                 │                  │
+  │◀── 进入首页 ─│ saveLogin, goMain                    │                 │                  │</code></pre>
+<div class="ex"><span class="h">练习 9-3　时序图</span>
+<p>画出“桌面端禁用一个客户后，该客户在手机端登录被拒绝”的完整时序图，涉及：管理员、FrmUserManage、DbHelper、数据库、手机 App、接口。</p></div>
+
+<h2 id="s7"><span class="sec">07</span>ER 图与线框图</h2>
+<h3>ER 图</h3>
+<p>第 05 章已经学过 ER 图和数据字典。设计时注意三件事：每个实体都有主键；一对多的“多”方放外键；多对多一定拆出中间表。湖北样题模块 A 就提供了 <code>ERD.pdf</code>（资料包中的赛题文档提到了它，但文件本身未包含在文档内），比赛中拿到 ER 图，第一件事是对照它在 SSMS 中看一遍表结构，确认字段名和类型。</p>
+<h3>线框图（界面草图）</h3>
+<p>辽宁通用要求写明“线框图仅供参考”：功能和数据以文字要求为准，布局可以按风格指引优化。练习时可以在纸上或 draw.io 中画线框图，标出每个控件的名称（txtPhone、btnLogin），然后照着搭界面。</p>
+<span class="fname">登录页线框图示意</span><pre><code>┌─────────────────────────┐
+│        [ Logo ]         │
+│      智慧康养平台        │
+│ (●)密码登录 ( )验证码登录 │
+│ ┌─────────────────────┐ │
+│ │ 手机号  etPhone      │ │
+│ └─────────────────────┘ │
+│ ┌─────────────────────┐ │
+│ │ 密码    etPassword   │ │
+│ └─────────────────────┘ │
+│ [√] 记住密码 cbRemember  │
+│ ┌─────────────────────┐ │
+│ │     登 录 btnLogin   │ │
+│ └─────────────────────┘ │
+│ 手机号注册      忘记密码？│
+└─────────────────────────┘</code></pre>
+
+<h2 id="s8"><span class="sec">08</span>需求分析的完整流程（比赛版）</h2>
+<ol>
+<li><strong>通读</strong>：完整读一遍题目，不动手，标出所有“必须”“需要”“不能”“至少”。</li>
+<li><strong>拆点</strong>：每句要求拆成可检查的点，写在草稿纸上（第 03 章的“拆成得分点”）。</li>
+<li><strong>找名词</strong>：名词往往是表或字段（客户、服务、订单、投诉、手机号、预约时间）。</li>
+<li><strong>找动词</strong>：动词往往是功能、接口（注册、预约、取消、回复）。</li>
+<li><strong>画三张草图</strong>：简易 ER 图、页面跳转图、接口清单。</li>
+<li><strong>排顺序</strong>：数据库 → 接口 → 界面；分值大、依赖少的先做。</li>
+<li><strong>补缺口</strong>：题目没写清楚的（例如样卷中“略”的部分、没给的数据），按行业常识做出合理假设，并在说明文件中写明“本作品假设……”。</li>
+</ol>
+<div class="ex"><span class="h">练习 9-4　综合：为一个新场景做设计</span>
+<p>场景：“社区食堂订餐平台”。管理端（桌面）：菜品管理、每日菜单、订单统计；客户端（手机）：注册登录、浏览今日菜单、下单、评价。请在 90 分钟内完成：用例图、ER 图（至少 5 张表）、数据字典、接口文档（至少 8 个接口，格式同第 07 章）、“下单”活动图。完成后对照第 15 章的“设计文档自查表”打分。</p></div>
+
+<h2 id="s9"><span class="sec">09</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>能用 draw.io 画出用例图、活动图、类图、时序图、ER 图，并解释每个符号</li>
+<li>拿到一道新题，10 分钟内在纸上完成 ER 草图、页面跳转图、接口清单</li>
+<li>能从活动图的分支推导出测试用例</li>
+<li>完成练习 9-1 到 9-4</li>
+</ul></div>
+
+<div class="pager"><a href="08-android.html"><small>上一章</small>Android 手机应用（模块 B）</a><a href="10-testing.html" style="text-align:right"><small>下一章</small>应用测试与操作手册（模块 C）</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

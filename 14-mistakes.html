@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>常见错误大全 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a class="active" href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>常见错误大全</span></div>
+<main class="content">
+<p class="kicker">第 14 章 · 训练与实战</p>
+<h1>常见错误大全</h1>
+<p class="lead">这一章收集了备赛过程中最常见、最浪费时间、最容易丢分的错误，按“现象 → 原因 → 解决”整理。遇到问题先来这里查；平时也建议每周翻一遍，把“别人踩过的坑”变成你的经验。把你自己遇到的新问题，按同样格式补进错题本。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">读题与交付类（丢分最多）</a></li><li><a href="#s2">C# 语言</a></li><li><a href="#s3">SQL 与数据库</a></li><li><a href="#s4">WinForms</a></li><li><a href="#s5">Web API 接口</a></li><li><a href="#s6">Android</a></li><li><a href="#s7">测试与文档（模块 C）</a></li><li><a href="#s8">环境与工具</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>读题与交付类（丢分最多）</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>功能都做了，分数却不高</td><td>漏掉了题目“通用要求”中的条目：滚动条、YYYY-MM-DD 日期、default.jpg、风格指引、验证与错误提示</td><td>把通用要求抄成一张清单贴在显示器边，每个界面做完对照一次</td></tr>
+<tr><td>某个要求完全没做</td><td>只读了一遍题，边做边看，漏掉了段落中间的一句</td><td>第 03 章“读题三遍法”；开场就列出得分点清单，做完一条划一条</td></tr>
+<tr><td>裁判打开压缩包找不到作品</td><td>压缩包或文件夹名称与题目不一致（Modul / Module）；或压缩的是快捷方式</td><td>严格照抄题目写法；压缩后打开检查一遍</td></tr>
+<tr><td>压缩包里没有 APK</td><td>只压缩了源码</td><td>辽宁样卷要求 Modul2.zip 包含 APK；交付前对照题目逐项检查</td></tr>
+<tr><td>裁判电脑上程序连不上数据库</td><td>连接字符串写死了自己电脑的实例名；数据库没有导出脚本</td><td>连接字符串放在配置文件中；说明文件写清数据库名和修改方法；按要求导出脚本</td></tr>
+<tr><td>提交的是旧版本</td><td>改完代码没有重新生成 / 重新 Build APK</td><td>收尾流程第一步：重新生成并运行一次</td></tr>
+<tr><td>作品无法编译</td><td>最后几分钟改代码引入了错误</td><td>最后 15 分钟不写新功能；编译不过立即撤销</td></tr>
+<tr><td>作品中出现个人姓名、学校</td><td>注释、窗体标题、文档封面中写了自己的信息</td><td>作品加密评分，一律不写可识别身份的信息</td></tr>
+</table></div>
+
+<h2 id="s2"><span class="sec">02</span>C# 语言</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td><code>5 / 2</code> 结果是 2</td><td>两个整数相除是整数除法</td><td>至少一个写成小数：<code>5 / 2.0</code>，或 <code>(decimal)a / b</code></td></tr>
+<tr><td>输入为空时程序崩溃，提示“输入字符串的格式不正确”</td><td>用了 <code>int.Parse</code>，空字符串无法转换</td><td>一律用 <code>int.TryParse</code>，转换失败时提示用户</td></tr>
+<tr><td>金额出现 0.30000000000000004 这类误差</td><td>用 double 存金额</td><td>金额一律用 <code>decimal</code>（数据库对应 DECIMAL）</td></tr>
+<tr><td><code>Math.Round(2.5)</code> 得到 2</td><td>默认是“银行家舍入”（四舍六入五取偶）</td><td><code>Math.Round(x, 2, MidpointRounding.AwayFromZero)</code></td></tr>
+<tr><td>日期显示成 2026-30-05 或 02:30 变成 14:30 的错乱</td><td>格式字符串大小写写错：MM 是月、mm 是分；HH 是 24 小时、hh 是 12 小时</td><td>日期 <code>yyyy-MM-dd</code>，时间 <code>HH:mm:ss</code></td></tr>
+<tr><td>“未将对象引用设置到对象的实例”</td><td>对 null 调用了方法，例如表格没有选中行时访问 <code>dgv.CurrentRow.Cells</code></td><td>使用前判断：<code>if (dgv.CurrentRow == null) { 提示; return; }</code></td></tr>
+<tr><td>“对象不能从 DBNull 转换为其他类型”</td><td>数据库字段为 NULL 时直接 <code>Convert.ToInt32</code> / 强制转换</td><td>先判断 <code>row["X"] == DBNull.Value</code>；或在 SQL 中用 <code>ISNULL</code></td></tr>
+<tr><td>年龄算错一岁</td><td>只用年份相减，没有考虑今年生日是否已过</td><td>年份相减后，如果今天还没到今年的生日就再减 1（第 04 章练习 4-13）</td></tr>
+<tr><td>正则 <code>\d{11}</code> 对 12 位数字也返回 true</td><td>没有加开头 <code>^</code> 和结尾 <code>$</code>，只要“包含”就匹配</td><td>校验整串一定写 <code>^...$</code></td></tr>
+<tr><td>程序运行一段时间后数据库连接耗尽、变慢</td><td>SqlConnection 没有关闭</td><td>一律写在 <code>using (...) { }</code> 中</td></tr>
+</table></div>
+
+<h2 id="s3"><span class="sec">03</span>SQL 与数据库</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>表建好了却在自己的库里找不到</td><td>执行脚本时当前数据库是 master，表建进了 master</td><td>脚本开头写 <code>USE 数据库名; GO</code>；执行前看 SSMS 工具栏的数据库下拉框</td></tr>
+<tr><td>中文存进去变成问号</td><td>字段类型是 VARCHAR，或字符串常量没有加 N 前缀</td><td>中文字段用 NVARCHAR；常量写 <code>N'张三'</code>；C# 中用参数传值则不需要考虑</td></tr>
+<tr><td>同一个日期字符串，在不同电脑上插入结果不同或报错</td><td><code>'2026-03-04'</code> 转为 DATETIME 时受服务器语言设置影响（可能被理解为 4 月 3 日）</td><td>脚本中写 <code>'20260304'</code> 或 <code>'2026-03-04T08:00:00'</code>；C# 中用参数传 DateTime</td></tr>
+<tr><td>UPDATE 后全表数据都变了</td><td>忘写 WHERE</td><td>先写 WHERE 再写 SET；重要操作前先用 SELECT 加同样的 WHERE 看看会影响哪些行</td></tr>
+<tr><td><code>WHERE Name = NULL</code> 查不到任何数据</td><td>NULL 不能用等号比较</td><td><code>WHERE Name IS NULL</code></td></tr>
+<tr><td>统计人数比实际少</td><td><code>COUNT(列名)</code> 不计 NULL</td><td>统计行数用 <code>COUNT(*)</code></td></tr>
+<tr><td>“选择列表中的列无效，因为该列没有包含在聚合函数或 GROUP BY 子句中”</td><td>SELECT 中有未分组也未聚合的列</td><td>把该列加入 GROUP BY，或用聚合函数包起来</td></tr>
+<tr><td>OFFSET 分页报语法错误</td><td>OFFSET … FETCH 必须跟在 ORDER BY 后面</td><td>分页查询一定有 ORDER BY</td></tr>
+<tr><td>按日期范围查询，结束当天的数据查不到</td><td>写了 <code>&lt;= '2026-10-31'</code>，只包含 0 点那一刻</td><td>写 <code>&lt; 结束日期 + 1 天</code></td></tr>
+<tr><td>删除客户时报外键冲突</td><td>该客户有订单引用</td><td>业务上一般用“禁用”（软删除）代替删除；确需删除时先处理子表</td></tr>
+<tr><td>新增后取到的编号不对</td><td>用了 <code>@@IDENTITY</code>（可能取到触发器中插入的值）</td><td>用 <code>SCOPE_IDENTITY()</code>，与 INSERT 写在同一条命令中</td></tr>
+<tr><td>模糊查询结果不对或报错</td><td>把 <code>%</code> 写进了 SQL 字符串里又加了引号，或拼接用户输入</td><td><code>LIKE @kw</code>，参数值为 <code>"%" + 关键字 + "%"</code></td></tr>
+<tr><td>SSMS 连接报证书错误</td><td>新版 SSMS 默认加密连接</td><td>连接对话框中勾选“信任服务器证书”（第 02 章）</td></tr>
+</table></div>
+
+<h2 id="s4"><span class="sec">04</span>WinForms</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>点击按钮没有任何反应</td><td>事件方法是从别处复制来的，没有绑定到控件</td><td>属性窗口 → 闪电图标 → 在对应事件右侧下拉选择该方法；或双击控件重新生成</td></tr>
+<tr><td>删掉一个事件方法后，设计器打不开、编译报错</td><td><code>Designer.cs</code> 里仍有 <code>this.btnX.Click += ...</code> 这一行</td><td>双击错误定位到该行删除；以后删除事件先在属性窗口的事件列表中清空</td></tr>
+<tr><td>执行 SQL 报“参数化查询需要参数 @s，但未提供该参数”</td><td><code>new SqlParameter("@s", 0)</code> 中的 0 被当成了 SqlDbType</td><td><code>new SqlParameter("@s", SqlDbType.Int) { Value = 0 }</code></td></tr>
+<tr><td>表格最后总有一行空白</td><td>AllowUserToAddRows 默认为 True</td><td>设为 False；同时 ReadOnly = True、SelectionMode = FullRowSelect</td></tr>
+<tr><td>列标题显示的是英文字段名</td><td>DataTable 自动生成的列用字段名作标题</td><td>SQL 中起中文别名，或设置 <code>dgv.Columns["X"].HeaderText</code></td></tr>
+<tr><td>替换照片时报“文件正由另一进程使用”</td><td>用 <code>Image.FromFile</code> 加载后文件被锁定</td><td>先读成字节再从内存流创建图片（第 06 章 ImageHelper）</td></tr>
+<tr><td>图片在自己电脑上能显示，换电脑就没有</td><td>写了绝对路径，或图片没有复制到输出目录</td><td>路径用 <code>Application.StartupPath</code> 拼接；图片文件属性“复制到输出目录”设为“如果较新则复制”</td></tr>
+<tr><td>登录后关闭首页，程序还在后台运行</td><td>登录窗只是隐藏了，没有关闭</td><td>首页 FormClosed 时根据情况关闭登录窗或 <code>Application.Exit()</code></td></tr>
+<tr><td>登录成功后程序直接退出</td><td>关闭了作为主窗体的登录窗</td><td>登录窗 <code>Hide()</code> 而不是 <code>Close()</code>（第 06 章）</td></tr>
+<tr><td>编辑窗口关闭后列表没刷新</td><td>用 Show 打开，或没有判断 DialogResult</td><td><code>if (f.ShowDialog() == DialogResult.OK) LoadData();</code></td></tr>
+<tr><td>“记住密码”重启后没有效果</td><td>修改设置后没有调用 <code>Properties.Settings.Default.Save()</code>；或设置的范围选了“应用程序”（只读）</td><td>范围选“用户”，修改后调用 Save()</td></tr>
+<tr><td><code>ConfigurationManager</code> 下有红色波浪线</td><td>没有添加 System.Configuration 引用</td><td>引用 → 添加引用 → 程序集 → System.Configuration</td></tr>
+<tr><td>下拉框一加载就触发查询，甚至报错</td><td>绑定数据源时会触发 SelectedIndexChanged</td><td>加载期间用一个标志变量跳过事件（第 06 章 _loading）</td></tr>
+<tr><td>窗体放大后控件挤在左上角</td><td>没有设置 Anchor / Dock</td><td>表格 Anchor 设为上下左右；或者固定窗体大小</td></tr>
+<tr><td>界面上到处是 Form1、button1、textBox1</td><td>没有命名</td><td>放一个控件就改一个 Name 和 Text（第 04 章命名规范）</td></tr>
+</table></div>
+
+<h2 id="s5"><span class="sec">05</span>Web API 接口</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>HttpListener 启动报“拒绝访问”</td><td>地址写成了 <code>http://+:端口/</code> 或 <code>http://*:端口/</code>，需要管理员权限</td><td>改为 <code>http://localhost:端口/</code></td></tr>
+<tr><td>启动报端口被占用</td><td>上一次的接口程序还没关，或其他程序占用</td><td>关闭旧的控制台窗口；或换一个端口（手机端同步修改）</td></tr>
+<tr><td>日期返回成 <code>/Date(1727740800000)/</code></td><td>JavaScriptSerializer 直接序列化 DateTime</td><td>转换成字符串再输出（第 07 章 Json.Rows）</td></tr>
+<tr><td>手机端取不到字段值，值总是空</td><td>字段名大小写不一致（接口返回 ServiceName，手机端取 serviceName）</td><td>接口统一小驼峰，并写进接口文档；两端照文档写</td></tr>
+<tr><td>中文变成乱码</td><td>没有用 UTF-8 读写请求体或响应</td><td>读请求用 <code>new StreamReader(stream, Encoding.UTF8)</code>，响应 <code>Content-Type</code> 带 <code>charset=utf-8</code></td></tr>
+<tr><td>POST 时接口收到的数据全是空</td><td>请求头没有 Content-Type: application/json；或 JSON 键名写错</td><td>curl 测试时加 <code>-H "Content-Type: application/json"</code>；对照接口文档</td></tr>
+<tr><td>IIS Express 返回 “Bad Request - Invalid Hostname”</td><td>模拟器用 10.0.2.2 访问，IIS Express 只接受 localhost</td><td>使用 adb reverse，手机端用 localhost（第 07 章）</td></tr>
+<tr><td>接口抛异常后整个服务停止</td><td>没有捕获异常</td><td>在请求处理的最外层 try-catch，返回 500 和错误信息（第 07 章 ApiServer.Start）</td></tr>
+</table></div>
+
+<h2 id="s6"><span class="sec">06</span>Android</h2>
+<div class="tw"><table>
+<tr><th>现象（Logcat 中的关键字）</th><th>原因</th><th>解决</th></tr>
+<tr><td><code>NetworkOnMainThreadException</code></td><td>在主线程发网络请求</td><td>在后台线程请求（第 08 章 ApiClient）</td></tr>
+<tr><td><code>CalledFromWrongThreadException</code>：Only the original thread that created a view hierarchy can touch its views</td><td>在后台线程修改了界面</td><td>回到主线程再更新界面（Handler 或 runOnUiThread）</td></tr>
+<tr><td><code>Cleartext HTTP traffic to localhost not permitted</code></td><td>Android 9 起默认禁止 http 明文请求</td><td>清单 application 节点加 <code>android:usesCleartextTraffic="true"</code></td></tr>
+<tr><td><code>SecurityException: Permission denied (missing INTERNET permission?)</code></td><td>没有声明网络权限</td><td>清单加 <code>&lt;uses-permission android:name="android.permission.INTERNET" /&gt;</code></td></tr>
+<tr><td><code>ConnectException: Failed to connect to localhost</code></td><td>模拟器中的 localhost 是模拟器自己；没有做端口映射；接口没启动</td><td>执行 adb reverse；或改用 10.0.2.2；确认接口在运行</td></tr>
+<tr><td><code>ActivityNotFoundException</code></td><td>新页面没有在清单中注册</td><td>用 New → Activity 创建（自动注册），或手动加 <code>&lt;activity android:name=".XxxActivity" /&gt;</code></td></tr>
+<tr><td>打开页面就闪退，<code>NullPointerException</code> 指向 findViewById 之后的行</td><td>id 写错，或 setContentView 用了别的布局</td><td>检查布局文件名与 id；setContentView 必须在 findViewById 之前</td></tr>
+<tr><td>新建项目后编译报找不到 <code>R.id.main</code></td><td>替换了布局，但模板中的 EdgeToEdge 代码还在引用它</td><td>删除模板生成的 EdgeToEdge 和 setOnApplyWindowInsetsListener 代码（第 08 章）</td></tr>
+<tr><td>字符串判断永远不相等</td><td>Java 中用 <code>==</code> 比较字符串（比较的是引用）</td><td>用 <code>a.equals(b)</code>；C# 转过来的同学特别注意</td></tr>
+<tr><td>资源编译报错：文件名叫 default 时提示 <code>invalid symbol name '…drawable/default'</code>；含横线或大写字母时提示 <code>is not a valid file-based resource name character</code></td><td>drawable 文件名含大写、横线、以数字开头或是 Java 关键字</td><td>改为小写字母、数字、下划线，如 img_default.jpg</td></tr>
+<tr><td>界面上显示文字 “null”</td><td><code>optString</code> 取到 JSON 中的 null 值会返回字符串 "null"</td><td>先 <code>isNull("key")</code> 判断</td></tr>
+<tr><td>选的是 3 月，显示成 2 月</td><td>Calendar / DatePicker 的月份从 0 开始</td><td>显示时加 1，设置时减 1</td></tr>
+<tr><td>列表数据变了，界面没变</td><td>修改数据后没有通知适配器</td><td><code>adapter.notifyDataSetChanged()</code></td></tr>
+<tr><td>离开页面后手机仍在耗电，或摇一摇在其他页面也触发</td><td>传感器监听没有注销</td><td>onResume 注册、onPause 注销</td></tr>
+<tr><td>Gradle 同步卡住或失败</td><td>添加了需要联网下载的依赖库，赛场断网</td><td>只用模板自带的依赖；本手册的代码不需要任何额外依赖</td></tr>
+<tr><td>倒计时结束前离开页面后闪退</td><td>CountDownTimer 仍在更新已销毁的按钮</td><td>onDestroy 中 cancel（第 08 章 CodeHelper.cancel）</td></tr>
+<tr><td>连点登录按钮，提交了好几次</td><td>请求期间按钮仍可点击</td><td>请求开始时 setEnabled(false)，结束后恢复</td></tr>
+</table></div>
+
+<h2 id="s7"><span class="sec">07</span>测试与文档（模块 C）</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>预期结果写“正常”“成功”</td><td>预期不具体，无法判断</td><td>写出具体的提示文字、跳转页面、数据变化</td></tr>
+<tr><td>一条用例里测了好几件事</td><td>为了省事合并</td><td>一条用例只验证一个点</td></tr>
+<tr><td>某个功能模块的用例数不够</td><td>前面的模块写太多，后面没时间</td><td>先按模块搭框架，每个模块先写够数量（第 10 章）</td></tr>
+<tr><td>测试结果全是“通过”</td><td>没有真实执行</td><td>逐条在模拟器上操作后再填</td></tr>
+<tr><td>步骤写“输入错误的密码”</td><td>不具体，别人无法复现</td><td>写出实际输入的值</td></tr>
+<tr><td>操作手册只有文字</td><td>没有截图</td><td>执行用例时顺手截图并按功能命名</td></tr>
+<tr><td>手册目录页码不对</td><td>手工输入目录</td><td>用标题样式 + 自动目录，最后更新域</td></tr>
+<tr><td>手册缺少某一部分</td><td>没有按模板要求的四部分组织</td><td>先建好四部分的标题框架再写内容</td></tr>
+</table></div>
+
+<h2 id="s8"><span class="sec">08</span>环境与工具</h2>
+<div class="tw"><table>
+<tr><th>现象</th><th>原因</th><th>解决</th></tr>
+<tr><td>新建项目时找不到“Windows 窗体应用(.NET Framework)”</td><td>Visual Studio 没有安装“.NET 桌面开发”工作负载，或搜索时选成了 .NET（非 Framework）的模板</td><td>Visual Studio Installer 中修改安装；模板名称注意带“(.NET Framework)”</td></tr>
+<tr><td>VS 中打开窗体设计器显示白屏或错误页</td><td>项目未生成或 Designer.cs 有错误</td><td>先重新生成解决方案，再看错误列表</td></tr>
+<tr><td>模拟器启动报虚拟化相关错误</td><td>BIOS 未开启虚拟化，或与其他虚拟化软件冲突</td><td>练习机上按 Android 官方文档配置硬件加速；赛场电脑出现时举手</td></tr>
+<tr><td>文件中文乱码</td><td>文件编码不是 UTF-8</td><td>代码、SQL 脚本统一保存为 UTF-8</td></tr>
+<tr><td>做到一半断电或死机，代码没了</td><td>没有及时保存</td><td>Ctrl + Shift + S 养成习惯；定时备份文件夹</td></tr>
+</table></div>
+
+<div class="pager"><a href="13-contest-day.html"><small>上一章</small>赛场战术与时间分配</a><a href="15-templates.html" style="text-align:right"><small>下一章</small>模板、清单与自评表</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

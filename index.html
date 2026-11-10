@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>首页 · 从这里开始 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a class="active" href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>首页 · 从这里开始</span></div>
+<main class="content">
+<div class="hero">
+<p class="kicker">人社口 · 世界技能大赛第 09 项 · 零基础备赛教程</p>
+<h1>商务软件解决方案<br>从零到能拿奖的备赛教程</h1>
+<p class="lead">这是一本写给“什么都还不会”的同学的训练手册。它不假设你学过编程，也不假设你身边有懂行的老师。你只要每天打开它，按顺序做完当天的练习，就能一步步走到：在规定时间里，独立完成一套桌面端 + 接口 + 手机端 + 测试文档的完整作品，并且让裁判在评分表上一项一项地给你打勾。</p>
+</div>
+
+<h2 id="s1"><span class="sec">01</span>这本手册是什么</h2>
+<p>“商务软件解决方案”是人社部门组织的职业技能大赛中的一个项目，对应世界技能大赛的第 09 项（英文旧称 IT Software Solutions for Business，2026 年第 48 届世赛的技术描述已改称 Software Applications Development，中文也常称“软件应用开发”）。省赛、国赛选拔通常都参照世赛的评分方式进行：大部分分数是“做到了就给分、没做到就不给”的客观测量分，少部分是裁判按 0–3 档给的主观评价分。</p>
+<p>本手册围绕你手上已经有的资料包《商务软件解决方案-人社口备赛资料.zip》编写。其中最重要的一份文件是辽宁省 2026 年发布的技术工作文件（含样卷），它把比赛拆成三个模块：</p>
+<div class="facts">
+<div class="fact"><b>模块 A · 40%</b><span>软件功能开发（桌面端，Visual Studio / .NET + 数据库），2 小时</span></div>
+<div class="fact"><b>模块 B · 40%</b><span>手机功能开发（Android），2 小时，数据来自模块 A 的接口</span></div>
+<div class="fact"><b>模块 C · 20%</b><span>应用测试（编写并执行测试用例、撰写产品操作手册），2 小时</span></div>
+<div class="fact"><b>合计 6 小时</b><span>比赛共 1.5 天；测量分 94 分 + 评价分 6 分</span></div>
+</div>
+<p>上面这些数字都来自资料包里的辽宁文件，第 01 章会逐条带你核对。<strong>不同省份、不同年份的赛制可能不同</strong>，你拿到自己赛区的技术文件后，要先按第 00 章的方法做一次“对表”。</p>
+
+<h2 id="s2"><span class="sec">02</span>如果你现在很迷茫，请先做这三件事</h2>
+<ol>
+<li><strong>今天：</strong>读完本页和第 00 章《如何使用本手册》（约 40 分钟），然后打开资料包里的 <code>01-官方技术文件/2026-辽宁省第三届职业技能大赛-商务软件解决方案技术工作文件(含样卷).pdf</code>，只看第 1–8 页，用笔圈出“模块、时长、分数”三样东西。</li>
+<li><strong>明天：</strong>按第 02 章准备电脑，至少装好 Visual Studio 2022 并运行出第一个“Hello”窗口。电脑装不好不要硬撑，第 02 章有逐项检查表。</li>
+<li><strong>第三天起：</strong>翻到第 11 章《训练计划》，选“标准版”或“强化版”，把每周的格子抄到你的本子或日历上，然后从第 03 章开始学。</li>
+</ol>
+<div class="box tip"><span class="h">教练的话</span>
+<p>零基础的同学最常犯的错误，是一上来就打开 Android Studio 想做手机 App，结果被各种报错劝退。本手册的学习顺序是刻意安排的：先学会用 C# 思考和写程序，再学数据库，再做桌面程序，再把桌面端的数据“开放”成接口，最后才做手机端。这个顺序和比赛里模块 A → 模块 B 的依赖关系完全一致——模块 B 的数据就是从模块 A 的接口拿的。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>你需要准备什么</h2>
+<div class="tw"><table>
+<tr><th>项目</th><th>最低要求</th><th>说明</th></tr>
+<tr><td>电脑</td><td>Windows 10 或 11，64 位；内存 16 GB；固态硬盘剩余 100 GB 以上</td><td>辽宁文件给出的赛场电脑配置是 Intel i5 十代以上、16 GB 内存、256 GB 硬盘。Android 模拟器很吃内存，8 GB 内存的电脑能学，但会非常卡。</td></tr>
+<tr><td>软件</td><td>Visual Studio 2022、SQL Server 2022、SSMS 20.2 以上、Android Studio 2023.2.1 以上</td><td>版本下限来自辽宁文件的基础设施清单。第 02 章有安装与验证步骤。</td></tr>
+<tr><td>时间</td><td>标准版每周 12–15 小时，约 8 个月；强化版每周 25–30 小时，约 5 个月</td><td>见第 11 章。离比赛不足 5 个月也能用强化版，但要优先保住模块 A 和模块 B 的基础分。</td></tr>
+<tr><td>文具</td><td>一个专用笔记本、一个计时器（手机计时即可，模拟时手机放远）</td><td>赛场不允许带资料，所以每天要把“容易忘的写法”抄进自己的“错题本”，赛前反复背。</td></tr>
+<tr><td>资料包</td><td>《商务软件解决方案-人社口备赛资料.zip》解压到一个固定位置</td><td>建议放到 <code>D:\备赛\资料包\</code>，不要放在桌面或下载文件夹里，免得误删。</td></tr>
+</table></div>
+
+<h2 id="s4"><span class="sec">04</span>每周要花多少时间</h2>
+<p>下面是两条默认路线。你的比赛日期请以自己省份的通知为准，第 11 章会教你从比赛日往回倒推，把训练计划“钉”在日历上。</p>
+<div class="tw"><table>
+<tr><th>路线</th><th>总时长</th><th>每周投入</th><th>适合谁</th></tr>
+<tr><td>标准版</td><td>约 34 周（8 个月）</td><td>12–15 小时：工作日每天 1.5 小时，周末每天 3 小时</td><td>在校学生，平时要上课；第一次参赛</td></tr>
+<tr><td>强化版</td><td>约 21 周（5 个月）</td><td>25–30 小时：每天 4 小时左右，周末整块模拟</td><td>集训队员、已停课备赛的学生；或学过一点编程</td></tr>
+</table></div>
+<p>无论哪条路线，最后 6–7 周都留给整套样卷的计时训练。很多同学不是不会，而是“会但做不完”——这个问题只能靠计时训练解决。</p>
+
+<h2 id="s5"><span class="sec">05</span>手册的结构</h2>
+<div class="cards">
+<a class="card" href="00-guide.html"><span class="n">第 00 章</span><span class="t">如何使用本手册</span><span class="d">学习方法、资料包怎么配合、怎样记训练日志。</span></a>
+<a class="card" href="01-contest.html"><span class="n">第 01 章</span><span class="t">赛项全景</span><span class="d">比赛日流程、模块与分值、测量分和评价分、获奖作品长什么样。</span></a>
+<a class="card" href="02-setup.html"><span class="n">第 02 章</span><span class="t">环境搭建与离线演练</span><span class="d">逐个安装并验证开发工具，练习断网编译。</span></a>
+<a class="card" href="03-thinking.html"><span class="n">第 03–10 章</span><span class="t">学习路径</span><span class="d">计算思维 → C# → SQL → WinForms → Web API → Android → UML → 测试。</span></a>
+<a class="card" href="11-schedule.html"><span class="n">第 11 章</span><span class="t">训练计划</span><span class="d">标准版与强化版逐周安排，每阶段都有过关标准。</span></a>
+<a class="card" href="12-mock.html"><span class="n">第 12 章</span><span class="t">样卷精练</span><span class="d">辽宁、湖北样卷的计时做法、自评方法、补全“略”的部分。</span></a>
+<a class="card" href="13-contest-day.html"><span class="n">第 13 章</span><span class="t">赛场战术</span><span class="d">两小时怎么分、先做什么、怎么保存和提交。</span></a>
+<a class="card" href="14-mistakes.html"><span class="n">第 14 章</span><span class="t">常见错误大全</span><span class="d">连接字符串、端口、模拟器访问、编码、第三方包……</span></a>
+<a class="card" href="15-templates.html"><span class="n">第 15–17 章</span><span class="t">工具箱</span><span class="d">模板与自评表、学习资源、术语表，以及 Python 选修附录。</span></a>
+</div>
+
+<h2 id="s6"><span class="sec">06</span>阅读约定</h2>
+<p>为了让你分清“哪些是比赛规定、哪些是教练建议”，全书使用以下几种提示框：</p>
+<div class="box official"><span class="h">文件依据</span><span class="src">来源：资料包中的某个具体文件</span><p>这里写的内容来自官方或赛区文件。我们只概括要点，不大段照抄；需要原文时，请打开括号里注明的文件。</p></div>
+<div class="box tip"><span class="h">训练建议</span><p>这是教练经验，不是比赛规定。按建议做通常更稳，但你可以根据自己的情况调整。</p></div>
+<div class="box warn"><span class="h">易错提醒</span><p>前人反复踩过的坑。看到这种框，最好把内容抄进错题本。</p></div>
+<div class="box check"><span class="h">过关标准</span><p>达到这里描述的水平，再进入下一阶段。达不到就多练一周，不要硬往前赶。</p></div>
+<div class="box note"><span class="h">说明</span><p>背景知识或补充解释。</p></div>
+<p>练习题的“参考答案”或“预期结果”默认折叠，先自己做，做完再点开对照。打印本手册时，折叠内容会自动展开。</p>
+<p>每章正文中的代码都可以照着敲。<strong>请一定自己敲，不要复制粘贴</strong>——赛场上没有地方可以复制，你的手指需要记住这些写法。</p>
+
+<div class="pager"><span></span><a href="00-guide.html" style="text-align:right"><small>下一章</small>如何使用本手册</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

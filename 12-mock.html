@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>模拟训练：样题实战与自评 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a class="active" href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>样卷精练：辽宁、湖北与国际题</span></div>
+<main class="content">
+<p class="kicker">第 12 章 · 训练与实战</p>
+<h1>模拟训练：样题实战与自评</h1>
+<p class="lead">学会每个知识点，和在 2 小时内把一个模块完整做完、交付、经得起裁判逐条检查，是两回事。本章教你怎样用资料包里的辽宁样卷、湖北样题和匈牙利赛题做“全真模拟”，怎样补齐样卷中省略的部分和缺失的素材，怎样像裁判一样给自己打分，以及怎样把一套样题变出更多套练习题。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">三种强度的模拟</a></li><li><a href="#s2">全真模拟的执行规程</a></li><li><a href="#s3">辽宁样卷：补齐“略”的部分</a></li><li><a href="#s4">像裁判一样给自己打分</a></li><li><a href="#s5">湖北样题：补齐缺失的素材</a></li><li><a href="#s6">匈牙利赛题：读英文题、按文档交付</a></li><li><a href="#s7">30% 改编法：一套样题变十套</a></li><li><a href="#s8">自造一套全新的题</a></li><li><a href="#s9">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>三种强度的模拟</h2>
+<div class="tw"><table>
+<tr><th>强度</th><th>内容</th><th>时长</th><th>频率（建议）</th></tr>
+<tr><td>限时小练</td><td>一个功能点，例如“查询 + 分页”“验证码注册”“10 条测试用例”</td><td>20–45 分钟</td><td>从 C# 阶段开始每周 1–3 次</td></tr>
+<tr><td>单模块模拟</td><td>一个完整模块，例如辽宁模块 A 全部 3 个任务</td><td>2 小时（湖北为 3 小时）</td><td>每个开发阶段结束时 1 次；模拟阶段每周 2–3 次</td></tr>
+<tr><td>全真模拟</td><td>三个模块，按比赛日程连续进行</td><td>按辽宁文件：竞赛总时长 360 分钟，分 1.5 天</td><td>模拟阶段至少 2 次，最好 3–4 次</td></tr>
+</table></div>
+
+<h2 id="s2"><span class="sec">02</span>全真模拟的执行规程</h2>
+<p>全真模拟的价值在于“真”。以下规程尽量还原辽宁技术文件中的赛场要求（断网、不准带资料、连续保存、按时提交），请严格执行：</p>
+<h3>开始前（前一天）</h3>
+<ul class="cl">
+<li>准备一台“干净”的练习机：只保留第 02 章安装的软件；关闭输入法云联想等联网功能</li>
+<li>还原数据库：执行练习库脚本，确保数据为初始状态</li>
+<li>删除桌面上旧的 Modul1 / Modul2 / Modul3 文件夹</li>
+<li>准备一个 U 盘作为“提交盘”</li>
+<li>请一位同学或老师担任“裁判”，负责发题、计时、提醒、收卷（没有人时用手机定时器）</li>
+<li>把本书、笔记、手机放到另一个房间</li>
+</ul>
+<h3>进行中</h3>
+<ol>
+<li><strong>断网</strong>：拔掉网线 / 关闭 Wi-Fi。</li>
+<li><strong>发题</strong>：开始前 5 分钟拿到题目（辽宁文件规定开赛前 5 分钟发放赛题），这 5 分钟只读题，不碰键盘。</li>
+<li><strong>计时</strong>：每个模块 2 小时；结束前 15 分钟“裁判”提醒一次。</li>
+<li><strong>中途</strong>：每完成一个功能保存一次（Ctrl + Shift + S 全部保存），每 30 分钟把当前成果复制一份到桌面备份文件夹。</li>
+<li><strong>收卷</strong>：时间到立即停手，在规定的几分钟内完成压缩和复制到 U 盘（辽宁文件中有比赛结束后限时提交的规定，具体时限以正式赛题和赛场通知为准，训练时按 3 分钟练）。</li>
+<li><strong>休息</strong>：模块之间至少休息 30 分钟，与比赛节奏一致。</li>
+</ol>
+<h3>结束后（当天）</h3>
+<ol>
+<li>按本章“自评”方法打分，填写第 15 章的模拟记录表。</li>
+<li>把每一个失分点写进错题本，标明原因：不会 / 会但慢 / 会但忘了 / 理解错题意。</li>
+<li>第二天先把失分最多的功能重做一遍（不看原代码）。</li>
+</ol>
+<div class="box tip"><span class="h">训练建议：建立自己的“赛场节奏表”</span>
+<p>每次单模块模拟都记录：读题用了几分钟、数据库准备用了几分钟、每个任务用了几分钟、最后检查和交付用了几分钟。三四次以后，你就能做出可靠的时间分配（例如 A 模块：读题 10、数据库与接口 25、任务 1 用 25、任务 2 和 3 各 25、自查与交付 10），比赛时按表推进。</p></div>
+
+<h2 id="s3"><span class="sec">03</span>辽宁样卷：补齐“略”的部分</h2>
+<p>辽宁样卷的模块 A 只写出了任务 1.1（登录 / 注册，10 分），1.2、1.3（各 15 分）写的是“略”；模块 B 同样只写出了 2.1（10 分），2.2、2.3（各 15 分）为“略”。文件同时说明正式赛题由样卷调整不超过 30% 形成、考核要素基本不变。这意味着：<strong>正式赛题的大部分分值，在样卷里是看不到具体内容的</strong>。你需要依据样卷的场景介绍和能力目录，自己补出这些任务来练。</p>
+<h3>自拟的依据</h3>
+<ul>
+<li>模块 A 的场景说明：桌面端面向平台管理者，整合康养服务资源、用户数据、订单信息及投诉反馈；1.1 要求登录成功后进入“系统首页（用户管理界面）”。</li>
+<li>模块 B：数据来源于 Modul1 接口；面向客户。</li>
+<li>能力目录中的设备性能参数、可视化统计、WebAPI、传感器、兼容性等内容。</li>
+</ul>
+<p>据此，下面给出一套<strong>自拟练习任务卡</strong>（不是官方内容，只是用来练习的合理推测，分值按样卷对应任务的分值设置）。数据用本手册的 SmartCare 练习库。</p>
+<h3>自拟任务卡 A-1.2：用户管理（15 分）</h3>
+<ul>
+<li>登录成功后进入本界面，界面顶部显示 Logo、平台名称、当前登录管理员姓名、“注销”和“退出”按钮。</li>
+<li>以表格显示客户：编号、姓名、性别、出生日期（YYYY-MM-DD）、年龄、手机号、地址、状态；姓名为空时显示“未填写”。</li>
+<li>可按姓名或手机号模糊查询，可按状态筛选，两个条件可组合。</li>
+<li>每页 10 条，有首页、上一页、下一页、尾页和页码跳转，显示总条数与当前页 / 总页数。</li>
+<li>已禁用的客户整行以浅红色背景显示，界面有颜色图例。</li>
+<li>可新增、编辑客户（手机号 11 位且唯一、姓名必填、出生日期不能晚于今天、照片不超过 100KB，没有照片显示 default.jpg）；双击行也可编辑。</li>
+<li>可禁用 / 启用客户，操作前需确认。</li>
+<li>“退出”时需确认；“注销”返回登录界面。</li>
+</ul>
+<h3>自拟任务卡 A-1.3：服务订单与投诉（15 分）</h3>
+<ul>
+<li>服务管理：按分类筛选、名称查询；新增 / 编辑服务（价格非负、最多两位小数）；上架 / 下架。</li>
+<li>订单管理：按状态、下单日期范围筛选；状态以中文显示并以颜色区分（附图例）；可取消“待支付 / 已支付”的订单。</li>
+<li>投诉处理：待处理的排在前面；可查看详情并回复，回复后状态变为已处理并记录回复时间，不能重复回复。</li>
+<li>统计：按月统计订单数和营业额（不含已取消），表格 + 折线图，可切换显示订单数或营业额，可选择是否在图上显示数值。</li>
+<li>为模块 B 提供接口：登录、注册、重置密码、服务查询、下单、订单查询、取消订单、健康数据、紧急联系人（地址和格式自定，写入接口文档）。</li>
+</ul>
+<h3>自拟任务卡 B-2.2：服务预约与订单（15 分）</h3>
+<ul>
+<li>首页以宫格显示功能入口，顶部显示欢迎语。</li>
+<li>服务列表显示图片、名称、分类、时长、价格；可按名称搜索、按分类筛选；没有结果时有提示；没有图片显示默认图片。</li>
+<li>点击服务可预约：数量为正整数，预约时间晚于当前时间，金额自动计算；提交后提示订单号和金额。</li>
+<li>我的订单：显示全部订单（新的在前），状态以颜色区分；可取消待支付 / 已支付订单，需确认。</li>
+<li>退出登录需确认，退出后再次打开 App 显示登录页。</li>
+</ul>
+<h3>自拟任务卡 B-2.3：健康与安全（15 分）</h3>
+<ul>
+<li>健康数据：可切换血压 / 血糖 / 心率，以折线图显示（横轴日期，纵轴数值，有图例），超出警戒值的点以红色显示，下方显示最高、最低、平均和最近一次。</li>
+<li>紧急求助：显示紧急联系人，点击可拨号；一键呼叫第一位联系人；摇动手机时弹出确认框，确认后拨号。</li>
+<li>设备信息：显示品牌、型号、系统版本、屏幕分辨率、可用 / 总内存、可用 / 总存储、电量与充电状态、传感器数量与名称，可刷新。</li>
+</ul>
+<div class="box note"><span class="h">做完以后</span>
+<p>这套任务卡与第 06–08 章的示例功能基本对应。第一次模拟时允许参考自己写过的代码（但不能看书），第二次起完全闭卷。从第三次起，用下文的“30% 改编法”换掉一部分要求再做。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>像裁判一样给自己打分</h2>
+<h3>第一步：把任务卡变成评分表</h3>
+<p>辽宁文件中的测量分示例，有“全对得分、否则 0 分”的项目（如 0.5 分一项），也有“缺一个要素扣 0.5 分，扣完为止”的项目（如 2 分一项）。自评时，把每张任务卡逐句拆成测量点，每个点 0.5 分，凑够任务分值。以 1.1（10 分）为例，可以这样拆（示例）：</p>
+<div class="tw"><table>
+<tr><th>编号</th><th>测量点</th><th>分值</th><th>方式</th></tr>
+<tr><td>M1</td><td>登录界面元素齐全：Logo、标题、用户名、密码、记住密码、登录、注册入口</td><td>1.0</td><td>缺一项扣 0.5，扣完为止</td></tr>
+<tr><td>M2</td><td>用户名或密码为空时有明确提示</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M3</td><td>用户名或密码错误时有明确提示</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M4</td><td>登录成功进入用户管理界面</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M5</td><td>勾选记住密码，重启程序后自动填入</td><td>1.0</td><td>全对或 0</td></tr>
+<tr><td>M6</td><td>取消勾选后，重启程序不再填入</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M7</td><td>注册界面元素齐全</td><td>1.0</td><td>缺一项扣 0.5</td></tr>
+<tr><td>M8</td><td>用户名唯一性校验与提示</td><td>1.0</td><td>全对或 0</td></tr>
+<tr><td>M9</td><td>密码长度与组成校验与提示</td><td>1.0</td><td>全对或 0</td></tr>
+<tr><td>M10</td><td>两次密码一致性校验与提示</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M11</td><td>手机号 11 位校验与提示</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td>M12</td><td>注册成功写入数据库，可用新账号登录</td><td>1.0</td><td>全对或 0</td></tr>
+<tr><td>M13</td><td>注册成功后返回登录界面并有成功提示</td><td>0.5</td><td>全对或 0</td></tr>
+<tr><td colspan="2">合计</td><td>9.5</td><td></td></tr>
+</table></div>
+<p>这里只拆出 9.5 分，剩下的 0.5 分你会放在哪里？（提示：重读样卷 1.1 的第一句话——程序运行后首先进入哪个界面？）这样的追问，正是在训练你“把每句话都当得分点”的读题习惯。</p>
+<h3>第二步：评价分（判断分）自评</h3>
+<p>辽宁样卷模块 A、B 各有 3 分评价分。评价分采用 0–3 分的等级描述，由至少 2 名裁判独立打分，分差不超过 1 分，评价分先于测量分评判（详见第 01 章）。自评时请同学做第二位“裁判”，两人独立打分再对比：</p>
+<div class="tw"><table>
+<tr><th>分数</th><th>通用描述（训练用）</th><th>界面与体验举例</th></tr>
+<tr><td>0</td><td>明显低于行业标准</td><td>控件随意摆放，风格混乱，多处出现 Form1、button1</td></tr>
+<tr><td>1</td><td>达到行业标准</td><td>功能可用，布局基本整齐，但风格不统一、提示简陋</td></tr>
+<tr><td>2</td><td>达到行业标准，部分方面优秀</td><td>风格统一、对齐规范、提示明确、操作顺手（回车登录、Tab 顺序）</td></tr>
+<tr><td>3</td><td>优秀，远超行业标准</td><td>在 2 分基础上，细节处处考虑用户：即时校验、空状态提示、防重复提交、加载提示、一致的图标与配色</td></tr>
+</table></div>
+<p>上表是训练用的通用描述，正式比赛的评价标准以赛场公布的评分细则为准。</p>
+<h3>第三步：评分顺序与记录</h3>
+<ol>
+<li>先做评价分（与辽宁文件规定的顺序一致），避免被测量分的结果影响整体印象。</li>
+<li>再逐条做测量分。每一条都要<strong>实际操作验证</strong>，不能凭“我记得写过”。</li>
+<li>换一台电脑（或新建一个 Windows 用户）运行交付的成果，确认裁判拿到后能跑起来。</li>
+<li>把结果记入第 15 章的模拟记录表，计算得分率，和上一次比较。</li>
+</ol>
+
+<h2 id="s5"><span class="sec">05</span>湖北样题：补齐缺失的素材</h2>
+<p>湖北样题文档（第 46 届世赛湖北省选拔赛）完整描述了模块 A 的 11 个界面和模块 B 的 7 个界面，配套评分表细化到 0.1 分。但文档中提到的素材——数据库脚本、ER 图、图片、风格指引、接口程序与接口文档、宣传视频——都不在资料包中。同时它的赛场环境较旧（Visual Studio 2015、SQL Server 2014、Android Studio 2.2.3），每个模块 3 小时，且要求全部使用英文。</p>
+<h3>补齐方法</h3>
+<div class="tw"><table>
+<tr><th>缺失素材</th><th>补齐方法</th></tr>
+<tr><td>数据库脚本 MSSQL-Session1.sql 与 ER 图</td><td>使用本手册附带的 <a href="assets/SunshineAirlines-自拟练习库.sql">SunshineAirlines 自拟练习库</a>。它按题目文字描述自拟了用户、角色、城市、机场、机型、舱位、航班、实际到达、机票、登录记录、里程积分等表，航班日期以执行当天为基准生成（过去 60 天到未来 30 天），部分航班已取消、部分航班余票不足 3 张，方便练习颜色标识。表名和字段名与官方脚本不一定相同，练习时以本脚本为准。</td></tr>
+<tr><td>风格指引</td><td>自己规定一份：主色、辅色、字体、字号、Logo 位置，写在一张纸上，全程遵守</td></tr>
+<tr><td>图片</td><td>用任意图片代替，重点练“图片显示、缺图显示默认图”</td></tr>
+<tr><td>模块 B 的 WebApi.exe 与接口文档</td><td>按题目界面需要，自己用第 07 章的方法写接口（登录、航班查询、选座、里程积分），先写接口文档再编码。这比使用现成接口难，但正好对应辽宁“数据来源 Modul1 接口”的考法</td></tr>
+<tr><td>宣传视频 video.mp4</td><td>用任意短视频代替；Android 中用系统控件 <code>VideoView</code> 播放（放在 <code>res/raw</code> 中）</td></tr>
+</table></div>
+<p>练习库的测试账号：管理员 <code>admin@sunshine.com</code> / <code>admin</code>；员工 <code>jack.li@sunshine.com</code> / <code>jack.l</code>；客户 <code>tom.chen@mail.com</code> / <code>tom.ch</code>。密码按样题描述的“邮箱 @ 前 6 位字符，不足 6 位取全部”规则设置。</p>
+<h3>用湖北评分表自评</h3>
+<p>湖北评分表的“子评分表”工作表按界面分为 A1M、A2M……B7M 等子模块，每条细则写明了最大分值和拆分到 0.1 分的得分要素（括号中的数字）。做完一个界面，就打开评分表对应的子模块，逐个要素检查打分。这份评分表是学习“裁判怎么看作品”的最好材料：你会发现，很多分数给在你以为“不重要”的细节上（标题与输入提示、日期格式、默认选项、颜色说明）。</p>
+<div class="box warn"><span class="h">易错提醒：不要照搬旧环境</span>
+<p>湖北样题的软件版本是当年的配置。练习时用你现在的环境（VS 2022、SQL Server 2022、新版 Android Studio）即可，只学它的题型和评分思路。比赛环境以你所参加比赛的技术文件为准。</p></div>
+
+<h2 id="s6"><span class="sec">06</span>匈牙利赛题：读英文题、按文档交付</h2>
+<div class="tw"><table>
+<tr><th>赛题</th><th>内容</th><th>练习要点</th></tr>
+<tr><td>WS2021 第一轮</td><td>桌面数据库应用，题目要求使用 MySQL；附设计稿、Logo、字体、图片和 JSON 数据</td><td>按设计稿还原界面；把 JSON 数据导入数据库（可改用 SQL Server）；读英文需求</td></tr>
+<tr><td>WS2024 第一轮</td><td>接口 + 登录 + 桌面界面，交付 API 和 UI 两个可执行程序；附 MySQL 格式的数据库脚本、Postman 测试集合、线框图和图标素材</td><td>按测试集合的预期实现接口（第 07 章练习 7-5）；桌面端调用自己的接口</td></tr>
+</table></div>
+<p>这两套题原本是“在家完成”的选拔题，没有严格时限。练习时建议给自己设定 2–3 小时的上限，按比赛方式完成主要功能。</p>
+<h3>把 MySQL 脚本转成 SQL Server</h3>
+<p>WS2024 附带的数据库脚本是 MySQL 导出的格式，不能直接在 SSMS 中执行。它只有一张 Routes 表（54 条线路数据），转换起来不难，而且是很好的练习。逐项修改：</p>
+<div class="tw"><table>
+<tr><th>MySQL 写法</th><th>SQL Server 写法</th></tr>
+<tr><td>以 <code>/*!40101 ... */;</code> 开头的行、<code>LOCK TABLES</code>、<code>UNLOCK TABLES</code></td><td>整行删除</td></tr>
+<tr><td>反引号 <code>`Routes`</code></td><td>去掉，或改为方括号 <code>[Routes]</code></td></tr>
+<tr><td><code>int(11)</code></td><td><code>INT</code></td></tr>
+<tr><td><code>AUTO_INCREMENT</code>（列定义中）</td><td><code>IDENTITY(1,1)</code></td></tr>
+<tr><td><code>longtext</code></td><td><code>NVARCHAR(MAX)</code></td></tr>
+<tr><td><code>) ENGINE=InnoDB ... COLLATE=...;</code></td><td><code>);</code></td></tr>
+<tr><td>插入时指定了 Id 值</td><td>插入前 <code>SET IDENTITY_INSERT Routes ON;</code>，插入语句写明列名，插入后 <code>SET IDENTITY_INSERT Routes OFF;</code></td></tr>
+<tr><td>字符串 <code>'Siófok kelet'</code>（含匈牙利语字母）</td><td>加 N 前缀：<code>N'Siófok kelet'</code>，否则在中文排序规则的数据库中，部分字母会变成问号</td></tr>
+<tr><td>文件末尾的 <code>CREATE USER ... GRANT ...</code></td><td>删除（SQL Server 的用户管理方式不同，练习用 Windows 身份验证即可）</td></tr>
+<tr><td>（文件开头）</td><td>加上 <code>CREATE DATABASE SessionOne;</code> 和 <code>USE SessionOne;</code></td></tr>
+</table></div>
+<p>转换后执行 <code>SELECT COUNT(*) FROM Routes;</code>，结果应为 54。字符串很多，手工加 N 前缀很费时：可以用 SSMS 或 Notepad++ 的“查找替换”（正则模式下，把 <code>,'</code> 替换为 <code>,N'</code>，再检查每行开头的第一个字符串）。注意 MySQL 中字符串里的 <code>\'</code> 在 SQL Server 中要写成两个单引号 <code>''</code>。</p>
+
+<h2 id="s7"><span class="sec">07</span>30% 改编法：一套样题变十套</h2>
+<p>辽宁文件说明正式赛题由样卷调整不超过 30% 形成，考核要素基本不变，但要素数量可能不同。所以最有针对性的练习，就是自己把样卷“改编”，再按改编后的要求做。改编时从下列卡片中抽 3–5 张，替换样卷中的对应要求：</p>
+<div class="tw"><table>
+<tr><th>#</th><th>改编卡</th><th>举例</th></tr>
+<tr><td>1</td><td>换校验规则</td><td>密码改为“8–16 位，必须含大写字母、小写字母和数字”</td></tr>
+<tr><td>2</td><td>换唯一性字段</td><td>用户名唯一 → 手机号唯一 + 身份证号唯一</td></tr>
+<tr><td>3</td><td>加一个输入项</td><td>注册时增加“身份证号”，并据此自动计算出生日期和性别</td></tr>
+<tr><td>4</td><td>换记住方式</td><td>记住密码 → 7 天内自动登录</td></tr>
+<tr><td>5</td><td>加失败处理</td><td>连续失败 3 次出现验证码 / 锁定 5 分钟</td></tr>
+<tr><td>6</td><td>换分页大小</td><td>每页 10 条 → 每页 8 条，并可选择 5 / 10 / 20</td></tr>
+<tr><td>7</td><td>加排序</td><td>点击列标题按该列排序（DataGridView 绑定 DataTable 时默认支持，分页时需在 SQL 中排序）</td></tr>
+<tr><td>8</td><td>加颜色规则</td><td>年龄 ≥ 80 岁的客户行显示为黄色，并加图例</td></tr>
+<tr><td>9</td><td>换统计维度</td><td>按月统计 → 按服务分类统计，折线图 → 饼图</td></tr>
+<tr><td>10</td><td>加导出</td><td>查询结果导出为 CSV 文件</td></tr>
+<tr><td>11</td><td>换验证码</td><td>6 位数字 → 4 位字母数字组合，有效期 1 分钟 → 5 分钟</td></tr>
+<tr><td>12</td><td>换登录方式</td><td>两种登录 → 三种登录（增加“用户名 + 密码”）</td></tr>
+<tr><td>13</td><td>换列表形式</td><td>列表 → 两列网格卡片</td></tr>
+<tr><td>14</td><td>加详情页</td><td>列表点击 → 详情页 → 再操作</td></tr>
+<tr><td>15</td><td>换图表</td><td>折线 → 柱状，增加“近 7 天 / 近 30 天”切换</td></tr>
+<tr><td>16</td><td>换传感器</td><td>摇一摇 → 光线传感器调节界面亮暗主题 / 计步器</td></tr>
+<tr><td>17</td><td>加状态流转</td><td>订单增加“服务中”状态，只有已支付的订单可以开始服务</td></tr>
+<tr><td>18</td><td>换测试模块</td><td>模块 C 的 11 个模块换成你自己 App 的 9 个功能，每个最少用例数重新分配</td></tr>
+<tr><td>19</td><td>换手册对象</td><td>为桌面端写操作手册</td></tr>
+<tr><td>20</td><td>换整个场景</td><td>智慧康养 → 智慧社区 / 校园食堂 / 共享单车（实体、字段全部重新设计）</td></tr>
+</table></div>
+<div class="ex"><span class="h">练习 12-1　改编并完成</span>
+<p>从改编卡中抽出 #1、#4、#6、#8、#9，写出改编后的模块 A 任务说明（像正式赛题一样写，包含分值），然后限时 2 小时完成，并按本章方法自评。</p></div>
+
+<h2 id="s8"><span class="sec">08</span>自造一套全新的题</h2>
+<p>模拟阶段后期，建议至少做一套“全新场景”的题，检验你是否真的掌握了方法，而不是记住了 SmartCare 的代码。自造题目的步骤：</p>
+<ol>
+<li><strong>选场景</strong>：从改编卡 #20 中选，或从生活中找（图书借阅、社区团购、驾校预约）。</li>
+<li><strong>设计数据库</strong>：5–8 张表，写建表脚本，造 50–100 条数据（含禁用账号、空值、已下架、已取消等“特殊数据”）。可以用 Excel 编数据，再拼成 INSERT 语句。</li>
+<li><strong>按样卷结构写题</strong>：A 模块 3 个任务（10 / 15 / 15 分），B 模块 3 个任务（10 / 15 / 15 分），C 模块用例与手册（10 / 10 分）。</li>
+<li><strong>写评分表</strong>：按本章方法拆成测量点。</li>
+<li><strong>交换做题</strong>：和同学互换各自出的题，限时完成后互相评分。</li>
+</ol>
+<div class="box tip"><span class="h">训练建议：出题本身就是训练</span>
+<p>写题和写评分表时，你会第一次站在裁判的角度思考“这句话怎么检查”。这种视角转换，比多做一套题更能提高你读题和自查的能力。</p></div>
+
+<h2 id="s9"><span class="sec">09</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>完成至少 2 次辽宁样卷全真模拟（含自拟任务卡），两次得分率都有记录</li>
+<li>完成湖北模块 A（3 小时内），并用湖北评分表自评</li>
+<li>完成 WS2024 脚本转换，并按 Postman 测试集合的预期实现接口</li>
+<li>完成练习 12-1 和至少一套自造新题</li>
+<li>最近一次全真模拟中，三个模块都在规定时间内完成交付</li>
+</ul></div>
+
+<div class="pager"><a href="11-schedule.html"><small>上一章</small>训练计划：标准版与强化版</a><a href="13-contest-day.html" style="text-align:right"><small>下一章</small>赛场战术与时间分配</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>

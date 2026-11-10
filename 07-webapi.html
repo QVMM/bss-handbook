@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Web API 接口：连接桌面与手机 · 商务软件解决方案零基础备赛教程</title>
+<link rel="stylesheet" href="styles.css"></head>
+<body><div class="layout"><aside class="sidebar"><a class="brand" href="index.html"><span class="t1">商务软件解决方案</span><span class="t2">零基础备赛教程 · 人社口 / 世赛第 09 项</span></a>
+<div class="group">开始</div><ol>
+<li><a href="index.html"><span class="no">·</span>首页 · 从这里开始</a></li>
+<li><a href="00-guide.html"><span class="no">00</span>如何使用本手册</a></li>
+</ol>
+<div class="group">认识赛项</div><ol>
+<li><a href="01-contest.html"><span class="no">01</span>赛项全景：比赛到底考什么</a></li>
+<li><a href="02-setup.html"><span class="no">02</span>电脑环境搭建与离线演练</a></li>
+</ol>
+<div class="group">学习路径</div><ol>
+<li><a href="03-thinking.html"><span class="no">03</span>计算思维与商务应用的结构</a></li>
+<li><a href="04-csharp.html"><span class="no">04</span>C# 从零开始</a></li>
+<li><a href="05-sql.html"><span class="no">05</span>SQL Server 与数据库设计</a></li>
+<li><a href="06-winforms.html"><span class="no">06</span>WinForms 桌面应用（模块 A）</a></li>
+<li><a class="active" href="07-webapi.html"><span class="no">07</span>Web API 与接口契约</a></li>
+<li><a href="08-android.html"><span class="no">08</span>Android 手机应用（模块 B）</a></li>
+<li><a href="09-uml.html"><span class="no">09</span>需求分析与 UML 建模</a></li>
+<li><a href="10-testing.html"><span class="no">10</span>应用测试与操作手册（模块 C）</a></li>
+</ol>
+<div class="group">训练与实战</div><ol>
+<li><a href="11-schedule.html"><span class="no">11</span>训练计划：标准版与强化版</a></li>
+<li><a href="12-mock.html"><span class="no">12</span>样卷精练：辽宁、湖北与国际题</a></li>
+<li><a href="13-contest-day.html"><span class="no">13</span>赛场战术与时间分配</a></li>
+<li><a href="14-mistakes.html"><span class="no">14</span>常见错误大全</a></li>
+</ol>
+<div class="group">工具箱</div><ol>
+<li><a href="15-templates.html"><span class="no">15</span>模板、清单与自评表</a></li>
+<li><a href="16-resources.html"><span class="no">16</span>学习资源与官方文档</a></li>
+<li><a href="17-glossary.html"><span class="no">17</span>术语表</a></li>
+<li><a href="18-python.html"><span class="no">附</span>附录：Python 数据分析（选修）</a></li>
+</ol></aside>
+<div class="main"><div class="topbar"><button type="button">目录</button><span>Web API 与接口契约</span></div>
+<main class="content">
+<p class="kicker">第 07 章 · 学习路径第五站</p>
+<h1>Web API 接口：连接桌面与手机</h1>
+<p class="lead">辽宁样卷模块 B 写着“本模块数据来源 Modul1 接口”。这句话的意思是：手机 App 不直接连数据库，而是通过你在模块 A 中做的接口读写数据。接口做不出来，模块 B 的数据功能就无从谈起。本章教你两种做法，并配一套完整的练习接口，第 08 章的手机端就用它。标准版 3 周，强化版 2 周。</p>
+<nav class="ptoc"><b>本章目录</b><ol><li><a href="#s1">接口是什么，为什么手机不能直接连数据库</a></li><li><a href="#s2">HTTP 与 JSON：必须懂的最少知识</a></li><li><a href="#s3">先设计，再编码：接口文档</a></li><li><a href="#s4">方案一：零依赖的 HttpListener 接口（保底方案）</a></li><li><a href="#s5">方案二：ASP.NET Web API 2（标准方案）</a></li><li><a href="#s6">测试接口：浏览器、curl 与一个小技巧</a></li><li><a href="#s7">让模拟器访问电脑上的接口</a></li><li><a href="#s8">交付：让裁判能把接口跑起来</a></li><li><a href="#s9">拓展练习</a></li><li><a href="#s10">本章过关检查</a></li></ol></nav>
+
+<h2 id="s1"><span class="sec">01</span>接口是什么，为什么手机不能直接连数据库</h2>
+<p>想象一个餐厅：数据库是后厨，手机 App 是顾客。顾客不能自己进后厨拿菜，而是向服务员点菜，服务员去后厨取来再端给顾客。<strong>接口（API）就是服务员</strong>：它规定了“能点什么菜（有哪些地址）”“怎么点（发送什么数据）”“端上来是什么样（返回什么数据）”。</p>
+<pre><code> ┌──────────────┐   HTTP 请求（URL + JSON）   ┌──────────────┐    SQL     ┌──────────────┐
+ │ 手机 App      │ ─────────────────────────▶ │  Web API     │ ─────────▶ │ SQL Server   │
+ │ (模块 B)      │ ◀───────────────────────── │  (模块 A 中)  │ ◀───────── │  SmartCare   │
+ └──────────────┘      HTTP 响应（JSON）       └──────────────┘   数据     └──────────────┘
+                                                  ▲
+                         桌面端 WinForms 直接连数据库（第 06 章）</code></pre>
+<p>手机不直接连数据库的原因：① Android 上没有可用的 SQL Server 驱动（也不应该把数据库密码放在手机里）；② 接口可以统一做校验和权限控制；③ 同一个接口可以同时给手机、网页、小程序用。这正是企业里的真实做法，也是比赛考查的能力点（辽宁能力目录中明确列有 WebAPI）。</p>
+
+<h2 id="s2"><span class="sec">02</span>HTTP 与 JSON：必须懂的最少知识</h2>
+<h3>一次 HTTP 请求由什么组成</h3>
+<div class="tw"><table>
+<tr><th>部分</th><th>例子</th><th>说明</th></tr>
+<tr><td>方法</td><td>GET / POST</td><td>GET 用来“查”，参数放在网址后面；POST 用来“提交”，数据放在请求体里</td></tr>
+<tr><td>地址（URL）</td><td><code>http://localhost:5000/api/services?keyword=助&amp;categoryId=1</code></td><td><code>?</code> 后面是查询参数，多个参数用 <code>&amp;</code> 连接</td></tr>
+<tr><td>请求头</td><td><code>Content-Type: application/json</code></td><td>告诉服务器“我发的是 JSON”</td></tr>
+<tr><td>请求体</td><td><code>{"phone":"13800000001","password":"abc12345"}</code></td><td>POST 时携带的数据</td></tr>
+<tr><td>状态码</td><td>200 / 400 / 404 / 500</td><td>200 成功；404 地址不存在；500 服务器内部出错</td></tr>
+</table></div>
+<h3>JSON 的语法</h3>
+<p>JSON 只有六种值：字符串（双引号）、数字、<code>true/false</code>、<code>null</code>、对象 <code>{ }</code>、数组 <code>[ ]</code>。对象是“键: 值”的集合，键必须用双引号。</p>
+<span class="fname">一个典型的接口返回</span><pre><code>{
+  "success": true,
+  "message": "成功",
+  "data": [
+    { "serviceId": 1, "serviceName": "上门助浴", "price": 120.00, "imageName": "bath.jpg" },
+    { "serviceId": 3, "serviceName": "居家保洁", "price": 80.00, "imageName": null }
+  ]
+}</code></pre>
+<div class="ex"><span class="h">练习 7-1　读懂 JSON</span>
+<p>针对上面的 JSON 回答：① <code>data</code> 是对象还是数组？有几个元素？② 第二个服务的图片是什么？手机端应该显示什么（提示：辽宁通用要求）？③ 写出一个表示“登录失败、提示密码错误”的返回（与上面结构一致）。</p>
+<details><summary>参考答案</summary><p>① 数组，2 个元素。② <code>null</code>，没有图片，应显示默认图片 default.jpg。③ <code>{"success": false, "message": "手机号或密码错误", "data": null}</code></p></details></div>
+
+<h2 id="s3"><span class="sec">03</span>先设计，再编码：接口文档</h2>
+<p>动手写代码之前，先写一份接口文档。比赛时这份文档就是你自己做模块 B 的“说明书”，也是交付物里体现专业度的部分（湖北样题模块 B 提供了 <code>WebAPI_technical.pdf</code>，就是这类文档）。本手册的练习接口约定如下（这是本手册自拟的约定，比赛中如果题目给了接口文档，严格按题目来）：</p>
+<ul>
+<li>基础地址：<code>http://localhost:5000</code></li>
+<li>所有返回统一为 <code>{ "success": 布尔, "message": 文字, "data": 数据 }</code></li>
+<li>字段名用小驼峰（<code>serviceName</code>），日期时间统一为 <code>yyyy-MM-dd HH:mm:ss</code>，日期为 <code>yyyy-MM-dd</code></li>
+<li>POST 请求体为 JSON，编码 UTF-8</li>
+</ul>
+<div class="tw"><table>
+<tr><th>#</th><th>方法</th><th>地址</th><th>参数 / 请求体</th><th>成功时 data</th></tr>
+<tr><td>1</td><td>POST</td><td>/api/customer/login</td><td><code>{"phone","password"}</code></td><td>客户对象（customerId、phone、realName、gender、birthDate、address、avatar、status）</td></tr>
+<tr><td>1b</td><td>POST</td><td>/api/customer/loginByCode</td><td><code>{"phone"}</code></td><td>同 1。验证码由手机端模拟校验通过后调用（练习约定，真实系统必须由服务器校验验证码）</td></tr>
+<tr><td>2</td><td>POST</td><td>/api/customer/register</td><td><code>{"phone","password"}</code></td><td><code>{"customerId"}</code></td></tr>
+<tr><td>3</td><td>POST</td><td>/api/customer/resetPassword</td><td><code>{"phone","newPassword"}</code></td><td>null</td></tr>
+<tr><td>4</td><td>GET</td><td>/api/categories</td><td>无</td><td>分类数组（categoryId、categoryName）</td></tr>
+<tr><td>5</td><td>GET</td><td>/api/services</td><td>keyword、categoryId（均可省略）</td><td>在售服务数组</td></tr>
+<tr><td>6</td><td>POST</td><td>/api/orders</td><td><code>{"customerId","serviceId","quantity","appointmentTime"}</code></td><td><code>{"orderId","orderNo","amount"}</code></td></tr>
+<tr><td>7</td><td>GET</td><td>/api/orders</td><td>customerId</td><td>该客户的订单数组（新的在前）</td></tr>
+<tr><td>8</td><td>POST</td><td>/api/orders/cancel</td><td><code>{"orderId","customerId"}</code></td><td>null（只能取消自己的待支付/已支付订单）</td></tr>
+<tr><td>9</td><td>GET</td><td>/api/health</td><td>customerId、type（血压/血糖/心率，可省略）</td><td>健康记录数组（按时间升序）</td></tr>
+<tr><td>10</td><td>GET</td><td>/api/contacts</td><td>customerId</td><td>紧急联系人数组</td></tr>
+</table></div>
+<div class="box tip"><span class="h">训练建议：为什么要统一返回结构</span>
+<p>如果有的接口返回数组、有的返回对象、失败时又返回一段文字，手机端每个页面都要写不同的解析代码，非常容易出错。统一成 <code>success/message/data</code> 后，手机端只写一个通用方法：先看 <code>success</code>，失败就把 <code>message</code> 弹出来，成功再取 <code>data</code>。这样连错误提示都是现成的。</p></div>
+
+<h2 id="s4"><span class="sec">04</span>方案一：零依赖的 HttpListener 接口（保底方案）</h2>
+<p>这个方案只用 .NET Framework 自带的类，不需要安装任何 NuGet 包、不需要 IIS，<strong>在完全断网的电脑上也一定能建出来</strong>。比赛断网是常态，所以本手册把它作为必须掌握的保底方案。</p>
+<h3>建项目</h3>
+<ol>
+<li>在 Modul1 解决方案上右键 → 添加 → 新建项目 → “控制台应用(.NET Framework)”，名称 <code>SmartCareApi</code>，框架 4.8。</li>
+<li>添加引用：<code>System.Web.Extensions</code>（JSON 序列化）、<code>System.Configuration</code>（读连接字符串）。</li>
+<li>App.config 中加入与桌面端相同的 <code>connectionStrings</code> 节（见第 06 章）。</li>
+<li>把桌面端的 <code>DbHelper.cs</code> 复制过来，命名空间改为 <code>SmartCareApi</code>。</li>
+</ol>
+<h3>JSON 工具类</h3>
+<p>.NET Framework 自带的 <code>JavaScriptSerializer</code> 有个坑：直接序列化 <code>DateTime</code> 会输出 <code>"\/Date(1727740800000)\/"</code> 这样的格式，手机端很难处理。下面的工具类把查询结果逐行转换成字典，日期统一转成字符串，字段名统一转成小驼峰：</p>
+<span class="fname">Json.cs</span><pre><code>using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Web.Script.Serialization;
+
+namespace SmartCareApi
+{
+    /// &lt;summary&gt;JSON 工具：只用 .NET Framework 自带的 JavaScriptSerializer（引用 System.Web.Extensions）。&lt;/summary&gt;
+    public static class Json
+    {
+        private static readonly JavaScriptSerializer Serializer = new JavaScriptSerializer { MaxJsonLength = int.MaxValue };
+
+        public static string Stringify(object obj) { return Serializer.Serialize(obj); }
+
+        public static Dictionary&lt;string, object&gt; Parse(string json)
+        {
+            if (string.IsNullOrWhiteSpace(json)) return new Dictionary&lt;string, object&gt;();
+            return Serializer.Deserialize&lt;Dictionary&lt;string, object&gt;&gt;(json);
+        }
+
+        /// &lt;summary&gt;
+        /// DataTable 转成“字典列表”。日期统一转成 yyyy-MM-dd HH:mm:ss 字符串，
+        /// DBNull 转成 null，避免 JavaScriptSerializer 输出 /Date(...)/ 这种手机端难以解析的格式。
+        /// &lt;/summary&gt;
+        public static List&lt;Dictionary&lt;string, object&gt;&gt; Rows(DataTable dt)
+        {
+            List&lt;Dictionary&lt;string, object&gt;&gt; list = new List&lt;Dictionary&lt;string, object&gt;&gt;();
+            foreach (DataRow r in dt.Rows)
+            {
+                Dictionary&lt;string, object&gt; d = new Dictionary&lt;string, object&gt;();
+                foreach (DataColumn c in dt.Columns)
+                {
+                    object v = r[c];
+                    if (v == DBNull.Value) v = null;
+                    else if (v is DateTime) v = ((DateTime)v).ToString("yyyy-MM-dd HH:mm:ss");
+                    d[ToCamel(c.ColumnName)] = v;
+                }
+                list.Add(d);
+            }
+            return list;
+        }
+
+        // ServiceName -&gt; serviceName：JSON 字段统一用小驼峰
+        private static string ToCamel(string s)
+        {
+            return string.IsNullOrEmpty(s) ? s : char.ToLowerInvariant(s[0]) + s.Substring(1);
+        }
+
+        /// &lt;summary&gt;统一的返回结构：{ "success": true/false, "message": "...", "data": ... }&lt;/summary&gt;
+        public static string Ok(object data) { return Stringify(new { success = true, message = "成功", data = data }); }
+        public static string Fail(string message) { return Stringify(new { success = false, message = message, data = (object)null }); }
+    }
+}</code></pre>
+<h3>接口服务</h3>
+<span class="fname">ApiServer.cs</span><pre><code>using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Net;
+using System.Text;
+
+namespace SmartCareApi
+{
+    /// &lt;summary&gt;
+    /// 零依赖的 HTTP 接口服务：只用 .NET Framework 自带的 HttpListener，不需要任何 NuGet 包。
+    /// &lt;/summary&gt;
+    public class ApiServer
+    {
+        private readonly HttpListener _listener = new HttpListener();
+
+        public ApiServer(string prefix)          // 例如 "http://localhost:5000/"
+        {
+            _listener.Prefixes.Add(prefix);
+        }
+
+        public void Start()
+        {
+            _listener.Start();
+            while (true)
+            {
+                HttpListenerContext ctx = _listener.GetContext();   // 等待下一个请求
+                try { Handle(ctx); }
+                catch (Exception ex) { Write(ctx, 500, Json.Fail("服务器错误：" + ex.Message)); }
+            }
+        }
+
+        private void Handle(HttpListenerContext ctx)
+        {
+            HttpListenerRequest req = ctx.Request;
+            string method = req.HttpMethod.ToUpperInvariant();
+            string path = req.Url.AbsolutePath.TrimEnd('/').ToLowerInvariant();
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss") + "  " + method + " " + req.Url.PathAndQuery);
+
+            if (method == "OPTIONS") { Write(ctx, 200, ""); return; }
+
+            string body = "";
+            if (req.HasEntityBody)
+                using (StreamReader sr = new StreamReader(req.InputStream, Encoding.UTF8)) body = sr.ReadToEnd();
+
+            // ---------- 路由表：方法 + 路径 -&gt; 处理函数 ----------
+            if (method == "POST" &amp;&amp; path == "/api/customer/login")          { Write(ctx, 200, Login(Json.Parse(body))); return; }
+            if (method == "POST" &amp;&amp; path == "/api/customer/loginbycode")    { Write(ctx, 200, LoginByCode(Json.Parse(body))); return; }
+            if (method == "POST" &amp;&amp; path == "/api/customer/register")       { Write(ctx, 200, Register(Json.Parse(body))); return; }
+            if (method == "GET"  &amp;&amp; path == "/api/categories")              { Write(ctx, 200, Categories()); return; }
+            if (method == "GET"  &amp;&amp; path == "/api/services")                { Write(ctx, 200, Services(req.QueryString["keyword"], req.QueryString["categoryId"])); return; }
+            if (method == "POST" &amp;&amp; path == "/api/orders")                  { Write(ctx, 200, CreateOrder(Json.Parse(body))); return; }
+            if (method == "GET"  &amp;&amp; path == "/api/orders")                  { Write(ctx, 200, Orders(req.QueryString["customerId"])); return; }
+            if (method == "POST" &amp;&amp; path == "/api/orders/cancel")           { Write(ctx, 200, CancelOrder(Json.Parse(body))); return; }
+            if (method == "POST" &amp;&amp; path == "/api/customer/resetpassword")  { Write(ctx, 200, ResetPassword(Json.Parse(body))); return; }
+            if (method == "GET"  &amp;&amp; path == "/api/health")                  { Write(ctx, 200, Health(req.QueryString["customerId"], req.QueryString["type"])); return; }
+            if (method == "GET"  &amp;&amp; path == "/api/contacts")                { Write(ctx, 200, Contacts(req.QueryString["customerId"])); return; }
+
+            Write(ctx, 404, Json.Fail("接口不存在：" + method + " " + path));
+        }
+
+        private static void Write(HttpListenerContext ctx, int status, string json)
+        {
+            byte[] buf = Encoding.UTF8.GetBytes(json);
+            ctx.Response.StatusCode = status;
+            ctx.Response.ContentType = "application/json; charset=utf-8";
+            ctx.Response.AddHeader("Access-Control-Allow-Origin", "*");
+            ctx.Response.ContentLength64 = buf.Length;
+            ctx.Response.OutputStream.Write(buf, 0, buf.Length);
+            ctx.Response.OutputStream.Close();
+        }
+
+        private static string Str(Dictionary&lt;string, object&gt; d, string key)
+        {
+            object v;
+            return d.TryGetValue(key, out v) &amp;&amp; v != null ? v.ToString().Trim() : "";
+        }
+
+        // POST /api/customer/login   请求：{ "phone": "...", "password": "..." }
+        private string Login(Dictionary&lt;string, object&gt; p)
+        {
+            string phone = Str(p, "phone"), pwd = Str(p, "password");
+            if (phone == "" || pwd == "") return Json.Fail("手机号和密码不能为空");
+            DataTable dt = DbHelper.Query(
+                "SELECT CustomerId, Phone, RealName, Gender, CONVERT(CHAR(10), BirthDate, 120) AS BirthDate, Address, Avatar, Status FROM Customer WHERE Phone = @ph AND Password = @pw",
+                new SqlParameter("@ph", phone), new SqlParameter("@pw", pwd));
+            if (dt.Rows.Count == 0) return Json.Fail("手机号或密码错误");
+            if (Convert.ToInt32(dt.Rows[0]["Status"]) == 0) return Json.Fail("该账号已被禁用");
+            return Json.Ok(Json.Rows(dt)[0]);
+        }
+
+        // POST /api/customer/loginByCode   请求：{ "phone": "..." }
+        // 练习约定：验证码由手机端模拟生成和校验，校验通过后调用本接口按手机号取回客户信息。
+        // 真实系统中验证码必须由服务器生成、发送和校验，这里只是比赛中“模拟”的简化做法。
+        private string LoginByCode(Dictionary&lt;string, object&gt; p)
+        {
+            string phone = Str(p, "phone");
+            DataTable dt = DbHelper.Query(
+                "SELECT CustomerId, Phone, RealName, Gender, CONVERT(CHAR(10), BirthDate, 120) AS BirthDate, Address, Avatar, Status FROM Customer WHERE Phone = @ph",
+                new SqlParameter("@ph", phone));
+            if (dt.Rows.Count == 0) return Json.Fail("该手机号未注册");
+            if (Convert.ToInt32(dt.Rows[0]["Status"]) == 0) return Json.Fail("该账号已被禁用");
+            return Json.Ok(Json.Rows(dt)[0]);
+        }
+
+        // POST /api/customer/register   请求：{ "phone": "...", "password": "..." }
+        private string Register(Dictionary&lt;string, object&gt; p)
+        {
+            string phone = Str(p, "phone"), pwd = Str(p, "password");
+            if (phone.Length != 11) return Json.Fail("手机号必须是 11 位");
+            if (pwd.Length &lt; 8) return Json.Fail("密码至少 8 位");
+            int n = Convert.ToInt32(DbHelper.Scalar("SELECT COUNT(*) FROM Customer WHERE Phone = @ph", new SqlParameter("@ph", phone)));
+            if (n &gt; 0) return Json.Fail("该手机号已注册");
+            object id = DbHelper.Scalar(
+                "INSERT INTO Customer (Phone, Password) VALUES (@ph, @pw); SELECT CAST(SCOPE_IDENTITY() AS INT);",
+                new SqlParameter("@ph", phone), new SqlParameter("@pw", pwd));
+            return Json.Ok(new { customerId = Convert.ToInt32(id) });
+        }
+
+        // GET /api/categories
+        private string Categories()
+        {
+            return Json.Ok(Json.Rows(DbHelper.Query("SELECT CategoryId, CategoryName FROM ServiceCategory ORDER BY CategoryId")));
+        }
+
+        // GET /api/services?keyword=助&amp;categoryId=1    两个参数都可省略；只返回在售服务
+        private string Services(string keyword, string categoryId)
+        {
+            string sql = @"SELECT s.ServiceId, s.ServiceName, s.Price, s.DurationMinutes, s.Description, s.ImageName,
+                                  c.CategoryId, c.CategoryName
+                           FROM CareService s JOIN ServiceCategory c ON s.CategoryId = c.CategoryId
+                           WHERE s.IsOnSale = 1";
+            List&lt;SqlParameter&gt; ps = new List&lt;SqlParameter&gt;();
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                sql += " AND s.ServiceName LIKE @kw";
+                ps.Add(new SqlParameter("@kw", "%" + keyword.Trim() + "%"));
+            }
+            int cid;
+            if (int.TryParse(categoryId, out cid) &amp;&amp; cid &gt; 0)
+            {
+                sql += " AND s.CategoryId = @cid";
+                ps.Add(new SqlParameter("@cid", SqlDbType.Int) { Value = cid });
+            }
+            sql += " ORDER BY s.ServiceId";
+            return Json.Ok(Json.Rows(DbHelper.Query(sql, ps.ToArray())));
+        }
+
+        // POST /api/orders   请求：{ "customerId": 1, "serviceId": 2, "quantity": 1, "appointmentTime": "2026-12-01 09:00:00" }
+        private string CreateOrder(Dictionary&lt;string, object&gt; p)
+        {
+            int customerId, serviceId, qty;
+            DateTime time;
+            if (!int.TryParse(Str(p, "customerId"), out customerId) || !int.TryParse(Str(p, "serviceId"), out serviceId))
+                return Json.Fail("缺少客户或服务编号");
+            if (!int.TryParse(Str(p, "quantity"), out qty) || qty &lt;= 0) return Json.Fail("数量必须是正整数");
+            if (!DateTime.TryParse(Str(p, "appointmentTime"), out time)) return Json.Fail("预约时间格式应为 yyyy-MM-dd HH:mm:ss");
+            if (time &lt;= DateTime.Now) return Json.Fail("预约时间必须晚于当前时间");
+
+            object price = DbHelper.Scalar("SELECT Price FROM CareService WHERE ServiceId = @id AND IsOnSale = 1",
+                new SqlParameter("@id", SqlDbType.Int) { Value = serviceId });
+            if (price == null) return Json.Fail("服务不存在或已下架");
+            decimal amount = Convert.ToDecimal(price) * qty;
+            string orderNo = "SO" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
+
+            object id = DbHelper.Scalar(@"INSERT INTO ServiceOrder (OrderNo, CustomerId, ServiceId, Quantity, Amount, AppointmentTime)
+                                          VALUES (@no, @c, @s, @q, @a, @t); SELECT CAST(SCOPE_IDENTITY() AS INT);",
+                new SqlParameter("@no", orderNo),
+                new SqlParameter("@c", SqlDbType.Int) { Value = customerId },
+                new SqlParameter("@s", SqlDbType.Int) { Value = serviceId },
+                new SqlParameter("@q", SqlDbType.Int) { Value = qty },
+                new SqlParameter("@a", SqlDbType.Decimal) { Value = amount, Precision = 10, Scale = 2 },
+                new SqlParameter("@t", SqlDbType.DateTime) { Value = time });
+            return Json.Ok(new { orderId = Convert.ToInt32(id), orderNo = orderNo, amount = amount });
+        }
+
+        // GET /api/orders?customerId=1
+        private string Orders(string customerId)
+        {
+            int cid;
+            if (!int.TryParse(customerId, out cid)) return Json.Fail("缺少 customerId");
+            DataTable dt = DbHelper.Query(@"SELECT o.OrderId, o.OrderNo, s.ServiceName, o.Quantity, o.Amount,
+                                                   o.AppointmentTime, o.Status, o.CreatedAt
+                                            FROM ServiceOrder o JOIN CareService s ON o.ServiceId = s.ServiceId
+                                            WHERE o.CustomerId = @c ORDER BY o.CreatedAt DESC",
+                new SqlParameter("@c", SqlDbType.Int) { Value = cid });
+            return Json.Ok(Json.Rows(dt));
+        }
+
+        // POST /api/orders/cancel   请求：{ "orderId": 30, "customerId": 1 }   只能取消自己的、待支付或已支付的订单
+        private string CancelOrder(Dictionary&lt;string, object&gt; p)
+        {
+            int orderId, customerId;
+            if (!int.TryParse(Str(p, "orderId"), out orderId) || !int.TryParse(Str(p, "customerId"), out customerId))
+                return Json.Fail("缺少订单或客户编号");
+            int n = DbHelper.Execute("UPDATE ServiceOrder SET Status = 3 WHERE OrderId = @o AND CustomerId = @c AND Status IN (0, 1)",
+                new SqlParameter("@o", SqlDbType.Int) { Value = orderId },
+                new SqlParameter("@c", SqlDbType.Int) { Value = customerId });
+            return n == 1 ? Json.Ok(null) : Json.Fail("订单不存在或当前状态不能取消");
+        }
+
+        // POST /api/customer/resetPassword   请求：{ "phone": "...", "newPassword": "..." }
+        // 验证码在手机端模拟校验，接口只负责改密码
+        private string ResetPassword(Dictionary&lt;string, object&gt; p)
+        {
+            string phone = Str(p, "phone"), pwd = Str(p, "newPassword");
+            if (pwd.Length &lt; 8) return Json.Fail("密码至少 8 位");
+            int n = DbHelper.Execute("UPDATE Customer SET Password = @pw WHERE Phone = @ph",
+                new SqlParameter("@pw", pwd), new SqlParameter("@ph", phone));
+            return n == 1 ? Json.Ok(null) : Json.Fail("该手机号未注册");
+        }
+
+        // GET /api/health?customerId=1&amp;type=血压    type 可省略；按测量时间升序，方便画折线
+        private string Health(string customerId, string type)
+        {
+            int cid;
+            if (!int.TryParse(customerId, out cid)) return Json.Fail("缺少 customerId");
+            string sql = "SELECT RecordId, RecordType, Value1, Value2, MeasuredAt FROM HealthRecord WHERE CustomerId = @c";
+            List&lt;SqlParameter&gt; ps = new List&lt;SqlParameter&gt; { new SqlParameter("@c", SqlDbType.Int) { Value = cid } };
+            if (!string.IsNullOrWhiteSpace(type))
+            {
+                sql += " AND RecordType = @t";
+                ps.Add(new SqlParameter("@t", type.Trim()));
+            }
+            sql += " ORDER BY MeasuredAt";
+            return Json.Ok(Json.Rows(DbHelper.Query(sql, ps.ToArray())));
+        }
+
+        // GET /api/contacts?customerId=1   紧急联系人
+        private string Contacts(string customerId)
+        {
+            int cid;
+            if (!int.TryParse(customerId, out cid)) return Json.Fail("缺少 customerId");
+            return Json.Ok(Json.Rows(DbHelper.Query(
+                "SELECT ContactId, ContactName, Phone, Relation FROM EmergencyContact WHERE CustomerId = @c ORDER BY ContactId",
+                new SqlParameter("@c", SqlDbType.Int) { Value = cid })));
+        }
+    }
+}</code></pre>
+<h3>启动入口</h3>
+<span class="fname">Program.cs</span><pre><code>using System;
+
+namespace SmartCareApi
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string prefix = "http://localhost:5000/";
+            Console.WriteLine("智慧康养平台接口服务已启动：" + prefix);
+            Console.WriteLine("关闭本窗口即停止服务。");
+            try
+            {
+                new ApiServer(prefix).Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("启动失败：" + ex.Message);
+                Console.WriteLine("如果提示“拒绝访问”，请检查地址是否写成了 http://localhost:端口/，或以管理员身份运行。");
+                Console.ReadKey();
+            }
+        }
+    }
+}</code></pre>
+<p>启动方法：把 <code>SmartCareApi</code> 设为启动项目（右键 → 设为启动项目）后按 F5；或者直接双击 <code>bin\Debug\SmartCareApi.exe</code>。黑色窗口显示“接口服务已启动”后就可以访问了，每收到一个请求，窗口里都会打印一行日志，调试时非常直观。</p>
+<div class="box warn"><span class="h">易错提醒：拒绝访问</span>
+<p>HttpListener 的地址写成 <code>http://localhost:5000/</code> 时普通权限即可运行。如果写成 <code>http://+:5000/</code> 或 <code>http://*:5000/</code>（监听所有地址），Windows 会要求管理员权限，否则报“拒绝访问”。这时要么以管理员身份运行 Visual Studio / exe，要么用管理员命令提示符执行 <code>netsh http add urlacl url=http://+:5000/ user=Everyone</code>。本手册统一用 localhost，配合下文的 adb reverse，不需要管理员权限。</p></div>
+<div class="box note"><span class="h">知识点：同时运行桌面端和接口</span>
+<p>调试时想同时启动两个项目：右键解决方案 → 属性 → 启动项目 → 选择“多个启动项目”，把 SmartCareDesk 和 SmartCareApi 的操作都设为“启动”。</p></div>
+
+<h2 id="s5"><span class="sec">05</span>方案二：ASP.NET Web API 2（标准方案）</h2>
+<p>ASP.NET Web API 2 是 .NET Framework 上的标准接口框架，路由、参数绑定、JSON 序列化都由框架完成，代码更简洁，也更“像企业项目”。前提是：Visual Studio 安装了“ASP.NET 和 Web 开发”工作负载，且项目模板所需的 NuGet 包能够还原（模板创建项目时会引用 <code>Microsoft.AspNet.WebApi</code> 等包）。<strong>在熟悉设备时，务必在赛场电脑上试建一次 Web API 项目，确认能编译运行</strong>；不能，就用方案一。</p>
+<h3>建项目</h3>
+<ol>
+<li>添加新项目 → “ASP.NET Web 应用程序(.NET Framework)” → 名称 <code>SmartCareWebApi</code>，框架 4.8 → 模板选“Web API”（或选“空”并勾选“Web API”）。</li>
+<li>项目属性 → Web → 项目 URL 改为 <code>http://localhost:5000/</code>，点“创建虚拟目录”。这样地址固定，手机端不用跟着改。</li>
+<li>添加引用 <code>System.Configuration</code>（通常已有），Web.config 的 <code>&lt;connectionStrings&gt;</code> 中加入 SmartCare 连接字符串，复制 DbHelper。</li>
+</ol>
+<h3>配置：只返回 JSON、小驼峰、统一日期</h3>
+<p>打开 <code>App_Start\WebApiConfig.cs</code>，替换为：</p>
+<span class="fname">App_Start\WebApiConfig.cs</span><pre><code>using System.Web.Http;
+using Newtonsoft.Json.Serialization;
+
+namespace SmartCareApi
+{
+    public static class WebApiConfig
+    {
+        public static void Register(HttpConfiguration config)
+        {
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional });
+
+            // 只返回 JSON：去掉 XML 格式化器，浏览器里看到的也是 JSON
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            var json = config.Formatters.JsonFormatter.SerializerSettings;
+            json.ContractResolver = new CamelCasePropertyNamesContractResolver();   // 字段名小驼峰
+            json.DateFormatString = "yyyy-MM-dd HH:mm:ss";                          // 统一日期格式
+        }
+    }
+}</code></pre>
+<span class="fname">Models\ApiResult.cs</span><pre><code>namespace SmartCareApi
+{
+    /// &lt;summary&gt;所有接口统一的返回结构。&lt;/summary&gt;
+    public class ApiResult
+    {
+        public bool Success { get; set; }
+        public string Message { get; set; }
+        public object Data { get; set; }
+
+        public static ApiResult Ok(object data) { return new ApiResult { Success = true, Message = "成功", Data = data }; }
+        public static ApiResult Fail(string msg) { return new ApiResult { Success = false, Message = msg }; }
+    }
+}</code></pre>
+<h3>控制器</h3>
+<p>在 Controllers 文件夹添加“Web API 2 控制器 - 空”：</p>
+<span class="fname">Controllers\CustomerController.cs</span><pre><code>using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Web.Http;
+
+namespace SmartCareApi.Controllers
+{
+    public class LoginRequest
+    {
+        public string Phone { get; set; }
+        public string Password { get; set; }
+    }
+
+    [RoutePrefix("api/customer")]
+    public class CustomerController : ApiController
+    {
+        // POST api/customer/login
+        [HttpPost, Route("login")]
+        public ApiResult Login([FromBody] LoginRequest req)
+        {
+            if (req == null || string.IsNullOrWhiteSpace(req.Phone) || string.IsNullOrWhiteSpace(req.Password))
+                return ApiResult.Fail("手机号和密码不能为空");
+            DataTable dt = DbHelper.Query(
+                @"SELECT CustomerId, Phone, RealName, Gender, CONVERT(CHAR(10), BirthDate, 120) AS BirthDate,
+                         Address, Avatar, Status
+                  FROM Customer WHERE Phone = @ph AND Password = @pw",
+                new SqlParameter("@ph", req.Phone.Trim()), new SqlParameter("@pw", req.Password));
+            if (dt.Rows.Count == 0) return ApiResult.Fail("手机号或密码错误");
+            if (Convert.ToInt32(dt.Rows[0]["Status"]) == 0) return ApiResult.Fail("该账号已被禁用");
+            return ApiResult.Ok(ToDict(dt.Rows[0]));   // 单条记录返回对象，和 HttpListener 版保持一致
+        }
+
+        /// &lt;summary&gt;把一行数据转成字典；配合小驼峰设置，键名会输出为 customerId、realName……&lt;/summary&gt;
+        private static System.Collections.Generic.Dictionary&lt;string, object&gt; ToDict(DataRow r)
+        {
+            var d = new System.Collections.Generic.Dictionary&lt;string, object&gt;();
+            foreach (DataColumn c in r.Table.Columns) d[c.ColumnName] = r[c] == DBNull.Value ? null : r[c];
+            return d;
+        }
+    }
+
+    public class ServicesController : ApiController
+    {
+        // GET api/services?keyword=助&amp;categoryId=1
+        [HttpGet, Route("api/services")]
+        public ApiResult Get(string keyword = null, int categoryId = 0)
+        {
+            string sql = @"SELECT s.ServiceId, s.ServiceName, s.Price, s.DurationMinutes, s.ImageName, c.CategoryName
+                           FROM CareService s JOIN ServiceCategory c ON s.CategoryId = c.CategoryId
+                           WHERE s.IsOnSale = 1
+                             AND (@kw IS NULL OR s.ServiceName LIKE '%' + @kw + '%')
+                             AND (@cid = 0 OR s.CategoryId = @cid)
+                           ORDER BY s.ServiceId";
+            DataTable dt = DbHelper.Query(sql,
+                new SqlParameter("@kw", SqlDbType.NVarChar, 50) { Value = (object)keyword ?? DBNull.Value },
+                new SqlParameter("@cid", SqlDbType.Int) { Value = categoryId });
+            return ApiResult.Ok(dt);     // Json.NET 会把 DataTable 序列化为对象数组
+        }
+    }
+}</code></pre>
+<p>对比方案一可以看出：Web API 2 自动把请求体 JSON 绑定到 <code>LoginRequest</code> 对象（属性名不区分大小写），自动把返回对象序列化为 JSON；<code>[Route]</code> 特性直接写出地址。其余接口请你仿照完成（练习 7-3）。</p>
+<div class="box warn"><span class="h">易错提醒：IIS Express 的 400 Bad Request</span>
+<p>IIS Express 默认只接受主机名为 <code>localhost</code> 的请求。模拟器用 <code>10.0.2.2:5000</code> 访问时，请求头中的主机名是 10.0.2.2，IIS Express 会直接返回“Bad Request - Invalid Hostname”。HttpListener 绑定 localhost 时也有同样的限制。最省事的解决办法是下一节的 <code>adb reverse</code>：让手机也用 localhost 访问。</p></div>
+
+<h2 id="s6"><span class="sec">06</span>测试接口：浏览器、curl 与一个小技巧</h2>
+<h3>GET 接口：浏览器直接打开</h3>
+<p>接口启动后，在浏览器地址栏输入 <code>http://localhost:5000/api/services?categoryId=1</code>，能看到 JSON 就说明接口、数据库、连接字符串全部正常。用练习库测试，应返回生活照料类的 3 个在售服务（上门助浴 120.00、助餐配送 25.00、居家保洁 80.00）。</p>
+<h3>POST 接口：curl.exe</h3>
+<p>Windows 10 及以上自带 <code>curl.exe</code>。在命令提示符（cmd）中，JSON 里的双引号需要转义，很容易写错。<strong>技巧：把请求体写在文件里</strong>：</p>
+<span class="fname">login.json（用记事本保存为 UTF-8）</span><pre><code>{"phone":"13800000001","password":"abc12345"}</code></pre>
+<span class="fname">命令提示符</span><pre><code>curl.exe -X POST http://localhost:5000/api/customer/login -H "Content-Type: application/json" --data-binary @login.json</code></pre>
+<p>预期返回（练习库数据）：</p>
+<pre><code>{"success":true,"message":"成功","data":{"customerId":1,"phone":"13800000001","realName":"王秀英","gender":"女","birthDate":"1948-03-12","address":"和平区南京街 12 号","avatar":null,"status":1}}</code></pre>
+<p>注意：在 PowerShell 里 <code>curl</code> 是另一个命令的别名，一定要写全 <code>curl.exe</code>。如果命令窗口中中文显示为乱码，是控制台编码的问题，不影响接口本身；可以先执行 <code>chcp 65001</code> 再测试。</p>
+<div class="ex"><span class="h">练习 7-2　接口测试清单</span>
+<p>启动方案一的接口，逐条测试并记录实际返回，与预期对比：</p>
+<div class="tw"><table>
+<tr><th>#</th><th>请求</th><th>预期</th></tr>
+<tr><td>1</td><td>登录 13800000001 / abc12345</td><td>success=true，realName=王秀英</td></tr>
+<tr><td>2</td><td>登录 13800000005 / abc12345</td><td>success=false，“该账号已被禁用”</td></tr>
+<tr><td>3</td><td>登录 13800000001 / 错误密码</td><td>success=false，“手机号或密码错误”</td></tr>
+<tr><td>4</td><td>注册 13811112222 / abc12345，再注册一次</td><td>第一次成功返回 customerId；第二次“该手机号已注册”</td></tr>
+<tr><td>5</td><td>GET /api/services?keyword=助&amp;categoryId=1</td><td>上门助浴、助餐配送</td></tr>
+<tr><td>6</td><td>下单：customerId=1，serviceId=8，quantity=1</td><td>“服务不存在或已下架”（中医推拿已下架）</td></tr>
+<tr><td>7</td><td>下单：quantity=0</td><td>“数量必须是正整数”</td></tr>
+<tr><td>8</td><td>GET /api/health?customerId=1&amp;type=血压</td><td>7 条记录，第一条 138/86，时间 2026-10-01 08:00:00</td></tr>
+<tr><td>9</td><td>GET /api/contacts?customerId=1</td><td>王小明（儿子）、王小红（女儿）</td></tr>
+<tr><td>10</td><td>取消订单 orderId=30，customerId=2</td><td>“订单不存在或当前状态不能取消”（不是他的订单）</td></tr>
+<tr><td>11</td><td>取消订单 orderId=30，customerId=1，连续两次</td><td>第一次成功；第二次失败（已取消的不能再取消）</td></tr>
+<tr><td>12</td><td>GET /api/nothing</td><td>状态码 404，“接口不存在”</td></tr>
+</table></div>
+<p>测试会修改数据。测完后重新执行练习库脚本，把数据恢复原样。</p></div>
+
+<h2 id="s7"><span class="sec">07</span>让模拟器访问电脑上的接口</h2>
+<p>Android 模拟器是一台独立的虚拟手机，在模拟器里 <code>localhost</code> 指的是<strong>模拟器自己</strong>，不是你的电脑。有两种办法：</p>
+<div class="tw"><table>
+<tr><th>办法</th><th>手机端地址</th><th>说明</th></tr>
+<tr><td>A. 特殊地址 10.0.2.2（官方文档说明的模拟器网络地址）</td><td><code>http://10.0.2.2:5000/</code></td><td>10.0.2.2 在模拟器中代表电脑的回环地址。但请求的主机名变成 10.0.2.2，IIS Express 和绑定 localhost 的 HttpListener 会返回 400</td></tr>
+<tr><td>B. 端口反向映射（推荐）</td><td><code>http://localhost:5000/</code></td><td>在电脑上执行一次 <code>adb reverse tcp:5000 tcp:5000</code>，模拟器访问自己的 5000 端口就会被转到电脑的 5000 端口，主机名仍是 localhost，两种接口方案都不用改</td></tr>
+</table></div>
+<span class="fname">命令提示符（模拟器启动后执行）</span><pre><code>D:\Android\Sdk\platform-tools\adb.exe devices
+D:\Android\Sdk\platform-tools\adb.exe reverse tcp:5000 tcp:5000
+D:\Android\Sdk\platform-tools\adb.exe reverse --list</code></pre>
+<ul>
+<li><code>adb devices</code> 应列出 <code>emulator-5554 device</code>；列表为空说明模拟器还没启动好。</li>
+<li>模拟器每次重启（或冷启动）后，映射会失效，要重新执行。把这三行保存成 <code>映射端口.bat</code> 放在桌面，双击即可。</li>
+<li>SDK 路径以你自己的安装位置为准（Android Studio → Settings → Languages &amp; Frameworks → Android SDK 顶部可以看到）。</li>
+</ul>
+<div class="box check"><span class="h">验证</span><p>模拟器中打开自带浏览器，访问 <code>http://localhost:5000/api/categories</code>，能看到 JSON 即为成功。看不到时按顺序排查：接口窗口是否开着 → 电脑浏览器能否访问 → adb reverse 是否执行 → 端口号是否一致。</p></div>
+
+<h2 id="s8"><span class="sec">08</span>交付：让裁判能把接口跑起来</h2>
+<p>模块 B 的评分是在裁判电脑上运行你的 APK 进行的，而 APK 的数据来自接口。<strong>训练建议</strong>：在 Modul1 和 Modul2 的说明文件中都写清楚接口的启动方法，避免因为“裁判没把接口跑起来”导致手机端整体失分。</p>
+<span class="fname">说明.txt（示例）</span><pre><code>【数据库】
+  在 SSMS 中执行 Modul1\Database\SmartCare.sql，创建数据库 SmartCare。
+  连接字符串位于 SmartCareApi.exe.config 和 SmartCareDesk.exe.config，默认 Data Source=.
+
+【接口】
+  1. 双击 Modul1\SmartCareDesk\SmartCareApi\bin\Debug\SmartCareApi.exe，窗口提示“已启动”后保持打开。
+  2. 浏览器访问 http://localhost:5000/api/categories 应返回 JSON。
+  3. 启动模拟器后，双击 Modul1\映射端口.bat（内容：adb reverse tcp:5000 tcp:5000）。
+
+【测试账号】
+  桌面端：admin / admin123
+  手机端：13800000001 / abc12345</code></pre>
+
+<h2 id="s9"><span class="sec">09</span>拓展练习</h2>
+<div class="ex"><span class="h">练习 7-3　用 Web API 2 实现全部接口</span>
+<p>以方案二为基础，把接口文档中其余接口全部实现，然后用练习 7-2 的清单逐条测试，结果必须与方案一完全一致（字段名、日期格式、提示文字）。</p>
+<details><summary>提示</summary><p>POST 接口为每种请求体建一个类（如 <code>OrderRequest</code>：CustomerId、ServiceId、Quantity、AppointmentTime 字符串）；GET 参数直接写成方法参数，可空的写默认值；返回一行数据时用 <code>ToDict(dt.Rows[0])</code>，返回多行直接返回 DataTable。</p></details></div>
+<div class="ex"><span class="h">练习 7-4　新增接口：健康数据上报与统计</span>
+<p>① <code>POST /api/health</code>：请求体 <code>{"customerId":1,"recordType":"血压","value1":135,"value2":85}</code>，测量时间取服务器当前时间；校验：类型只能是血压/血糖/心率，血压必须有 value2，数值范围自定并在接口文档中写明。② <code>GET /api/health/summary?customerId=1</code>：按类型返回记录数、最高值、最低值、平均值（保留 1 位小数）、最近一次测量时间。用练习库核对：客户 1 的血压 value1 最高 145.0，最低 128.0。</p></div>
+<div class="ex"><span class="h">练习 7-5　按别人的接口文档写接口</span>
+<p>解压资料包中的匈牙利 WorldSkills 2024 选拔赛第一轮压缩包，阅读英文题目 PDF 和 <code>assets</code> 文件夹中的 Postman 测试集合（.json 文件，可以用记事本打开，重点看每个请求下的 test 脚本）。回答：① 一共几个接口，各用什么方法和路径？基础地址的端口是多少？② 登录成功和失败时分别返回什么状态码、什么内容？③ 线路列表接口要求返回多少条、按什么顺序？然后用本章的方法实现这些接口（数据库脚本是 MySQL 格式，转换方法见第 12 章），用 curl.exe 逐条验证与测试集合的预期一致。</p>
+<details><summary>提示</summary><p>这套题的返回格式和本手册的练习约定<strong>不同</strong>：它没有 success/message/data 外壳，登录成功只返回状态码、不返回内容，失败返回带 error 字段的对象并配合 401 状态码。比赛中永远以题目文档为准，不要套用自己习惯的格式——这正是本练习要训练的。HttpListener 方案中设置状态码用 <code>ctx.Response.StatusCode</code>，Web API 2 中可以返回 <code>StatusCode(HttpStatusCode.NoContent)</code> 或 <code>Content(HttpStatusCode.Unauthorized, 对象)</code>。</p></details></div>
+
+<h2 id="s10"><span class="sec">10</span>本章过关检查</h2>
+<div class="box check"><span class="h">过关标准</span>
+<ul class="cl">
+<li>45 分钟内在空白解决方案中用 HttpListener 做出登录、服务查询、下单 3 个接口，浏览器和 curl.exe 测试通过</li>
+<li>能写出统一返回结构，解释 GET 与 POST 的区别</li>
+<li>能讲清楚为什么模拟器里不能用 localhost，以及 adb reverse 的作用</li>
+<li>在练习机上成功建出 Web API 2 项目并跑通登录接口（如果你的环境支持）</li>
+<li>完成练习 7-2 全部 12 条测试，并写好“说明.txt”</li>
+</ul></div>
+
+<div class="pager"><a href="06-winforms.html"><small>上一章</small>WinForms 桌面应用（模块 A）</a><a href="08-android.html" style="text-align:right"><small>下一章</small>Android 手机应用（模块 B）</a></div>
+<p class="foot">商务软件解决方案 · 零基础备赛教程｜文中“文件依据”以资料包中的原始文件为准；正式比赛以当届赛区发布的技术文件和赛题为准。</p>
+</main></div></div><script src="nav.js"></script></body></html>
